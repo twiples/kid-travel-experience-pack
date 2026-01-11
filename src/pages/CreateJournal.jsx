@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { useNavigate, Link, useSearchParams } from 'react-router-dom'
 import './CreateJournal.css'
 
 const TRIP_TYPES = [
@@ -42,6 +42,7 @@ const STEPS = [
 
 function CreateJournal() {
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
   const [currentStep, setCurrentStep] = useState(1)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [formData, setFormData] = useState({
@@ -61,6 +62,32 @@ function CreateJournal() {
     familyPhoto: null,
     photoPreview: null,
   })
+
+  // Pre-fill destination from URL params
+  useEffect(() => {
+    const destination = searchParams.get('destination')
+    const country = searchParams.get('country')
+
+    if (destination) {
+      // Check if it matches a preset destination
+      const presetMatch = DESTINATIONS.find(d =>
+        d.name.toLowerCase().includes(destination.toLowerCase()) ||
+        destination.toLowerCase().includes(d.name.toLowerCase().split('/')[0])
+      )
+
+      if (presetMatch) {
+        setFormData(prev => ({ ...prev, destination: presetMatch.id }))
+      } else {
+        // Use as custom destination
+        const fullDestination = country ? `${destination}, ${country}` : destination
+        setFormData(prev => ({
+          ...prev,
+          destination: 'custom',
+          customDestination: fullDestination
+        }))
+      }
+    }
+  }, [searchParams])
 
   const updateFormData = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }))

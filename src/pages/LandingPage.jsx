@@ -237,8 +237,9 @@ function LandingPage() {
 
           <div className="destinations-showcase reveal">
             {DESTINATIONS.map((dest, index) => (
-              <div
+              <Link
                 key={index}
+                to={`/create?destination=${encodeURIComponent(dest.name)}&country=${encodeURIComponent(dest.country)}`}
                 className="destination-pill"
                 style={{ animationDelay: `${index * 80}ms` }}
               >
@@ -247,7 +248,7 @@ function LandingPage() {
                   <span className="destination-name">{dest.name}</span>
                   <span className="destination-country">{dest.country}</span>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
 

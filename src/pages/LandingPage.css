@@ -529,7 +529,9 @@
   border-radius: var(--radius-full);
   border: 2px solid transparent;
   transition: all var(--duration-normal) var(--ease-out-expo);
-  cursor: default;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
 }
 
 .destination-pill:hover {
