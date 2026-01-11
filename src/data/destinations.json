@@ -1,0 +1,430 @@
+{
+  "tokyo": {
+    "id": "tokyo",
+    "name": "Tokyo & Kyoto",
+    "country": "Japan",
+    "emoji": "🗾",
+    "language": "Japanese",
+    "currency": "Yen (¥)",
+    "greeting": "Konnichiwa",
+    "thankyou": "Arigatou",
+    "goodbye": "Sayonara",
+    "population": "14 million (Tokyo)",
+    "funFacts": [
+      "Tokyo has more Michelin-starred restaurants than any other city in the world!",
+      "There are vending machines everywhere in Japan - even for hot ramen!",
+      "Train stations play unique melodies when trains arrive",
+      "Some traffic lights chirp like birds to help blind people cross",
+      "There are cat cafes and owl cafes where you can have drinks with animals"
+    ],
+    "landmarks": [
+      "Tokyo Tower",
+      "Senso-ji Temple",
+      "Shibuya Crossing",
+      "Tokyo Skytree",
+      "Meiji Shrine",
+      "Fushimi Inari Shrine (Kyoto)",
+      "Kinkaku-ji Golden Pavilion (Kyoto)"
+    ],
+    "foods": [
+      "Sushi",
+      "Ramen",
+      "Tempura",
+      "Mochi",
+      "Matcha ice cream"
+    ],
+    "culturalHighlights": [
+      "Bowing is how people greet each other",
+      "You take off your shoes before entering homes",
+      "Trains are extremely punctual - even seconds matter!",
+      "People are very quiet on public transport"
+    ],
+    "prompts": {
+      "observation": [
+        "Tokyo's train stations have unique arrival melodies. What sounds did you notice in public spaces?",
+        "Look at the vending machines around you. What unusual items did you find for sale?",
+        "Japanese streets are very clean. What do you think keeps them so tidy?",
+        "Watch people at a crosswalk. How is it different from crosswalks at home?"
+      ],
+      "reflection": [
+        "How did it feel to bow when greeting someone?",
+        "What was the most surprising thing about how people act in Japan?",
+        "If you could bring one Japanese tradition home, what would it be?"
+      ],
+      "interests": {
+        "food": [
+          "Try using chopsticks for a whole meal. What was the trickiest thing to pick up?",
+          "Describe a Japanese food you tried. How is it different from food at home?",
+          "Visit a convenience store (konbini). What foods looked interesting?"
+        ],
+        "animals": [
+          "Did you visit an animal cafe? Describe the experience.",
+          "How are pets treated differently in Japan?",
+          "Look for animal characters (mascots) everywhere. Draw your favorite one."
+        ],
+        "art": [
+          "Find something that shows traditional Japanese art. Describe the patterns you see.",
+          "How is Japanese writing (kanji) like art?",
+          "What colors are used in Japanese temples and shrines?"
+        ],
+        "transportation": [
+          "Describe riding the Shinkansen (bullet train). How fast did it feel?",
+          "How is the metro system different from trains at home?",
+          "Watch how people wait in line for trains. What do you notice?"
+        ],
+        "history": [
+          "What did you learn about samurai or ninja?",
+          "Compare an ancient temple to a modern building in Tokyo.",
+          "What symbols or images keep appearing in historic places?"
+        ]
+      }
+    },
+    "activities": {
+      "wordSearch": ["TOKYO", "RAMEN", "SUSHI", "TEMPLE", "KIMONO", "ORIGAMI", "SHRINE", "SAMURAI", "BENTO", "FUJI"],
+      "trivia": [
+        {"q": "What is Japan's tallest mountain?", "a": "Mount Fuji"},
+        {"q": "What do you call the famous Japanese art of paper folding?", "a": "Origami"},
+        {"q": "What is the name of Japan's super-fast train?", "a": "Shinkansen (Bullet Train)"}
+      ]
+    }
+  },
+  "paris": {
+    "id": "paris",
+    "name": "Paris",
+    "country": "France",
+    "emoji": "🇫🇷",
+    "language": "French",
+    "currency": "Euro (€)",
+    "greeting": "Bonjour",
+    "thankyou": "Merci",
+    "goodbye": "Au revoir",
+    "population": "2.2 million",
+    "funFacts": [
+      "The Eiffel Tower was supposed to be temporary and torn down after 20 years!",
+      "There are over 470 parks and gardens in Paris",
+      "The Louvre is the biggest art museum in the world",
+      "French people eat about 30 million baguettes every day",
+      "Paris has a beach every summer along the Seine River"
+    ],
+    "landmarks": [
+      "Eiffel Tower",
+      "Louvre Museum",
+      "Notre-Dame Cathedral",
+      "Arc de Triomphe",
+      "Sacré-Cœur",
+      "Palace of Versailles",
+      "Seine River"
+    ],
+    "foods": [
+      "Croissants",
+      "Baguettes",
+      "Crêpes",
+      "Macarons",
+      "French onion soup"
+    ],
+    "culturalHighlights": [
+      "People often greet with kisses on both cheeks",
+      "Lunch is an important meal - shops may close for it",
+      "Art and culture are everywhere - on buildings, in parks",
+      "Café culture - sitting and watching people is a tradition"
+    ],
+    "prompts": {
+      "observation": [
+        "French cafés are everywhere. Describe a café you visited. What were people doing?",
+        "The Eiffel Tower looks different at different times. When did you see it? Describe how it looked.",
+        "Walk along the Seine River. What boats, bridges, or activities did you see?",
+        "Look at the buildings around you. What makes Parisian architecture special?"
+      ],
+      "reflection": [
+        "How is the pace of life in Paris different from home?",
+        "What would it be like to be an artist living in Paris?",
+        "If you could live in any Paris neighborhood, which would you choose and why?"
+      ],
+      "interests": {
+        "food": [
+          "Try a French pastry. Describe the taste and texture.",
+          "Visit a boulangerie (bakery). What breads and treats did you see?",
+          "What French meal was your favorite? How was it served?"
+        ],
+        "art": [
+          "If you visited the Louvre, which artwork amazed you the most?",
+          "How is street art in Paris different from graffiti at home?",
+          "Find an artist painting or drawing outside. What are they creating?"
+        ],
+        "history": [
+          "What did you learn about French kings and queens?",
+          "Find something that's over 500 years old. Describe how it looks today.",
+          "How has Paris changed over hundreds of years?"
+        ],
+        "architecture": [
+          "Compare Notre-Dame to a modern building. What's different?",
+          "What patterns do you see in Parisian balconies and windows?",
+          "Describe the Palace of Versailles. How would you feel living there?"
+        ]
+      }
+    },
+    "activities": {
+      "wordSearch": ["PARIS", "EIFFEL", "LOUVRE", "CROISSANT", "BONJOUR", "SEINE", "BAGUETTE", "CREPE", "METRO", "MONET"],
+      "trivia": [
+        {"q": "In what year was the Eiffel Tower built?", "a": "1889"},
+        {"q": "What famous painting lives in the Louvre?", "a": "Mona Lisa"},
+        {"q": "What river runs through Paris?", "a": "The Seine"}
+      ]
+    }
+  },
+  "london": {
+    "id": "london",
+    "name": "London",
+    "country": "United Kingdom",
+    "emoji": "🇬🇧",
+    "language": "English",
+    "currency": "Pound Sterling (£)",
+    "greeting": "Hello",
+    "thankyou": "Thank you",
+    "goodbye": "Cheerio",
+    "population": "9 million",
+    "funFacts": [
+      "Big Ben is actually the name of the bell, not the tower!",
+      "The London Underground (Tube) is the oldest subway system in the world",
+      "Ravens live at the Tower of London - legend says England will fall if they leave!",
+      "Red double-decker buses have been in London since 1956",
+      "London has been a Roman city, a Viking city, and a Norman city"
+    ],
+    "landmarks": [
+      "Big Ben",
+      "Tower of London",
+      "Buckingham Palace",
+      "London Eye",
+      "Tower Bridge",
+      "Westminster Abbey",
+      "British Museum"
+    ],
+    "foods": [
+      "Fish and Chips",
+      "Full English Breakfast",
+      "Afternoon Tea",
+      "Shepherd's Pie",
+      "Bangers and Mash"
+    ],
+    "culturalHighlights": [
+      "Queueing (standing in line) is taken very seriously!",
+      "The Royal Family lives in Buckingham Palace",
+      "Double-decker red buses are iconic",
+      "Afternoon tea is a British tradition"
+    ],
+    "prompts": {
+      "observation": [
+        "Watch the Changing of the Guard. Describe what the soldiers wear and do.",
+        "Ride a double-decker bus. What can you see from the top?",
+        "London has many old and new buildings together. Find an example of each.",
+        "Listen to how people talk. What British words or phrases did you hear?"
+      ],
+      "reflection": [
+        "What would it be like to be royal and live in Buckingham Palace?",
+        "How is London similar to and different from other big cities you know?",
+        "If you were a guard at the Tower of London, what would your day be like?"
+      ],
+      "interests": {
+        "history": [
+          "What did you learn about kings and queens at the Tower of London?",
+          "Find something that's over 1000 years old. How has it survived?",
+          "How did the Great Fire of London change the city?"
+        ],
+        "animals": [
+          "Did you see the ravens at the Tower of London? Why are they important?",
+          "Visit the Natural History Museum. What creature amazed you most?",
+          "What animals did you spot in the Royal Parks?"
+        ],
+        "transportation": [
+          "Ride the Tube (Underground). How does it compare to subways you know?",
+          "Why do you think London has so many famous black taxis?",
+          "Find an old and a new way people get around London."
+        ],
+        "art": [
+          "Visit a free museum. What artwork or object was your favorite?",
+          "Find street performers. What talent did they have?",
+          "Look at street art in Shoreditch or Camden. Describe what you see."
+        ]
+      }
+    },
+    "activities": {
+      "wordSearch": ["LONDON", "QUEEN", "TOWER", "BRIDGE", "PALACE", "GUARD", "THAMES", "ABBEY", "TUBE", "CROWN"],
+      "trivia": [
+        {"q": "What is the river that runs through London?", "a": "The Thames"},
+        {"q": "Where does the King live?", "a": "Buckingham Palace"},
+        {"q": "What is the London Underground also called?", "a": "The Tube"}
+      ]
+    }
+  },
+  "orlando": {
+    "id": "orlando",
+    "name": "Orlando & Disney",
+    "country": "United States",
+    "emoji": "🏰",
+    "language": "English",
+    "currency": "US Dollar ($)",
+    "greeting": "Hello",
+    "thankyou": "Thank you",
+    "goodbye": "Goodbye",
+    "population": "300,000",
+    "funFacts": [
+      "Walt Disney World is the size of San Francisco!",
+      "There are hidden Mickeys all over the Disney parks",
+      "Cinderella Castle is 189 feet tall but looks taller due to forced perspective",
+      "Orlando gets more visitors each year than any other US city",
+      "The parks have underground tunnels called 'utilidors' for cast members"
+    ],
+    "landmarks": [
+      "Cinderella Castle",
+      "Hogwarts Castle",
+      "Spaceship Earth (EPCOT)",
+      "Tree of Life",
+      "Hollywood Tower of Terror",
+      "Millennium Falcon"
+    ],
+    "foods": [
+      "Mickey-shaped waffles",
+      "Turkey legs",
+      "Dole Whip",
+      "Butterbeer",
+      "Churros"
+    ],
+    "culturalHighlights": [
+      "Cast members (employees) are always in character",
+      "Each park has its own unique theme and story",
+      "Parades and fireworks happen daily",
+      "Characters walk around for photos and autographs"
+    ],
+    "prompts": {
+      "observation": [
+        "Find a Hidden Mickey somewhere in the park. Where was it?",
+        "Watch how Cast Members interact with guests. What makes them special?",
+        "Notice how different lands in the park have different music and smells.",
+        "Look at the details in a building facade. What story is it telling?"
+      ],
+      "reflection": [
+        "If you could design your own theme park ride, what would it be?",
+        "What was the most magical moment of your day? Why?",
+        "How do the parks make you feel like you're in a different world?"
+      ],
+      "interests": {
+        "art": [
+          "Look at how animators brought characters to life. What did you learn?",
+          "Notice the artwork throughout the parks. What styles do you see?",
+          "Watch a parade. How do costumes and floats create art in motion?"
+        ],
+        "science": [
+          "What did you learn about space at EPCOT or Kennedy Space Center?",
+          "How do roller coasters use physics to create thrills?",
+          "What technology makes the rides feel so real?"
+        ],
+        "animals": [
+          "What did you learn at Animal Kingdom?",
+          "Describe an animal you saw on the safari or in exhibits.",
+          "How do the parks help protect endangered animals?"
+        ],
+        "music": [
+          "Listen to the background music in different lands. How does it change?",
+          "Describe a show or performance you watched.",
+          "What role does music play in making the parks magical?"
+        ]
+      }
+    },
+    "activities": {
+      "wordSearch": ["DISNEY", "MAGIC", "CASTLE", "MICKEY", "PARADE", "RIDE", "WIZARD", "SAFARI", "SPACE", "SPLASH"],
+      "trivia": [
+        {"q": "What year did Walt Disney World open?", "a": "1971"},
+        {"q": "What is the big golf-ball shaped building at EPCOT?", "a": "Spaceship Earth"},
+        {"q": "What frozen treat is famous at Magic Kingdom?", "a": "Dole Whip"}
+      ]
+    }
+  },
+  "hawaii": {
+    "id": "hawaii",
+    "name": "Hawaii",
+    "country": "United States",
+    "emoji": "🌺",
+    "language": "English & Hawaiian",
+    "currency": "US Dollar ($)",
+    "greeting": "Aloha",
+    "thankyou": "Mahalo",
+    "goodbye": "A hui hou",
+    "population": "1.4 million (all islands)",
+    "funFacts": [
+      "Hawaii is the only US state made entirely of islands!",
+      "Hawaiian has only 13 letters in its alphabet",
+      "The islands were formed by underwater volcanoes",
+      "Hawaii is home to the only royal palace in the United States",
+      "You can ski and surf on the same day in Hawaii!"
+    ],
+    "landmarks": [
+      "Diamond Head",
+      "Pearl Harbor",
+      "Waikiki Beach",
+      "Hawaii Volcanoes National Park",
+      "Na Pali Coast",
+      "Haleakala Crater"
+    ],
+    "foods": [
+      "Poke",
+      "Loco Moco",
+      "Shave Ice",
+      "Spam Musubi",
+      "Kalua Pig"
+    ],
+    "culturalHighlights": [
+      "Aloha spirit - treating everyone with love and respect",
+      "'Ohana means family - and family is very important",
+      "Lei are given as welcomes and celebrations",
+      "Hula dancing tells stories through movement"
+    ],
+    "prompts": {
+      "observation": [
+        "Describe the ocean when you first saw it. What colors? What sounds?",
+        "Watch a hula performance. What stories were being told through dance?",
+        "Look at a volcanic landscape. How is it different from other mountains?",
+        "Notice the plants and flowers around you. Which ones are new to you?"
+      ],
+      "reflection": [
+        "Hawaiian culture values 'ohana (family). How did you see families spending time together?",
+        "What does 'aloha spirit' mean to you after visiting?",
+        "How is the pace of life different from home?"
+      ],
+      "interests": {
+        "nature": [
+          "Describe the underwater world if you went snorkeling.",
+          "What plants or animals did you see that don't live where you're from?",
+          "How do volcanoes create new land?"
+        ],
+        "animals": [
+          "Did you see any sea turtles? Describe the experience.",
+          "What birds did you notice that you've never seen before?",
+          "Look for fish while snorkeling. Draw your favorites."
+        ],
+        "science": [
+          "How were the Hawaiian islands formed?",
+          "What did you learn about volcanoes?",
+          "How does the ocean affect the weather in Hawaii?"
+        ],
+        "culture": [
+          "Learn about Hawaiian history. What surprised you?",
+          "What Hawaiian words did you learn? What do they mean?",
+          "How do native Hawaiian traditions continue today?"
+        ],
+        "food": [
+          "Try a local dish. How is it different from mainland food?",
+          "What tropical fruits did you taste?",
+          "Describe your favorite shave ice flavor combination."
+        ]
+      }
+    },
+    "activities": {
+      "wordSearch": ["HAWAII", "ALOHA", "VOLCANO", "BEACH", "SURFING", "TURTLE", "MAHALO", "LUAU", "HULA", "OHANA"],
+      "trivia": [
+        {"q": "How many main islands make up Hawaii?", "a": "8"},
+        {"q": "What is the Hawaiian word for thank you?", "a": "Mahalo"},
+        {"q": "What type of geological feature formed the Hawaiian islands?", "a": "Volcanoes"}
+      ]
+    }
+  }
+}
