@@ -1867,7 +1867,13 @@ function generateWelcomePage(doc, content) {
   y = drawSectionHeader(doc, 'Before You Go...', y, { color: COLORS.accent });
   y += 8;
 
-  content.preTrip.preflightPrompts.forEach((prompt, i) => {
+  const preflightPrompts = content.preTrip?.preflightPrompts || [
+    'What are you most excited to see?',
+    'What do you want to learn about?',
+    'What food do you want to try?'
+  ];
+
+  preflightPrompts.forEach((prompt, i) => {
     // Number badge
     doc.fillColor(COLORS.secondary)
       .circle(MARGIN + 8, y + 5, 8)
@@ -1975,7 +1981,20 @@ function generateAboutMyTripPage(doc, content) {
 }
 
 function generateDestinationFactsPages(doc, content) {
-  const facts = content.preTrip.destinationFacts;
+  const facts = content.preTrip?.destinationFacts || {
+    language: 'English',
+    currency: 'Local currency',
+    population: 'N/A',
+    funFacts: [
+      'This is an amazing destination!',
+      'There are lots of interesting things to see and do here.',
+      'Many families visit this place every year.',
+    ],
+    culturalHighlights: [
+      'Be respectful of local customs',
+      'Try the local food!',
+    ],
+  };
 
   drawPageBorder(doc, 'dotted');
 
@@ -2037,7 +2056,11 @@ function generateDestinationFactsPages(doc, content) {
     .text('Useful Phrases:', MARGIN + 10, y + 8);
 
   let phraseY = y + 22;
-  content.preTrip.usefulPhrases.forEach(phrase => {
+  const usefulPhrases = content.preTrip?.usefulPhrases || [
+    { phrase: 'Hello', meaning: 'Greeting', pronunciation: 'heh-LOH' },
+    { phrase: 'Thank you', meaning: 'Gratitude', pronunciation: 'THANK yoo' },
+  ];
+  usefulPhrases.forEach(phrase => {
     doc.fillColor(COLORS.secondary).font(FONTS.title).fontSize(8)
       .text(`"${phrase.phrase}"`, MARGIN + 15, phraseY);
     doc.fillColor(COLORS.textLight).font(FONTS.body).fontSize(8)
@@ -2116,7 +2139,23 @@ function generateDestinationFactsPages(doc, content) {
 }
 
 function generateActivitiesSection(doc, content) {
-  const activities = content.activities;
+  const defaultActivities = {
+    wordSearch: { words: ['TRAVEL', 'ADVENTURE', 'EXPLORE', 'FUN', 'DISCOVER', 'JOURNEY'] },
+    unscramble: { words: [{ scrambled: 'RTIP', answer: 'TRIP' }, { scrambled: 'AMP', answer: 'MAP' }] },
+    trivia: [
+      { question: 'What is the capital of this place?', options: ['A', 'B', 'C', 'D'] },
+    ],
+    maze: { theme: 'Travel' },
+    connectDots: { items: [{ a: 'Airplane', b: 'Sky' }, { a: 'Suitcase', b: 'Clothes' }] },
+    codeBreaker: { code: { A: 1, B: 2, C: 3 }, message: 'HELLO' },
+    spottedList: ['Bird', 'Cloud', 'Tree', 'Car', 'Airplane'],
+    wouldYouRather: [{ option1: 'fly', option2: 'swim' }],
+    quickDraw: ['a tree', 'a house', 'the sun'],
+    packingList: ['Clothes', 'Toothbrush', 'Camera'],
+    games: ['I Spy', '20 Questions'],
+    travelBingo: ['Red car', 'Bird', 'Cloud', 'River', 'Bridge', 'Cow', 'Stop sign', 'Gas station', 'Mountain', 'Restaurant', 'Hotel', 'Flag'],
+  };
+  const activities = { ...defaultActivities, ...content.activities };
   const dest = content.destination;
   const COL2_X = MARGIN + 170;
 
