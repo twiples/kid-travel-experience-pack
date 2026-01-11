@@ -186,19 +186,33 @@ function getSketchPrompt(day, destData) {
 
 function getDefaultObservationPrompts() {
   return [
+    // Sensory observation prompts
     'What is the first thing you notice when you look around?',
     'Describe the sounds you hear right now.',
     'What smells are in the air?',
     'How are people around you dressed differently than at home?',
+    // Psychology-based open-ended questions
+    'If you could explore anywhere in this place for a whole day, where would you go and why?',
+    'What is something here that you have never seen before? How does it make you feel?',
+    'What one thing would you want to show your best friend about this place?',
+    'Look at the people around you - what do you think they are feeling right now?',
   ];
 }
 
 function getDefaultReflectionPrompts() {
   return [
+    // Experience reflection
     'What was the most surprising thing you experienced today?',
     'What would you tell your friends about this place?',
     'How is this place different from home?',
     'What will you remember most about today?',
+    // Psychology-based growth & gratitude questions
+    'What is something kind you did for someone today, or that someone did for you?',
+    'What is something that was hard today, and how did you handle it?',
+    'What new skill or thing did you learn today that you are proud of?',
+    'What is one thing about today that you are grateful for? Why?',
+    'If you could travel back in time to this morning, what would you do differently?',
+    'What is something you want to try tomorrow that you have never done before?',
   ];
 }
 
