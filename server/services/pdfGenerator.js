@@ -7,7 +7,7 @@ const COLORS = {
   accent: '#7B68EE',
   text: '#333333',
   textLight: '#666666',
-  border: '#E0E0E0',
+  border: '#CCCCCC',
   background: '#FFF9F0',
 };
 
@@ -17,12 +17,18 @@ const FONTS = {
   italic: 'Helvetica-Oblique',
 };
 
+// Half-letter size for 2-up printing (5.5" x 8.5")
+const PAGE_WIDTH = 396;  // 5.5 inches * 72
+const PAGE_HEIGHT = 612; // 8.5 inches * 72
+const MARGIN = 36;       // 0.5 inch margins
+const CONTENT_WIDTH = PAGE_WIDTH - (MARGIN * 2);
+
 export async function generatePDF(content, journalData, outputPath) {
   return new Promise((resolve, reject) => {
     try {
       const doc = new PDFDocument({
-        size: 'LETTER',
-        margins: { top: 72, bottom: 72, left: 72, right: 72 },
+        size: [PAGE_WIDTH, PAGE_HEIGHT],
+        margins: { top: MARGIN, bottom: MARGIN, left: MARGIN, right: MARGIN },
         info: {
           Title: `${content.childName}'s Travel Journal - ${content.destination}`,
           Author: 'KidsTravel Journal Generator',
@@ -52,33 +58,38 @@ export async function generatePDF(content, journalData, outputPath) {
 
 function generateCoverPage(doc, content) {
   // Background color
-  doc.rect(0, 0, doc.page.width, doc.page.height)
-    .fill('#4A90A4');
+  doc.rect(0, 0, PAGE_WIDTH, PAGE_HEIGHT).fill(COLORS.primary);
 
   // Title
   doc.fillColor('white')
     .font(FONTS.title)
-    .fontSize(42)
-    .text(`${content.childName}'s`, 72, 200, { align: 'center' })
-    .fontSize(56)
-    .text('Travel Journal', 72, 260, { align: 'center' });
+    .fontSize(24)
+    .text(`${content.childName}'s`, MARGIN, 150, { align: 'center', width: CONTENT_WIDTH })
+    .fontSize(32)
+    .text('Travel Journal', MARGIN, 185, { align: 'center', width: CONTENT_WIDTH });
 
   // Destination
-  doc.fontSize(28)
-    .text(content.destination, 72, 360, { align: 'center' });
+  doc.fontSize(18)
+    .text(content.destination, MARGIN, 260, { align: 'center', width: CONTENT_WIDTH });
 
   if (content.country) {
-    doc.fontSize(18)
-      .text(content.country, 72, 400, { align: 'center' });
+    doc.fontSize(12)
+      .text(content.country, MARGIN, 285, { align: 'center', width: CONTENT_WIDTH });
   }
 
   // Dates
-  doc.fontSize(14)
-    .text(`${formatDate(content.startDate)} - ${formatDate(content.endDate)}`, 72, 500, { align: 'center' });
+  doc.fontSize(10)
+    .text(`${formatDate(content.startDate)} - ${formatDate(content.endDate)}`, MARGIN, 340, { align: 'center', width: CONTENT_WIDTH });
 
-  // Decorative elements
-  doc.fontSize(48)
-    .text('✈️', 72, 580, { align: 'center' });
+  // Decorative border
+  doc.strokeColor('white')
+    .lineWidth(2)
+    .rect(20, 20, PAGE_WIDTH - 40, PAGE_HEIGHT - 40)
+    .stroke();
+
+  // Simple decorative elements (no emojis)
+  doc.fontSize(14)
+    .text('~ ~ ~', MARGIN, 400, { align: 'center', width: CONTENT_WIDTH });
 
   doc.addPage();
 }
@@ -86,47 +97,47 @@ function generateCoverPage(doc, content) {
 function generateWelcomePage(doc, content) {
   doc.fillColor(COLORS.primary)
     .font(FONTS.title)
-    .fontSize(28)
+    .fontSize(18)
     .text('Welcome, Traveler!', { align: 'center' });
 
-  doc.moveDown(2);
+  doc.moveDown(1);
 
   doc.fillColor(COLORS.text)
     .font(FONTS.body)
-    .fontSize(12)
+    .fontSize(9)
     .text(content.preTrip.welcomeLetter, {
       align: 'left',
-      lineGap: 6,
+      lineGap: 3,
     });
 
-  doc.moveDown(2);
+  doc.moveDown(1);
 
   // Pre-flight prompts
   doc.fillColor(COLORS.primary)
     .font(FONTS.title)
-    .fontSize(18)
+    .fontSize(12)
     .text('Before You Go...');
 
-  doc.moveDown();
+  doc.moveDown(0.5);
 
   content.preTrip.preflightPrompts.forEach((prompt, i) => {
     doc.fillColor(COLORS.text)
       .font(FONTS.italic)
-      .fontSize(11)
+      .fontSize(8)
       .text(`${i + 1}. ${prompt}`);
 
     // Lines for writing
-    doc.moveDown(0.5);
-    for (let j = 0; j < 3; j++) {
+    doc.moveDown(0.3);
+    for (let j = 0; j < 2; j++) {
       const y = doc.y;
       doc.strokeColor(COLORS.border)
         .lineWidth(0.5)
-        .moveTo(72, y)
-        .lineTo(doc.page.width - 72, y)
+        .moveTo(MARGIN, y)
+        .lineTo(PAGE_WIDTH - MARGIN, y)
         .stroke();
-      doc.moveDown(0.8);
+      doc.moveDown(0.5);
     }
-    doc.moveDown(0.5);
+    doc.moveDown(0.3);
   });
 
   doc.addPage();
@@ -138,463 +149,617 @@ function generateDestinationFactsPages(doc, content) {
   // Header
   doc.fillColor(COLORS.primary)
     .font(FONTS.title)
-    .fontSize(28)
+    .fontSize(16)
     .text(`All About ${content.destination}`, { align: 'center' });
 
-  doc.moveDown(2);
+  doc.moveDown(1);
 
   // Quick facts box
   const boxTop = doc.y;
-  doc.rect(72, boxTop, doc.page.width - 144, 120)
+  doc.rect(MARGIN, boxTop, CONTENT_WIDTH, 85)
     .fill('#F0F7FA');
 
   doc.fillColor(COLORS.text)
     .font(FONTS.title)
-    .fontSize(14);
+    .fontSize(9);
 
-  let y = boxTop + 15;
-  const col1 = 90;
-  const col2 = doc.page.width / 2 + 20;
+  let y = boxTop + 10;
 
-  doc.text(`🗣️ Language: ${facts.language}`, col1, y);
-  doc.text(`💰 Currency: ${facts.currency}`, col2, y);
+  doc.text(`Language: ${facts.language}`, MARGIN + 10, y);
+  doc.text(`Currency: ${facts.currency}`, PAGE_WIDTH / 2, y);
 
-  y += 25;
-  doc.text(`👥 Population: ${facts.population}`, col1, y);
+  y += 15;
+  doc.text(`Population: ${facts.population}`, MARGIN + 10, y);
 
-  y += 25;
-  doc.font(FONTS.body).fontSize(12);
-  doc.text('Useful Phrases:', col1, y);
+  y += 18;
+  doc.font(FONTS.body).fontSize(8);
+  doc.text('Useful Phrases:', MARGIN + 10, y);
 
-  y += 20;
+  y += 12;
   content.preTrip.usefulPhrases.forEach(phrase => {
-    doc.text(`"${phrase.phrase}" = ${phrase.meaning}`, col1 + 20, y);
-    y += 18;
+    doc.text(`"${phrase.phrase}" = ${phrase.meaning}`, MARGIN + 20, y);
+    y += 11;
   });
 
-  doc.y = boxTop + 140;
+  doc.y = boxTop + 95;
 
   // Fun Facts
-  doc.moveDown();
   doc.fillColor(COLORS.secondary)
     .font(FONTS.title)
-    .fontSize(18)
-    .text('🤔 Did You Know?');
+    .fontSize(11)
+    .text('Did You Know?');
 
-  doc.moveDown(0.5);
+  doc.moveDown(0.3);
 
-  facts.funFacts.forEach(fact => {
+  facts.funFacts.slice(0, 4).forEach(fact => {
     doc.fillColor(COLORS.text)
       .font(FONTS.body)
-      .fontSize(11)
-      .text(`• ${fact}`, { indent: 10 });
-    doc.moveDown(0.5);
+      .fontSize(8)
+      .text(`* ${fact}`, { indent: 5 });
+    doc.moveDown(0.3);
   });
-
-  doc.moveDown();
 
   // Cultural Highlights
   if (facts.culturalHighlights && facts.culturalHighlights.length > 0) {
+    doc.moveDown(0.5);
     doc.fillColor(COLORS.accent)
       .font(FONTS.title)
-      .fontSize(18)
-      .text('🌍 Cultural Tips');
+      .fontSize(11)
+      .text('Cultural Tips');
 
-    doc.moveDown(0.5);
+    doc.moveDown(0.3);
 
-    facts.culturalHighlights.forEach(highlight => {
+    facts.culturalHighlights.slice(0, 3).forEach(highlight => {
       doc.fillColor(COLORS.text)
         .font(FONTS.body)
-        .fontSize(11)
-        .text(`• ${highlight}`, { indent: 10 });
-      doc.moveDown(0.5);
-    });
-  }
-
-  // Landmarks
-  if (content.preTrip.landmarks && content.preTrip.landmarks.length > 0) {
-    doc.addPage();
-
-    doc.fillColor(COLORS.primary)
-      .font(FONTS.title)
-      .fontSize(22)
-      .text('🗺️ Famous Landmarks', { align: 'center' });
-
-    doc.moveDown();
-
-    content.preTrip.landmarks.forEach((landmark, i) => {
-      doc.fillColor(COLORS.text)
-        .font(FONTS.body)
-        .fontSize(12)
-        .text(`${i + 1}. ${landmark}`);
-
-      // Small box for notes
-      const boxY = doc.y + 5;
-      doc.rect(90, boxY, doc.page.width - 180, 40)
-        .stroke(COLORS.border);
-
-      doc.fontSize(9)
-        .fillColor(COLORS.textLight)
-        .text('Notes:', 95, boxY + 5);
-
-      doc.y = boxY + 50;
+        .fontSize(8)
+        .text(`* ${highlight}`, { indent: 5 });
+      doc.moveDown(0.3);
     });
   }
 
   doc.addPage();
+
+  // Landmarks page
+  if (content.preTrip.landmarks && content.preTrip.landmarks.length > 0) {
+    doc.fillColor(COLORS.primary)
+      .font(FONTS.title)
+      .fontSize(14)
+      .text('Famous Landmarks', { align: 'center' });
+
+    doc.moveDown(0.8);
+
+    content.preTrip.landmarks.slice(0, 5).forEach((landmark, i) => {
+      doc.fillColor(COLORS.text)
+        .font(FONTS.body)
+        .fontSize(9)
+        .text(`${i + 1}. ${landmark}`);
+
+      // Small box for notes
+      const boxY = doc.y + 3;
+      doc.rect(MARGIN + 10, boxY, CONTENT_WIDTH - 20, 28)
+        .stroke(COLORS.border);
+
+      doc.fontSize(7)
+        .fillColor(COLORS.textLight)
+        .text('Notes:', MARGIN + 15, boxY + 3);
+
+      doc.y = boxY + 35;
+    });
+
+    doc.addPage();
+  }
 }
 
 function generateActivitiesSection(doc, content) {
   const activities = content.activities;
+  const dest = content.destination;
+  const COL2_X = MARGIN + 170; // Right column start
 
-  // Section header
-  doc.fillColor(COLORS.secondary)
-    .font(FONTS.title)
-    .fontSize(32)
-    .text('✈️ In-Flight Fun!', { align: 'center' });
+  // === PAGE 1: Word Search + Unscramble + Trivia ===
+  let y = MARGIN;
 
-  doc.moveDown();
-  doc.fillColor(COLORS.textLight)
-    .font(FONTS.italic)
-    .fontSize(12)
-    .text('Activities to enjoy on your journey', { align: 'center' });
+  doc.fillColor(COLORS.secondary).font(FONTS.title).fontSize(11)
+    .text('IN-FLIGHT FUN!', MARGIN, y, { align: 'center', width: CONTENT_WIDTH });
+  y += 20;
 
-  doc.addPage();
+  // LEFT: Word Search
+  doc.fillColor(COLORS.primary).font(FONTS.title).fontSize(9)
+    .text('WORD SEARCH', MARGIN, y);
+  y += 12;
 
-  // Word Search
-  doc.fillColor(COLORS.primary)
-    .font(FONTS.title)
-    .fontSize(22)
-    .text(`🔍 ${activities.wordSearch.title}`);
+  doc.font(FONTS.body).fontSize(6).fillColor(COLORS.textLight)
+    .text('Find: ' + activities.wordSearch.words.slice(0, 6).join(', '), MARGIN, y);
+  y += 12;
 
-  doc.moveDown();
-  doc.fillColor(COLORS.text)
-    .font(FONTS.body)
-    .fontSize(11)
-    .text('Find these words in the grid below:');
-
-  doc.moveDown(0.5);
-  doc.font(FONTS.title)
-    .fontSize(10)
-    .text(activities.wordSearch.words.join('  •  '), { align: 'center' });
-
-  // Draw grid
-  doc.moveDown();
-  const gridSize = 12;
-  const cellSize = 28;
-  const gridStartX = (doc.page.width - (gridSize * cellSize)) / 2;
-  const gridStartY = doc.y;
+  const gridSize = 9;
+  const cellSize = 16;
 
   for (let row = 0; row < gridSize; row++) {
     for (let col = 0; col < gridSize; col++) {
-      const x = gridStartX + (col * cellSize);
-      const y = gridStartY + (row * cellSize);
-
-      doc.rect(x, y, cellSize, cellSize)
-        .stroke(COLORS.border);
-
-      const letter = activities.wordSearch.grid[row]?.[col] || String.fromCharCode(65 + Math.floor(Math.random() * 26));
-      doc.font(FONTS.body)
-        .fontSize(14)
-        .fillColor(COLORS.text)
-        .text(letter, x + 8, y + 7);
+      const cx = MARGIN + (col * cellSize);
+      const cy = y + (row * cellSize);
+      doc.rect(cx, cy, cellSize, cellSize).stroke(COLORS.border);
+      const letter = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+      doc.font(FONTS.body).fontSize(9).fillColor(COLORS.text).text(letter, cx + 4, cy + 3);
     }
   }
 
-  doc.y = gridStartY + (gridSize * cellSize) + 20;
+  // RIGHT: Unscramble
+  const rightY = MARGIN + 20;
+  doc.fillColor(COLORS.accent).font(FONTS.title).fontSize(9)
+    .text('UNSCRAMBLE', COL2_X, rightY);
 
-  doc.addPage();
+  const scrambleWords = activities.wordSearch.words.slice(0, 6).map(w =>
+    w.split('').sort(() => Math.random() - 0.5).join('')
+  );
 
-  // Travel Bingo
-  doc.fillColor(COLORS.accent)
-    .font(FONTS.title)
-    .fontSize(22)
-    .text('🎯 Travel Bingo');
-
-  doc.moveDown();
-  doc.fillColor(COLORS.text)
-    .font(FONTS.body)
-    .fontSize(11)
-    .text('Check off each item as you experience it!');
-
-  doc.moveDown();
-
-  const bingoCellSize = 100;
-  const bingoStartX = (doc.page.width - (4 * bingoCellSize)) / 2;
-  const bingoStartY = doc.y;
-
-  activities.travelBingo.forEach((item, i) => {
-    const row = Math.floor(i / 4);
-    const col = i % 4;
-    const x = bingoStartX + (col * bingoCellSize);
-    const y = bingoStartY + (row * bingoCellSize);
-
-    doc.rect(x, y, bingoCellSize, bingoCellSize)
-      .stroke(COLORS.border);
-
-    // Checkbox
-    doc.rect(x + 5, y + 5, 12, 12)
-      .stroke(COLORS.primary);
-
-    // Text
-    doc.font(FONTS.body)
-      .fontSize(9)
-      .fillColor(COLORS.text)
-      .text(item, x + 5, y + 22, {
-        width: bingoCellSize - 10,
-        height: bingoCellSize - 30,
-        align: 'center',
-      });
+  let sY = rightY + 14;
+  scrambleWords.forEach((word, i) => {
+    doc.font(FONTS.body).fontSize(8).fillColor(COLORS.text)
+      .text(`${i + 1}. ${word}`, COL2_X, sY);
+    doc.text('__________', COL2_X + 70, sY);
+    sY += 22;
   });
 
-  doc.addPage();
-
-  // Trivia
-  doc.fillColor(COLORS.secondary)
-    .font(FONTS.title)
-    .fontSize(22)
-    .text('❓ Travel Trivia');
-
-  doc.moveDown();
+  // BOTTOM: Trivia
+  y += (gridSize * cellSize) + 15;
+  doc.fillColor(COLORS.secondary).font(FONTS.title).fontSize(9)
+    .text('TRIVIA', MARGIN, y);
+  y += 14;
 
   activities.trivia.forEach((item, i) => {
-    doc.fillColor(COLORS.text)
-      .font(FONTS.title)
-      .fontSize(12)
-      .text(`${i + 1}. ${item.q}`);
-
-    doc.moveDown(0.5);
-
-    // Answer line
-    doc.text('Your answer: ___________________________', { indent: 20 });
-
-    doc.moveDown(0.5);
-    doc.fillColor(COLORS.textLight)
-      .font(FONTS.italic)
-      .fontSize(9)
-      .text(`(Hint: Turn page upside down for answer)`, { indent: 20 });
-
-    doc.moveDown();
+    doc.font(FONTS.body).fontSize(8).fillColor(COLORS.text)
+      .text(`${i + 1}. ${item.q}`, MARGIN, y);
+    y += 12;
+    doc.text('Answer: _______________________________', MARGIN + 10, y);
+    y += 18;
   });
 
-  // Answers upside down at bottom
-  doc.save();
-  doc.rotate(180, { origin: [doc.page.width / 2, doc.page.height - 50] });
-  doc.fontSize(8)
-    .fillColor(COLORS.textLight)
-    .text(
-      `Answers: ${activities.trivia.map((t, i) => `${i + 1}. ${t.a}`).join(' | ')}`,
-      72,
-      30,
-      { width: doc.page.width - 144, align: 'center' }
-    );
-  doc.restore();
+  doc.fontSize(5).fillColor(COLORS.textLight)
+    .text(`Answers: ${activities.trivia.map((t, i) => `${i + 1}.${t.a}`).join('  ')}`, MARGIN, y);
+
+  doc.addPage();
+
+  // === PAGE 2: Bingo + Scavenger Hunt ===
+  y = MARGIN;
+
+  // LEFT: Travel Bingo (3x4 grid)
+  doc.fillColor(COLORS.accent).font(FONTS.title).fontSize(9)
+    .text('TRAVEL BINGO', MARGIN, y);
+  doc.font(FONTS.body).fontSize(6).fillColor(COLORS.textLight)
+    .text('Check off each item!', MARGIN, y + 11);
+  y += 24;
+
+  const bingoW = 52;
+  const bingoH = 42;
+  const bingoItems = activities.travelBingo.slice(0, 12);
+
+  bingoItems.forEach((item, i) => {
+    const row = Math.floor(i / 3);
+    const col = i % 3;
+    const bx = MARGIN + (col * bingoW);
+    const by = y + (row * bingoH);
+
+    doc.rect(bx, by, bingoW, bingoH).stroke(COLORS.border);
+    doc.rect(bx + 3, by + 3, 8, 8).stroke(COLORS.primary);
+    doc.font(FONTS.body).fontSize(6).fillColor(COLORS.text)
+      .text(item, bx + 3, by + 14, { width: bingoW - 6 });
+  });
+
+  // RIGHT: Scavenger Hunt
+  doc.fillColor(COLORS.primary).font(FONTS.title).fontSize(9)
+    .text('SCAVENGER HUNT', COL2_X, MARGIN);
+  doc.font(FONTS.body).fontSize(6).fillColor(COLORS.textLight)
+    .text('Find and check off:', COL2_X, MARGIN + 11);
+
+  const huntItems = [
+    'Something red', 'A uniform', 'The number 7',
+    'Something soft', 'A cloud shape', 'Someone smiling',
+    'Something shiny', 'A bird', 'The color blue',
+    'A sign with letters'
+  ];
+
+  let hY = MARGIN + 26;
+  huntItems.forEach((item) => {
+    doc.rect(COL2_X, hY, 8, 8).stroke(COLORS.border);
+    doc.font(FONTS.body).fontSize(7).fillColor(COLORS.text)
+      .text(item, COL2_X + 12, hY);
+    hY += 16;
+  });
+
+  // BOTTOM: Tally + Fill-in-Blank
+  y += (4 * bingoH) + 12;
+
+  doc.fillColor(COLORS.secondary).font(FONTS.title).fontSize(9)
+    .text('TALLY COUNT', MARGIN, y);
+  y += 14;
+
+  const tallies = ['Airplanes', 'Red cars', 'Dogs', 'Waves'];
+  tallies.forEach((item, i) => {
+    const tx = MARGIN + (i % 2) * 160;
+    const ty = y + Math.floor(i / 2) * 28;
+    doc.font(FONTS.body).fontSize(7).fillColor(COLORS.text).text(item + ':', tx, ty);
+    doc.rect(tx, ty + 10, 70, 14).stroke(COLORS.border);
+  });
+
+  y += 65;
+  doc.fillColor(COLORS.accent).font(FONTS.title).fontSize(9)
+    .text('FILL IN THE BLANK', MARGIN, y);
+  y += 14;
+
+  const blanks = [
+    `${dest} is famous for ________________________________.`,
+    `I hope to see ________________________________.`,
+    `One word to describe this trip: ________________.`,
+  ];
+
+  blanks.forEach(b => {
+    doc.font(FONTS.body).fontSize(8).fillColor(COLORS.text).text(b, MARGIN, y);
+    y += 20;
+  });
+
+  doc.addPage();
+
+  // === PAGE 3: Drawing + Would You Rather + Categories ===
+  y = MARGIN;
+
+  doc.fillColor(COLORS.primary).font(FONTS.title).fontSize(9)
+    .text('DRAW IT!', MARGIN, y);
+  doc.font(FONTS.italic).fontSize(7).fillColor(COLORS.textLight)
+    .text(`Draw what you imagine ${dest} looks like:`, MARGIN, y + 12);
+  y += 26;
+
+  doc.rect(MARGIN, y, CONTENT_WIDTH, 160).stroke(COLORS.border);
+  y += 170;
+
+  // Would You Rather
+  doc.fillColor(COLORS.secondary).font(FONTS.title).fontSize(9)
+    .text('WOULD YOU RATHER...', MARGIN, y);
+  y += 14;
+
+  const wyr = [
+    ['Fly like a bird', 'Swim like a dolphin'],
+    ['Visit 100 years ago', 'Visit 100 years ahead'],
+    ['Eat only sweets forever', 'Eat only pizza forever'],
+  ];
+
+  wyr.forEach((q, i) => {
+    doc.font(FONTS.body).fontSize(7).fillColor(COLORS.text)
+      .text(`${i + 1}. [  ] ${q[0]}   OR   [  ] ${q[1]}`, MARGIN, y);
+    y += 18;
+  });
+
+  y += 8;
+
+  // Categories
+  doc.fillColor(COLORS.accent).font(FONTS.title).fontSize(9)
+    .text('CATEGORIES GAME', MARGIN, y);
+
+  const catLetter = dest.charAt(0).toUpperCase();
+  doc.font(FONTS.title).fontSize(16).fillColor(COLORS.primary)
+    .text(catLetter, MARGIN + CONTENT_WIDTH - 30, y - 4);
+
+  doc.font(FONTS.body).fontSize(6).fillColor(COLORS.textLight)
+    .text(`Name one thing starting with "${catLetter}" for each:`, MARGIN, y + 12);
+  y += 26;
+
+  const cats = [
+    ['Animal:', 'Food:', 'Place:'],
+    ['Name:', 'Color:', 'Thing:']
+  ];
+
+  cats.forEach((row, ri) => {
+    row.forEach((cat, ci) => {
+      const cx = MARGIN + (ci * 108);
+      doc.font(FONTS.body).fontSize(7).fillColor(COLORS.text)
+        .text(cat, cx, y + (ri * 22));
+      doc.strokeColor(COLORS.border).moveTo(cx + 35, y + (ri * 22) + 8)
+        .lineTo(cx + 100, y + (ri * 22) + 8).stroke();
+    });
+  });
+
+  doc.addPage();
+
+  // === PAGE 4: Games Page ===
+  y = MARGIN;
+
+  // Tic-Tac-Toe (2 grids side by side)
+  doc.fillColor(COLORS.accent).font(FONTS.title).fontSize(9)
+    .text('TIC-TAC-TOE', MARGIN, y);
+  y += 14;
+
+  const tttSize = 72;
+  const tttCell = tttSize / 3;
+
+  [MARGIN, MARGIN + 100].forEach(startX => {
+    for (let i = 1; i < 3; i++) {
+      doc.strokeColor(COLORS.border)
+        .moveTo(startX + (i * tttCell), y).lineTo(startX + (i * tttCell), y + tttSize).stroke()
+        .moveTo(startX, y + (i * tttCell)).lineTo(startX + tttSize, y + (i * tttCell)).stroke();
+    }
+  });
+
+  // Maze on right
+  doc.fillColor(COLORS.primary).font(FONTS.title).fontSize(9)
+    .text('MINI MAZE', COL2_X + 20, MARGIN);
+
+  const mazeY = MARGIN + 14;
+  const mazeW = 90;
+  const mazeH = 72;
+  doc.rect(COL2_X + 20, mazeY, mazeW, mazeH).stroke(COLORS.text);
+
+  // Simple maze walls
+  doc.strokeColor(COLORS.text)
+    .moveTo(COL2_X + 50, mazeY).lineTo(COL2_X + 50, mazeY + 25).stroke()
+    .moveTo(COL2_X + 50, mazeY + 40).lineTo(COL2_X + 50, mazeY + mazeH).stroke()
+    .moveTo(COL2_X + 80, mazeY + 20).lineTo(COL2_X + 80, mazeY + 55).stroke()
+    .moveTo(COL2_X + 20, mazeY + 35).lineTo(COL2_X + 35, mazeY + 35).stroke()
+    .moveTo(COL2_X + 65, mazeY + 50).lineTo(COL2_X + 110, mazeY + 50).stroke();
+
+  doc.font(FONTS.body).fontSize(5).fillColor(COLORS.text)
+    .text('S', COL2_X + 23, mazeY + 3)
+    .text('E', COL2_X + 100, mazeY + mazeH - 12);
+
+  y += tttSize + 20;
+
+  // Story Starter
+  doc.fillColor(COLORS.secondary).font(FONTS.title).fontSize(9)
+    .text('STORY STARTER', MARGIN, y);
+  y += 12;
+
+  doc.font(FONTS.italic).fontSize(8).fillColor(COLORS.text)
+    .text(`"One day in ${dest}, something amazing happened..."`, MARGIN, y);
+  y += 16;
+
+  for (let i = 0; i < 8; i++) {
+    doc.strokeColor(COLORS.border).moveTo(MARGIN, y).lineTo(MARGIN + CONTENT_WIDTH, y).stroke();
+    y += 18;
+  }
+
+  y += 10;
+
+  // Math Fun
+  doc.fillColor(COLORS.accent).font(FONTS.title).fontSize(9)
+    .text('TRAVEL MATH', MARGIN, y);
+  y += 14;
+
+  const math = [
+    ['3 hours x 500 mph = _______ miles', '25 + 17 + 8 = _______'],
+    ['$20 - $7.50 = $_______', '6 rows x 30 seats = _______'],
+  ];
+
+  math.forEach((row, ri) => {
+    row.forEach((prob, ci) => {
+      doc.font(FONTS.body).fontSize(7).fillColor(COLORS.text)
+        .text(prob, MARGIN + (ci * 165), y + (ri * 20));
+    });
+  });
 
   doc.addPage();
 }
 
 function generateDailyPages(doc, content) {
-  // Section header
-  doc.fillColor(COLORS.primary)
-    .font(FONTS.title)
-    .fontSize(32)
-    .text('📝 Daily Journal', { align: 'center' });
+  const LINE_HEIGHT = 18; // Space between writing lines
+  const PAGE_BOTTOM = PAGE_HEIGHT - MARGIN - 10;
 
-  doc.moveDown();
-  doc.fillColor(COLORS.textLight)
-    .font(FONTS.italic)
-    .fontSize(12)
-    .text('Record your adventures each day', { align: 'center' });
-
-  content.dailyPages.forEach((page, index) => {
+  content.dailyPages.forEach((page) => {
+    // === PAGE 1: Prompts & Writing ===
     doc.addPage();
+    let y = MARGIN;
 
-    // Day header
-    doc.fillColor(COLORS.primary)
-      .font(FONTS.title)
-      .fontSize(24)
-      .text(`Day ${page.dayNumber} - ${page.location}`);
+    // Header with day info
+    doc.fillColor(COLORS.primary).font(FONTS.title).fontSize(14)
+      .text(`Day ${page.dayNumber} - ${page.location}`, MARGIN, y);
+    y += 18;
 
-    // Date and weather
-    doc.moveDown(0.5);
-    doc.fillColor(COLORS.text)
-      .font(FONTS.body)
-      .fontSize(11)
-      .text('Date: _____________    Weather: ☀️ ⛅ 🌧️ ❄️ (circle one)');
+    // Date and weather on same line
+    doc.fillColor(COLORS.text).font(FONTS.body).fontSize(8)
+      .text('Date: ______________', MARGIN, y);
+    doc.text('Weather:  [sunny]  [cloudy]  [rainy]  [cold]', MARGIN + 120, y);
+    y += 14;
 
-    doc.moveDown();
+    // Mood
+    doc.text('Mood:  [great]  [good]  [okay]  [tired]  [sad]', MARGIN, y);
+    y += 20;
 
-    // Mood tracker
-    doc.text("Today's mood: 😊 😃 😐 😢 😴 (circle one)");
+    // Calculate available space for prompts
+    const availableHeight = PAGE_BOTTOM - y;
+    const prompts = page.prompts.slice(0, 3);
+    const linesPerPrompt = Math.floor((availableHeight - (prompts.length * 20)) / (prompts.length * LINE_HEIGHT));
 
-    doc.moveDown(1.5);
+    prompts.forEach((prompt, idx) => {
+      doc.fillColor(COLORS.accent).font(FONTS.italic).fontSize(8)
+        .text(`>> ${prompt}`, MARGIN, y);
+      y += 14;
 
-    // Prompts
-    page.prompts.forEach((prompt, i) => {
-      doc.fillColor(COLORS.accent)
-        .font(FONTS.italic)
-        .fontSize(11)
-        .text(`✏️ ${prompt}`);
-
-      doc.moveDown(0.5);
-
-      // Writing lines
-      for (let j = 0; j < 4; j++) {
-        const y = doc.y;
-        doc.strokeColor(COLORS.border)
-          .lineWidth(0.5)
-          .moveTo(72, y)
-          .lineTo(doc.page.width - 72, y)
-          .stroke();
-        doc.moveDown(0.7);
+      // Writing lines - fill available space
+      const lines = Math.max(4, Math.min(linesPerPrompt, 7));
+      for (let j = 0; j < lines; j++) {
+        doc.strokeColor(COLORS.border).lineWidth(0.5)
+          .moveTo(MARGIN, y).lineTo(PAGE_WIDTH - MARGIN, y).stroke();
+        y += LINE_HEIGHT;
       }
-
-      doc.moveDown(0.5);
-
-      // Check if we need a new page
-      if (doc.y > doc.page.height - 200 && i < page.prompts.length - 1) {
-        doc.addPage();
-        doc.fillColor(COLORS.textLight)
-          .font(FONTS.italic)
-          .fontSize(10)
-          .text(`Day ${page.dayNumber} continued...`);
-        doc.moveDown();
-      }
+      y += 8;
     });
 
-    // Sketch section (on second page of each day)
+    // Fill remaining space with extra lines if any
+    while (y + LINE_HEIGHT < PAGE_BOTTOM - 20) {
+      doc.strokeColor(COLORS.border).lineWidth(0.5)
+        .moveTo(MARGIN, y).lineTo(PAGE_WIDTH - MARGIN, y).stroke();
+      y += LINE_HEIGHT;
+    }
+
+    // === PAGE 2: Sketch, Vocabulary, Highlights ===
     doc.addPage();
+    y = MARGIN;
 
-    doc.fillColor(COLORS.primary)
-      .font(FONTS.title)
-      .fontSize(18)
-      .text(`Day ${page.dayNumber} - Sketch & Reflect`);
+    // Sketch section
+    doc.fillColor(COLORS.primary).font(FONTS.title).fontSize(11)
+      .text(`Day ${page.dayNumber} - Sketch & Reflect`, MARGIN, y);
+    y += 16;
 
-    doc.moveDown();
+    doc.fillColor(COLORS.accent).font(FONTS.italic).fontSize(8)
+      .text(`Draw: ${page.sketchPrompt}`, MARGIN, y);
+    y += 14;
 
-    // Sketch box
-    doc.fillColor(COLORS.accent)
-      .font(FONTS.italic)
-      .fontSize(11)
-      .text(`🎨 ${page.sketchPrompt}`);
+    const sketchHeight = 200;
+    doc.rect(MARGIN, y, CONTENT_WIDTH, sketchHeight).stroke(COLORS.border);
+    y += sketchHeight + 12;
 
-    doc.moveDown(0.5);
+    // Two-column layout for vocabulary and highlights
+    const col1X = MARGIN;
+    const col2X = MARGIN + CONTENT_WIDTH / 2 + 10;
+    const colWidth = CONTENT_WIDTH / 2 - 15;
 
-    const sketchBoxY = doc.y;
-    doc.rect(72, sketchBoxY, doc.page.width - 144, 250)
-      .stroke(COLORS.border);
+    // LEFT: New word
+    doc.fillColor(COLORS.secondary).font(FONTS.title).fontSize(9)
+      .text('NEW WORD', col1X, y);
 
-    doc.y = sketchBoxY + 260;
+    doc.font(FONTS.body).fontSize(7).fillColor(COLORS.text)
+      .text('Word: _____________________', col1X, y + 14);
+    doc.text('Means: ____________________', col1X, y + 32);
+    doc.text('Use it: ____________________', col1X, y + 50);
+    doc.text('_____________________________', col1X, y + 68);
 
-    // New word section
-    doc.fillColor(COLORS.secondary)
-      .font(FONTS.title)
-      .fontSize(12)
-      .text('📚 ' + page.newWordSection.label);
+    // RIGHT: Best & Worst
+    doc.fillColor(COLORS.primary).font(FONTS.title).fontSize(9)
+      .text('TODAY WAS...', col2X, y);
 
-    doc.moveDown(0.3);
-    doc.strokeColor(COLORS.border)
-      .lineWidth(0.5)
-      .moveTo(72, doc.y)
-      .lineTo(300, doc.y)
-      .stroke();
+    doc.font(FONTS.body).fontSize(7).fillColor(COLORS.text)
+      .text('Best part:', col2X, y + 14);
+    doc.text('_____________________________', col2X, y + 26);
+    doc.text('_____________________________', col2X, y + 42);
 
-    doc.moveDown(0.8);
-    doc.fillColor(COLORS.text)
-      .font(FONTS.body)
-      .fontSize(11)
-      .text('It means: _________________________________');
+    doc.text('Surprising:', col2X, y + 60);
+    doc.text('_____________________________', col2X, y + 72);
 
-    doc.moveDown(1.5);
+    y += 95;
 
-    // Favorite moment
-    doc.fillColor(COLORS.primary)
-      .font(FONTS.title)
-      .fontSize(12)
-      .text('⭐ My favorite moment today:');
+    // Bottom section: What I want to remember
+    doc.fillColor(COLORS.accent).font(FONTS.title).fontSize(9)
+      .text('WHAT I WANT TO REMEMBER', MARGIN, y);
+    y += 14;
 
-    doc.moveDown(0.5);
-    for (let j = 0; j < 3; j++) {
-      const y = doc.y;
-      doc.strokeColor(COLORS.border)
-        .lineWidth(0.5)
-        .moveTo(72, y)
-        .lineTo(doc.page.width - 72, y)
-        .stroke();
-      doc.moveDown(0.7);
+    // Fill rest of page with lines
+    while (y + LINE_HEIGHT < PAGE_BOTTOM) {
+      doc.strokeColor(COLORS.border).lineWidth(0.5)
+        .moveTo(MARGIN, y).lineTo(PAGE_WIDTH - MARGIN, y).stroke();
+      y += LINE_HEIGHT;
     }
   });
 }
 
 function generateClosingPage(doc, content) {
+  const LINE_HEIGHT = 18;
+  const PAGE_BOTTOM = PAGE_HEIGHT - MARGIN - 10;
+
   doc.addPage();
+  let y = MARGIN;
 
-  doc.fillColor(COLORS.primary)
-    .font(FONTS.title)
-    .fontSize(28)
-    .text('Trip Reflections', { align: 'center' });
-
-  doc.moveDown(2);
+  doc.fillColor(COLORS.primary).font(FONTS.title).fontSize(14)
+    .text('TRIP REFLECTIONS', MARGIN, y, { align: 'center', width: CONTENT_WIDTH });
+  y += 24;
 
   const closingPrompts = [
-    'The best thing about this trip was...',
-    'Something I learned about myself...',
-    'I want to remember...',
+    'The BEST thing about this trip was...',
+    'Something that SURPRISED me...',
+    'A new thing I LEARNED...',
+    'I want to REMEMBER...',
     'Next time I travel, I want to...',
-    'My advice for other kids visiting this place...',
   ];
 
+  // Calculate lines per prompt to fill the page
+  const promptSpace = PAGE_BOTTOM - y - 20;
+  const linesPerPrompt = Math.floor(promptSpace / (closingPrompts.length * (LINE_HEIGHT + 4))) - 1;
+
   closingPrompts.forEach(prompt => {
-    doc.fillColor(COLORS.accent)
-      .font(FONTS.italic)
-      .fontSize(11)
-      .text(`✏️ ${prompt}`);
+    doc.fillColor(COLORS.accent).font(FONTS.italic).fontSize(8)
+      .text(`>> ${prompt}`, MARGIN, y);
+    y += 12;
 
-    doc.moveDown(0.5);
-
-    for (let j = 0; j < 4; j++) {
-      const y = doc.y;
-      doc.strokeColor(COLORS.border)
-        .lineWidth(0.5)
-        .moveTo(72, y)
-        .lineTo(doc.page.width - 72, y)
-        .stroke();
-      doc.moveDown(0.7);
+    for (let j = 0; j < Math.max(3, linesPerPrompt); j++) {
+      doc.strokeColor(COLORS.border).lineWidth(0.5)
+        .moveTo(MARGIN, y).lineTo(PAGE_WIDTH - MARGIN, y).stroke();
+      y += LINE_HEIGHT;
     }
-
-    doc.moveDown();
+    y += 6;
   });
 
   // Final page
   doc.addPage();
+  y = MARGIN;
 
-  doc.fillColor(COLORS.primary)
-    .font(FONTS.title)
-    .fontSize(36)
-    .text('The End!', 72, 250, { align: 'center' });
+  // Trip summary box
+  doc.rect(MARGIN, y, CONTENT_WIDTH, 100).fill('#F0F7FA');
 
-  doc.moveDown(2);
+  doc.fillColor(COLORS.primary).font(FONTS.title).fontSize(20)
+    .text('Trip Complete!', MARGIN, y + 15, { align: 'center', width: CONTENT_WIDTH });
 
-  doc.fontSize(18)
-    .text(`${content.childName}'s Amazing Adventure`, { align: 'center' });
+  doc.fontSize(12)
+    .text(`${content.childName}'s Adventure to ${content.destination}`, MARGIN, y + 45, { align: 'center', width: CONTENT_WIDTH });
 
-  doc.moveDown();
+  doc.fillColor(COLORS.textLight).font(FONTS.body).fontSize(10)
+    .text(`${content.tripDays} Days of Exploration`, MARGIN, y + 65, { align: 'center', width: CONTENT_WIDTH });
 
-  doc.fillColor(COLORS.textLight)
-    .font(FONTS.body)
-    .fontSize(12)
-    .text(`${content.destination} • ${content.tripDays} Days`, { align: 'center' });
+  y += 115;
 
-  doc.moveDown(3);
+  // Rate your trip section
+  doc.fillColor(COLORS.secondary).font(FONTS.title).fontSize(10)
+    .text('RATE YOUR TRIP', MARGIN, y);
+  y += 14;
 
-  doc.fontSize(48)
-    .text('🎒✈️🌍', { align: 'center' });
+  doc.font(FONTS.body).fontSize(8).fillColor(COLORS.text)
+    .text('Overall:     [1]  [2]  [3]  [4]  [5]  stars', MARGIN, y);
+  y += 16;
+  doc.text('Would visit again?     [Yes]  [Maybe]  [No]', MARGIN, y);
+  y += 24;
 
-  doc.moveDown(3);
+  // Favorite memories
+  doc.fillColor(COLORS.primary).font(FONTS.title).fontSize(10)
+    .text('MY TOP 3 MEMORIES', MARGIN, y);
+  y += 14;
 
-  doc.fillColor(COLORS.textLight)
-    .fontSize(10)
-    .text('Created with KidsTravel Journal Generator', { align: 'center' });
+  for (let i = 1; i <= 3; i++) {
+    doc.font(FONTS.body).fontSize(8).fillColor(COLORS.text)
+      .text(`${i}. ________________________________________`, MARGIN, y);
+    y += 20;
+  }
+
+  y += 10;
+
+  // People I met / Food I tried
+  const col1X = MARGIN;
+  const col2X = MARGIN + CONTENT_WIDTH / 2 + 5;
+
+  doc.fillColor(COLORS.accent).font(FONTS.title).fontSize(9)
+    .text('FOODS I TRIED', col1X, y);
+  doc.text('SOUVENIRS', col2X, y);
+  y += 12;
+
+  for (let i = 0; i < 4; i++) {
+    doc.font(FONTS.body).fontSize(7).fillColor(COLORS.text)
+      .text(`- ________________`, col1X, y + (i * 14));
+    doc.text(`- ________________`, col2X, y + (i * 14));
+  }
+
+  y += 70;
+
+  // Message to future self
+  doc.fillColor(COLORS.secondary).font(FONTS.title).fontSize(9)
+    .text('NOTE TO MY FUTURE SELF:', MARGIN, y);
+  y += 14;
+
+  while (y + LINE_HEIGHT < PAGE_BOTTOM - 30) {
+    doc.strokeColor(COLORS.border).lineWidth(0.5)
+      .moveTo(MARGIN, y).lineTo(PAGE_WIDTH - MARGIN, y).stroke();
+    y += LINE_HEIGHT;
+  }
+
+  // Footer
+  doc.fillColor(COLORS.textLight).fontSize(6)
+    .text('Created with KidsTravel Journal Generator', MARGIN, PAGE_BOTTOM - 10, { align: 'center', width: CONTENT_WIDTH })
+    .text('Print: 2 pages per sheet, double-sided = 4 pages per paper', MARGIN, PAGE_BOTTOM, { align: 'center', width: CONTENT_WIDTH });
 }
 
 function formatDate(dateString) {
