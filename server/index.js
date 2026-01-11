@@ -18,6 +18,12 @@ const PORT = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.json());
 
+// Serve static files from the dist folder in production
+const distPath = path.join(__dirname, '..', 'dist');
+if (fs.existsSync(distPath)) {
+  app.use(express.static(distPath));
+}
+
 // File upload config
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -194,6 +200,13 @@ async function generateJournalAsync(journalId, journalData) {
     journal.error = error.message;
     journals.set(journalId, journal);
   }
+}
+
+// Serve React app for all other routes (must be after API routes)
+if (fs.existsSync(distPath)) {
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(distPath, 'index.html'));
+  });
 }
 
 // Start server
