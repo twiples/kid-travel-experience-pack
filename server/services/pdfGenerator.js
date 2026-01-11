@@ -338,6 +338,1300 @@ function drawCompass(doc, x, y, size = 20, color = COLORS.accent) {
     .fill();
 }
 
+// ============================================
+// TROPICAL DECORATIONS (Costa Rica inspired)
+// ============================================
+
+// Draw a toucan
+function drawToucan(doc, x, y, size = 24, flip = false) {
+  doc.save();
+  doc.translate(x, y);
+  doc.scale(size / 24);
+  if (flip) doc.scale(-1, 1);
+
+  // Body
+  doc.fillColor('#1a1a2e')
+    .ellipse(6, 4, 7, 8).fill();
+
+  // Head
+  doc.circle(-4, -4, 5).fill();
+
+  // Eye ring (cyan)
+  doc.fillColor('#00afd8')
+    .circle(-6, -5, 2.5).fill();
+
+  // Eye
+  doc.fillColor('#1a1a2e')
+    .circle(-6, -5, 1.2).fill();
+  doc.fillColor('#ffffff')
+    .circle(-6.3, -5.3, 0.4).fill();
+
+  // Beak (orange/red)
+  doc.fillColor('#ff9f43');
+  doc.moveTo(-9, -3)
+    .bezierCurveTo(-14, -1, -14, 2, -11, 3)
+    .lineTo(-7, 0)
+    .closePath().fill();
+
+  doc.fillColor('#ee5a24');
+  doc.moveTo(-9, -3)
+    .bezierCurveTo(-12, -4, -11, 0, -7, 0)
+    .closePath().fill();
+
+  // Tail (cyan accent)
+  doc.fillColor('#00afd8');
+  doc.moveTo(12, 6)
+    .bezierCurveTo(14, 10, 13, 14, 11, 12)
+    .bezierCurveTo(10, 10, 11, 8, 12, 6)
+    .fill();
+
+  doc.restore();
+}
+
+// Draw a monstera leaf
+function drawMonsteraLeaf(doc, x, y, size = 30, rotation = 0) {
+  doc.save();
+  doc.translate(x, y);
+  doc.rotate(rotation);
+  doc.scale(size / 30);
+
+  // Main leaf shape
+  doc.fillColor('#2ecc71');
+  doc.moveTo(0, -12)
+    .bezierCurveTo(-10, -6, -12, 6, -8, 14)
+    .bezierCurveTo(-4, 18, 4, 18, 8, 14)
+    .bezierCurveTo(12, 6, 10, -6, 0, -12)
+    .fill();
+
+  // Holes in leaf (using white/background)
+  doc.fillColor('#FFFFFF');
+  doc.ellipse(-4, 0, 2, 3).fill();
+  doc.ellipse(4, 0, 2, 3).fill();
+  doc.ellipse(-2, 8, 1.5, 2.5).fill();
+  doc.ellipse(2, 8, 1.5, 2.5).fill();
+
+  // Center vein
+  doc.strokeColor('#27ae60').lineWidth(1);
+  doc.moveTo(0, -10).lineTo(0, 14).stroke();
+
+  // Side veins
+  doc.lineWidth(0.5);
+  doc.moveTo(0, -4).lineTo(-5, 0).stroke();
+  doc.moveTo(0, -4).lineTo(5, 0).stroke();
+  doc.moveTo(0, 4).lineTo(-4, 8).stroke();
+  doc.moveTo(0, 4).lineTo(4, 8).stroke();
+
+  doc.restore();
+}
+
+// Draw a butterfly
+function drawButterfly(doc, x, y, size = 16, color = '#00afd8') {
+  doc.save();
+  doc.translate(x, y);
+  doc.scale(size / 16);
+
+  // Left wings
+  doc.fillColor(color);
+  doc.moveTo(0, 0)
+    .bezierCurveTo(-6, -6, -10, -4, -8, 0)
+    .bezierCurveTo(-10, 4, -6, 6, 0, 0)
+    .fill();
+
+  // Right wings
+  doc.moveTo(0, 0)
+    .bezierCurveTo(6, -6, 10, -4, 8, 0)
+    .bezierCurveTo(10, 4, 6, 6, 0, 0)
+    .fill();
+
+  // Wing details
+  doc.fillColor('#008fb3');
+  doc.circle(-5, -2, 1.2).fill();
+  doc.circle(5, -2, 1.2).fill();
+
+  // Body
+  doc.fillColor('#2d3436');
+  doc.ellipse(0, 1, 0.8, 4).fill();
+
+  // Antennae
+  doc.strokeColor('#2d3436').lineWidth(0.5);
+  doc.moveTo(-0.5, -3).bezierCurveTo(-2, -6, -3, -7, -4, -7).stroke();
+  doc.moveTo(0.5, -3).bezierCurveTo(2, -6, 3, -7, 4, -7).stroke();
+
+  doc.restore();
+}
+
+// Draw a tropical flower (hibiscus-style)
+function drawTropicalFlower(doc, x, y, size = 20, color = '#ff6b6b') {
+  doc.save();
+  doc.translate(x, y);
+  doc.scale(size / 20);
+
+  // Petals
+  doc.fillColor(color);
+  for (let i = 0; i < 5; i++) {
+    doc.save();
+    doc.rotate(i * 72);
+    doc.ellipse(0, -6, 4, 6).fill();
+    doc.restore();
+  }
+
+  // Center
+  doc.fillColor('#f9ca24');
+  doc.circle(0, 0, 3).fill();
+
+  // Stamen dots
+  doc.fillColor('#f39c12');
+  doc.circle(-1, -1, 0.6).fill();
+  doc.circle(1, 0, 0.6).fill();
+  doc.circle(0, 1, 0.6).fill();
+
+  doc.restore();
+}
+
+// Draw a palm frond
+function drawPalmFrond(doc, x, y, size = 25, rotation = 0) {
+  doc.save();
+  doc.translate(x, y);
+  doc.rotate(rotation);
+  doc.scale(size / 25);
+
+  doc.strokeColor('#27ae60').lineWidth(1);
+  doc.fillColor('#2ecc71');
+
+  // Central stem
+  doc.moveTo(0, 10).lineTo(0, -12).stroke();
+
+  // Frond leaves
+  for (let i = -4; i <= 4; i++) {
+    const yPos = i * 2.5;
+    const length = 8 - Math.abs(i);
+    // Left leaf
+    doc.moveTo(0, yPos)
+      .bezierCurveTo(-length * 0.5, yPos - 2, -length, yPos - 1, -length, yPos + 1)
+      .bezierCurveTo(-length * 0.5, yPos + 1, 0, yPos, 0, yPos)
+      .fill();
+    // Right leaf
+    doc.moveTo(0, yPos)
+      .bezierCurveTo(length * 0.5, yPos - 2, length, yPos - 1, length, yPos + 1)
+      .bezierCurveTo(length * 0.5, yPos + 1, 0, yPos, 0, yPos)
+      .fill();
+  }
+
+  doc.restore();
+}
+
+// Draw a hummingbird
+function drawHummingbird(doc, x, y, size = 20, flip = false) {
+  doc.save();
+  doc.translate(x, y);
+  doc.scale(size / 20);
+  if (flip) doc.scale(-1, 1);
+
+  // Body
+  doc.fillColor('#27ae60');
+  doc.ellipse(2, 0, 6, 4).fill();
+
+  // Head
+  doc.fillColor('#2ecc71');
+  doc.circle(-5, -1, 3).fill();
+
+  // Beak
+  doc.fillColor('#2d3436');
+  doc.moveTo(-8, -1)
+    .lineTo(-14, 0)
+    .lineTo(-8, 1)
+    .closePath().fill();
+
+  // Eye
+  doc.fillColor('#1a1a2e');
+  doc.circle(-6, -2, 0.8).fill();
+
+  // Wing
+  doc.fillColor('#00afd8');
+  doc.moveTo(2, -2)
+    .bezierCurveTo(6, -8, 10, -6, 8, -2)
+    .bezierCurveTo(6, 0, 2, 0, 2, -2)
+    .fill();
+
+  // Tail
+  doc.fillColor('#1e8449');
+  doc.moveTo(7, 0)
+    .lineTo(12, 2)
+    .lineTo(10, 4)
+    .lineTo(7, 1)
+    .closePath().fill();
+
+  // Throat patch
+  doc.fillColor('#e74c3c');
+  doc.ellipse(-4, 1, 1.5, 1).fill();
+
+  doc.restore();
+}
+
+// Draw a small tropical leaf (simpler version for accents)
+function drawSmallLeaf(doc, x, y, size = 12, rotation = 0, color = '#27ae60') {
+  doc.save();
+  doc.translate(x, y);
+  doc.rotate(rotation);
+  doc.scale(size / 12);
+
+  doc.fillColor(color);
+  doc.moveTo(0, -6)
+    .bezierCurveTo(-4, -3, -4, 3, 0, 6)
+    .bezierCurveTo(4, 3, 4, -3, 0, -6)
+    .fill();
+
+  doc.strokeColor('#1e8449').lineWidth(0.3);
+  doc.moveTo(0, -5).lineTo(0, 5).stroke();
+
+  doc.restore();
+}
+
+// ============================================
+// JAPAN THEME DECORATIONS
+// ============================================
+
+// Draw cherry blossom flower
+function drawCherryBlossom(doc, x, y, size = 16) {
+  doc.save();
+  doc.translate(x, y);
+  doc.scale(size / 16);
+
+  // Petals (5 heart-shaped petals)
+  doc.fillColor('#ffb7c5');
+  for (let i = 0; i < 5; i++) {
+    doc.save();
+    doc.rotate(i * 72);
+    doc.moveTo(0, -6)
+      .bezierCurveTo(-3, -8, -4, -4, 0, 0)
+      .bezierCurveTo(4, -4, 3, -8, 0, -6)
+      .fill();
+    doc.restore();
+  }
+
+  // Center
+  doc.fillColor('#ff69b4');
+  doc.circle(0, 0, 2).fill();
+
+  // Stamen dots
+  doc.fillColor('#ffeb3b');
+  for (let i = 0; i < 5; i++) {
+    const angle = (i * 72 - 90) * Math.PI / 180;
+    doc.circle(Math.cos(angle) * 1.5, Math.sin(angle) * 1.5, 0.5).fill();
+  }
+
+  doc.restore();
+}
+
+// Draw torii gate
+function drawToriiGate(doc, x, y, size = 24) {
+  doc.save();
+  doc.translate(x, y);
+  doc.scale(size / 24);
+
+  doc.fillColor('#d32f2f');
+
+  // Top beam (kasagi)
+  doc.rect(-12, -10, 24, 3).fill();
+
+  // Second beam (nuki)
+  doc.rect(-10, -5, 20, 2).fill();
+
+  // Pillars
+  doc.rect(-9, -7, 2.5, 17).fill();
+  doc.rect(6.5, -7, 2.5, 17).fill();
+
+  // Top extensions
+  doc.moveTo(-12, -10).lineTo(-13, -12).lineTo(-11, -10).fill();
+  doc.moveTo(12, -10).lineTo(13, -12).lineTo(11, -10).fill();
+
+  doc.restore();
+}
+
+// Draw Mt. Fuji
+function drawMtFuji(doc, x, y, size = 30) {
+  doc.save();
+  doc.translate(x, y);
+  doc.scale(size / 30);
+
+  // Mountain body
+  doc.fillColor('#5d7d9a');
+  doc.moveTo(0, -10)
+    .lineTo(-15, 10)
+    .lineTo(15, 10)
+    .closePath().fill();
+
+  // Snow cap
+  doc.fillColor('#ffffff');
+  doc.moveTo(0, -10)
+    .lineTo(-6, -2)
+    .bezierCurveTo(-4, -1, -2, -3, 0, -2)
+    .bezierCurveTo(2, -3, 4, -1, 6, -2)
+    .lineTo(0, -10)
+    .fill();
+
+  doc.restore();
+}
+
+// Draw koi fish
+function drawKoiFish(doc, x, y, size = 20, color = '#ff6b35') {
+  doc.save();
+  doc.translate(x, y);
+  doc.scale(size / 20);
+
+  // Body
+  doc.fillColor(color);
+  doc.moveTo(-8, 0)
+    .bezierCurveTo(-8, -5, 4, -5, 8, 0)
+    .bezierCurveTo(4, 5, -8, 5, -8, 0)
+    .fill();
+
+  // Tail
+  doc.moveTo(-8, 0)
+    .lineTo(-12, -4)
+    .bezierCurveTo(-10, 0, -10, 0, -12, 4)
+    .closePath().fill();
+
+  // Eye
+  doc.fillColor('#ffffff');
+  doc.circle(4, -1, 2).fill();
+  doc.fillColor('#1a1a2e');
+  doc.circle(4.5, -1, 1).fill();
+
+  // Scales pattern
+  doc.strokeColor('#e55a2b').lineWidth(0.3);
+  doc.moveTo(-2, -2).bezierCurveTo(0, -1, 0, 1, -2, 2).stroke();
+  doc.moveTo(2, -2).bezierCurveTo(4, -1, 4, 1, 2, 2).stroke();
+
+  doc.restore();
+}
+
+// Draw Japanese lantern
+function drawLantern(doc, x, y, size = 20) {
+  doc.save();
+  doc.translate(x, y);
+  doc.scale(size / 20);
+
+  // Top
+  doc.fillColor('#2d3436');
+  doc.rect(-2, -10, 4, 2).fill();
+
+  // Lantern body
+  doc.fillColor('#ff5722');
+  doc.ellipse(0, 0, 6, 8).fill();
+
+  // Stripes
+  doc.strokeColor('#d84315').lineWidth(0.5);
+  doc.moveTo(-5, -2).lineTo(5, -2).stroke();
+  doc.moveTo(-5, 2).lineTo(5, 2).stroke();
+
+  // Bottom
+  doc.fillColor('#2d3436');
+  doc.rect(-3, 7, 6, 2).fill();
+
+  // Tassel
+  doc.strokeColor('#ffeb3b').lineWidth(1);
+  doc.moveTo(0, 9).lineTo(0, 12).stroke();
+  doc.moveTo(-1, 12).lineTo(1, 12).stroke();
+
+  doc.restore();
+}
+
+// ============================================
+// PARIS/FRANCE THEME DECORATIONS
+// ============================================
+
+// Draw Eiffel Tower
+function drawEiffelTower(doc, x, y, size = 30) {
+  doc.save();
+  doc.translate(x, y);
+  doc.scale(size / 30);
+
+  doc.fillColor('#5d5d5d');
+
+  // Main tower shape
+  doc.moveTo(0, -14)
+    .lineTo(-2, -8)
+    .lineTo(-4, -8)
+    .lineTo(-6, 0)
+    .lineTo(-3, 0)
+    .lineTo(-5, 8)
+    .lineTo(-8, 14)
+    .lineTo(-3, 14)
+    .lineTo(-2, 10)
+    .lineTo(2, 10)
+    .lineTo(3, 14)
+    .lineTo(8, 14)
+    .lineTo(5, 8)
+    .lineTo(3, 0)
+    .lineTo(6, 0)
+    .lineTo(4, -8)
+    .lineTo(2, -8)
+    .closePath().fill();
+
+  // Platforms
+  doc.fillColor('#4a4a4a');
+  doc.rect(-5, -8, 10, 1.5).fill();
+  doc.rect(-6, 0, 12, 1.5).fill();
+
+  // Top
+  doc.fillColor('#5d5d5d');
+  doc.rect(-0.5, -16, 1, 3).fill();
+
+  doc.restore();
+}
+
+// Draw croissant
+function drawCroissant(doc, x, y, size = 18) {
+  doc.save();
+  doc.translate(x, y);
+  doc.scale(size / 18);
+
+  doc.fillColor('#d4a056');
+  doc.moveTo(-8, 0)
+    .bezierCurveTo(-8, -4, -4, -5, 0, -3)
+    .bezierCurveTo(4, -5, 8, -4, 8, 0)
+    .bezierCurveTo(8, 3, 4, 4, 0, 2)
+    .bezierCurveTo(-4, 4, -8, 3, -8, 0)
+    .fill();
+
+  // Shading lines
+  doc.strokeColor('#c49346').lineWidth(0.5);
+  doc.moveTo(-5, -1).bezierCurveTo(-3, -2, 3, -2, 5, -1).stroke();
+  doc.moveTo(-4, 1).bezierCurveTo(-2, 0, 2, 0, 4, 1).stroke();
+
+  doc.restore();
+}
+
+// Draw fleur-de-lis
+function drawFleurDeLis(doc, x, y, size = 20, color = '#1a237e') {
+  doc.save();
+  doc.translate(x, y);
+  doc.scale(size / 20);
+
+  doc.fillColor(color);
+
+  // Center petal
+  doc.moveTo(0, -8)
+    .bezierCurveTo(-2, -6, -2, -2, 0, 0)
+    .bezierCurveTo(2, -2, 2, -6, 0, -8)
+    .fill();
+
+  // Left petal
+  doc.moveTo(-3, -4)
+    .bezierCurveTo(-7, -6, -8, -2, -6, 0)
+    .bezierCurveTo(-4, 0, -2, -1, -1, 0)
+    .bezierCurveTo(-2, -2, -3, -3, -3, -4)
+    .fill();
+
+  // Right petal
+  doc.moveTo(3, -4)
+    .bezierCurveTo(7, -6, 8, -2, 6, 0)
+    .bezierCurveTo(4, 0, 2, -1, 1, 0)
+    .bezierCurveTo(2, -2, 3, -3, 3, -4)
+    .fill();
+
+  // Base
+  doc.rect(-3, 0, 6, 2).fill();
+  doc.rect(-4, 2, 8, 2).fill();
+  doc.rect(-2, 4, 4, 4).fill();
+
+  doc.restore();
+}
+
+// Draw beret
+function drawBeret(doc, x, y, size = 18) {
+  doc.save();
+  doc.translate(x, y);
+  doc.scale(size / 18);
+
+  doc.fillColor('#1a1a2e');
+
+  // Main beret shape
+  doc.moveTo(-8, 2)
+    .bezierCurveTo(-8, -4, -4, -6, 0, -6)
+    .bezierCurveTo(4, -6, 8, -4, 8, 2)
+    .lineTo(-8, 2)
+    .fill();
+
+  // Brim
+  doc.fillColor('#2d3436');
+  doc.ellipse(0, 2, 9, 2).fill();
+
+  // Top bobble
+  doc.fillColor('#1a1a2e');
+  doc.circle(0, -6, 2).fill();
+
+  doc.restore();
+}
+
+// ============================================
+// LONDON/UK THEME DECORATIONS
+// ============================================
+
+// Draw Big Ben
+function drawBigBen(doc, x, y, size = 30) {
+  doc.save();
+  doc.translate(x, y);
+  doc.scale(size / 30);
+
+  doc.fillColor('#8b7355');
+
+  // Main tower
+  doc.rect(-5, -6, 10, 20).fill();
+
+  // Clock face
+  doc.fillColor('#f5f5dc');
+  doc.circle(0, 0, 4).fill();
+  doc.strokeColor('#8b7355').lineWidth(0.5);
+  doc.circle(0, 0, 4).stroke();
+
+  // Clock hands
+  doc.strokeColor('#1a1a2e').lineWidth(0.8);
+  doc.moveTo(0, 0).lineTo(0, -3).stroke();
+  doc.moveTo(0, 0).lineTo(2, 0).stroke();
+
+  // Spire
+  doc.fillColor('#8b7355');
+  doc.moveTo(-3, -6).lineTo(0, -14).lineTo(3, -6).fill();
+
+  // Top
+  doc.fillColor('#d4af37');
+  doc.moveTo(-1, -14).lineTo(0, -16).lineTo(1, -14).fill();
+
+  // Windows
+  doc.fillColor('#87ceeb');
+  doc.rect(-3, 6, 2, 3).fill();
+  doc.rect(1, 6, 2, 3).fill();
+
+  doc.restore();
+}
+
+// Draw double-decker bus
+function drawDoubleDecker(doc, x, y, size = 28) {
+  doc.save();
+  doc.translate(x, y);
+  doc.scale(size / 28);
+
+  // Main body
+  doc.fillColor('#cc0000');
+  doc.roundedRect(-12, -6, 24, 14, 2).fill();
+
+  // Windows
+  doc.fillColor('#87ceeb');
+  doc.rect(-10, -4, 5, 4).fill();
+  doc.rect(-3, -4, 5, 4).fill();
+  doc.rect(4, -4, 5, 4).fill();
+  doc.rect(-10, 2, 5, 4).fill();
+  doc.rect(-3, 2, 5, 4).fill();
+  doc.rect(4, 2, 5, 4).fill();
+
+  // Wheels
+  doc.fillColor('#1a1a2e');
+  doc.circle(-7, 10, 3).fill();
+  doc.circle(7, 10, 3).fill();
+
+  // Wheel centers
+  doc.fillColor('#888');
+  doc.circle(-7, 10, 1.5).fill();
+  doc.circle(7, 10, 1.5).fill();
+
+  doc.restore();
+}
+
+// Draw crown
+function drawCrown(doc, x, y, size = 20) {
+  doc.save();
+  doc.translate(x, y);
+  doc.scale(size / 20);
+
+  // Base
+  doc.fillColor('#d4af37');
+  doc.rect(-8, 2, 16, 4).fill();
+
+  // Crown peaks
+  doc.moveTo(-8, 2)
+    .lineTo(-8, -4)
+    .lineTo(-5, 0)
+    .lineTo(-2, -6)
+    .lineTo(0, -2)
+    .lineTo(2, -6)
+    .lineTo(5, 0)
+    .lineTo(8, -4)
+    .lineTo(8, 2)
+    .closePath().fill();
+
+  // Jewels
+  doc.fillColor('#e53935');
+  doc.circle(-5, -2, 1.5).fill();
+  doc.circle(5, -2, 1.5).fill();
+  doc.fillColor('#1e88e5');
+  doc.circle(0, -4, 1.5).fill();
+
+  // Base jewels
+  doc.fillColor('#e53935');
+  doc.circle(-4, 4, 1).fill();
+  doc.circle(0, 4, 1).fill();
+  doc.circle(4, 4, 1).fill();
+
+  doc.restore();
+}
+
+// Draw tea cup
+function drawTeaCup(doc, x, y, size = 18) {
+  doc.save();
+  doc.translate(x, y);
+  doc.scale(size / 18);
+
+  // Saucer
+  doc.fillColor('#f5f5dc');
+  doc.ellipse(0, 6, 8, 2).fill();
+
+  // Cup body
+  doc.fillColor('#ffffff');
+  doc.moveTo(-5, -2)
+    .bezierCurveTo(-5, 4, -4, 6, 0, 6)
+    .bezierCurveTo(4, 6, 5, 4, 5, -2)
+    .lineTo(-5, -2)
+    .fill();
+
+  // Cup rim
+  doc.strokeColor('#d4af37').lineWidth(1);
+  doc.moveTo(-5, -2).lineTo(5, -2).stroke();
+
+  // Handle
+  doc.strokeColor('#ffffff').lineWidth(2);
+  doc.moveTo(5, 0)
+    .bezierCurveTo(8, 0, 8, 4, 5, 4)
+    .stroke();
+
+  // Steam
+  doc.strokeColor('#cccccc').lineWidth(0.5);
+  doc.moveTo(-2, -4).bezierCurveTo(-2, -6, -1, -6, -1, -8).stroke();
+  doc.moveTo(1, -4).bezierCurveTo(1, -6, 2, -6, 2, -8).stroke();
+
+  doc.restore();
+}
+
+// ============================================
+// BEACH/COASTAL THEME DECORATIONS
+// ============================================
+
+// Draw palm tree (different from frond)
+function drawPalmTree(doc, x, y, size = 30) {
+  doc.save();
+  doc.translate(x, y);
+  doc.scale(size / 30);
+
+  // Trunk
+  doc.fillColor('#8b6914');
+  doc.moveTo(-2, 0).lineTo(-3, 14).lineTo(3, 14).lineTo(2, 0).fill();
+
+  // Trunk texture
+  doc.strokeColor('#725a12').lineWidth(0.5);
+  for (let i = 2; i < 14; i += 2) {
+    doc.moveTo(-2.5 + i*0.05, i).lineTo(2.5 - i*0.05, i).stroke();
+  }
+
+  // Fronds
+  doc.fillColor('#27ae60');
+  // Center
+  doc.moveTo(0, -2).bezierCurveTo(0, -12, 1, -14, 0, -14)
+    .bezierCurveTo(-1, -14, 0, -12, 0, -2).fill();
+  // Left fronds
+  doc.moveTo(0, -2).bezierCurveTo(-8, -6, -12, -4, -12, -2)
+    .bezierCurveTo(-10, -2, -6, -2, 0, -2).fill();
+  doc.moveTo(0, -2).bezierCurveTo(-6, -10, -10, -10, -10, -8)
+    .bezierCurveTo(-8, -8, -4, -6, 0, -2).fill();
+  // Right fronds
+  doc.moveTo(0, -2).bezierCurveTo(8, -6, 12, -4, 12, -2)
+    .bezierCurveTo(10, -2, 6, -2, 0, -2).fill();
+  doc.moveTo(0, -2).bezierCurveTo(6, -10, 10, -10, 10, -8)
+    .bezierCurveTo(8, -8, 4, -6, 0, -2).fill();
+
+  // Coconuts
+  doc.fillColor('#8b6914');
+  doc.circle(-1, 1, 2).fill();
+  doc.circle(2, 0, 2).fill();
+
+  doc.restore();
+}
+
+// Draw seashell
+function drawSeashell(doc, x, y, size = 16) {
+  doc.save();
+  doc.translate(x, y);
+  doc.scale(size / 16);
+
+  doc.fillColor('#ffd5b5');
+
+  // Shell shape
+  doc.moveTo(-6, 4)
+    .bezierCurveTo(-6, -4, 0, -6, 0, -6)
+    .bezierCurveTo(0, -6, 6, -4, 6, 4)
+    .bezierCurveTo(4, 6, -4, 6, -6, 4)
+    .fill();
+
+  // Ridges
+  doc.strokeColor('#e6b896').lineWidth(0.5);
+  doc.moveTo(0, -5).lineTo(-4, 4).stroke();
+  doc.moveTo(0, -5).lineTo(0, 5).stroke();
+  doc.moveTo(0, -5).lineTo(4, 4).stroke();
+
+  doc.restore();
+}
+
+// Draw starfish
+function drawStarfish(doc, x, y, size = 18) {
+  doc.save();
+  doc.translate(x, y);
+  doc.scale(size / 18);
+
+  doc.fillColor('#ff7043');
+
+  // 5-pointed star with rounded arms
+  for (let i = 0; i < 5; i++) {
+    doc.save();
+    doc.rotate(i * 72);
+    doc.moveTo(0, 0)
+      .bezierCurveTo(-2, -3, -1, -7, 0, -8)
+      .bezierCurveTo(1, -7, 2, -3, 0, 0)
+      .fill();
+    doc.restore();
+  }
+
+  // Texture dots
+  doc.fillColor('#e64a19');
+  doc.circle(0, -4, 0.8).fill();
+  doc.circle(2.5, -2, 0.6).fill();
+  doc.circle(-2.5, -2, 0.6).fill();
+
+  doc.restore();
+}
+
+// Draw wave
+function drawWave(doc, x, y, size = 25) {
+  doc.save();
+  doc.translate(x, y);
+  doc.scale(size / 25);
+
+  doc.fillColor('#4fc3f7');
+  doc.moveTo(-12, 0)
+    .bezierCurveTo(-8, -6, -4, -6, 0, 0)
+    .bezierCurveTo(4, 6, 8, 6, 12, 0)
+    .lineTo(12, 4)
+    .bezierCurveTo(8, 10, 4, 10, 0, 4)
+    .bezierCurveTo(-4, -2, -8, -2, -12, 4)
+    .closePath().fill();
+
+  // Foam
+  doc.fillColor('#ffffff');
+  doc.circle(-6, -2, 1.5).fill();
+  doc.circle(-3, -4, 1).fill();
+  doc.circle(6, 2, 1.5).fill();
+
+  doc.restore();
+}
+
+// Draw sun
+function drawSun(doc, x, y, size = 22) {
+  doc.save();
+  doc.translate(x, y);
+  doc.scale(size / 22);
+
+  doc.fillColor('#ffd54f');
+
+  // Center
+  doc.circle(0, 0, 6).fill();
+
+  // Rays
+  for (let i = 0; i < 8; i++) {
+    doc.save();
+    doc.rotate(i * 45);
+    doc.moveTo(-1, -7).lineTo(0, -11).lineTo(1, -7).fill();
+    doc.restore();
+  }
+
+  // Face (optional cute details)
+  doc.fillColor('#ff8f00');
+  doc.circle(-2, -1, 1).fill();
+  doc.circle(2, -1, 1).fill();
+  doc.moveTo(-2, 2).bezierCurveTo(-1, 3, 1, 3, 2, 2).stroke();
+
+  doc.restore();
+}
+
+// ============================================
+// SAFARI/AFRICA THEME DECORATIONS
+// ============================================
+
+// Draw elephant
+function drawElephant(doc, x, y, size = 24) {
+  doc.save();
+  doc.translate(x, y);
+  doc.scale(size / 24);
+
+  doc.fillColor('#808080');
+
+  // Body
+  doc.ellipse(2, 2, 8, 6).fill();
+
+  // Head
+  doc.circle(-6, -2, 5).fill();
+
+  // Ear
+  doc.fillColor('#696969');
+  doc.ellipse(-9, -2, 3, 4).fill();
+
+  // Trunk
+  doc.fillColor('#808080');
+  doc.moveTo(-8, 2)
+    .bezierCurveTo(-10, 4, -10, 8, -8, 10)
+    .bezierCurveTo(-6, 10, -6, 8, -6, 6)
+    .bezierCurveTo(-6, 4, -6, 2, -6, 2)
+    .fill();
+
+  // Eye
+  doc.fillColor('#1a1a2e');
+  doc.circle(-5, -3, 1).fill();
+
+  // Legs
+  doc.fillColor('#808080');
+  doc.rect(-2, 6, 3, 5).fill();
+  doc.rect(5, 6, 3, 5).fill();
+
+  // Tusk
+  doc.fillColor('#f5f5dc');
+  doc.moveTo(-6, 0).bezierCurveTo(-7, 3, -5, 4, -4, 2).fill();
+
+  doc.restore();
+}
+
+// Draw giraffe
+function drawGiraffe(doc, x, y, size = 28) {
+  doc.save();
+  doc.translate(x, y);
+  doc.scale(size / 28);
+
+  doc.fillColor('#f4a460');
+
+  // Body
+  doc.ellipse(2, 6, 7, 5).fill();
+
+  // Neck
+  doc.moveTo(-4, 4).lineTo(-6, -10).lineTo(-2, -10).lineTo(0, 4).fill();
+
+  // Head
+  doc.ellipse(-4, -12, 3, 2.5).fill();
+
+  // Spots
+  doc.fillColor('#8b4513');
+  doc.circle(-3, -4, 1.5).fill();
+  doc.circle(-5, -8, 1.2).fill();
+  doc.circle(0, 4, 2).fill();
+  doc.circle(4, 8, 1.5).fill();
+  doc.circle(-2, 8, 1.2).fill();
+
+  // Horns
+  doc.fillColor('#8b4513');
+  doc.rect(-5, -15, 1, 3).fill();
+  doc.rect(-3, -15, 1, 3).fill();
+  doc.fillColor('#f4a460');
+  doc.circle(-4.5, -15, 1).fill();
+  doc.circle(-2.5, -15, 1).fill();
+
+  // Eye
+  doc.fillColor('#1a1a2e');
+  doc.circle(-3, -12, 0.8).fill();
+
+  // Legs
+  doc.fillColor('#f4a460');
+  doc.rect(-2, 10, 2, 5).fill();
+  doc.rect(4, 10, 2, 5).fill();
+
+  doc.restore();
+}
+
+// Draw acacia tree
+function drawAcaciaTree(doc, x, y, size = 30) {
+  doc.save();
+  doc.translate(x, y);
+  doc.scale(size / 30);
+
+  // Trunk
+  doc.fillColor('#8b6914');
+  doc.moveTo(-1, 0).lineTo(-2, 14).lineTo(2, 14).lineTo(1, 0).fill();
+
+  // Canopy (flat umbrella shape)
+  doc.fillColor('#228b22');
+  doc.ellipse(0, -4, 14, 5).fill();
+
+  // Canopy top
+  doc.fillColor('#2e7d32');
+  doc.ellipse(0, -6, 12, 3).fill();
+
+  doc.restore();
+}
+
+// Draw lion face
+function drawLionFace(doc, x, y, size = 24) {
+  doc.save();
+  doc.translate(x, y);
+  doc.scale(size / 24);
+
+  // Mane
+  doc.fillColor('#d4860b');
+  doc.circle(0, 0, 10).fill();
+
+  // Face
+  doc.fillColor('#f4a460');
+  doc.circle(0, 0, 6).fill();
+
+  // Ears
+  doc.fillColor('#d4860b');
+  doc.circle(-6, -6, 2.5).fill();
+  doc.circle(6, -6, 2.5).fill();
+
+  // Eyes
+  doc.fillColor('#1a1a2e');
+  doc.circle(-2, -2, 1.2).fill();
+  doc.circle(2, -2, 1.2).fill();
+
+  // Nose
+  doc.fillColor('#8b4513');
+  doc.moveTo(0, 1).lineTo(-1.5, 3).lineTo(1.5, 3).closePath().fill();
+
+  // Mouth
+  doc.strokeColor('#8b4513').lineWidth(0.5);
+  doc.moveTo(0, 3).lineTo(0, 4).stroke();
+  doc.moveTo(-2, 4).bezierCurveTo(-1, 5, 1, 5, 2, 4).stroke();
+
+  doc.restore();
+}
+
+// ============================================
+// THEME DETECTION AND APPLICATION
+// ============================================
+
+// Determine theme based on destination
+function getDestinationTheme(destination, country) {
+  const dest = (destination || '').toLowerCase();
+  const ctry = (country || '').toLowerCase();
+
+  // Japan
+  if (ctry.includes('japan') || dest.includes('tokyo') || dest.includes('kyoto') ||
+      dest.includes('osaka') || dest.includes('japan')) {
+    return 'japan';
+  }
+
+  // France/Paris
+  if (ctry.includes('france') || dest.includes('paris') || dest.includes('france') ||
+      dest.includes('nice') || dest.includes('lyon')) {
+    return 'paris';
+  }
+
+  // UK/London
+  if (ctry.includes('uk') || ctry.includes('united kingdom') || ctry.includes('england') ||
+      dest.includes('london') || dest.includes('england') || dest.includes('scotland')) {
+    return 'london';
+  }
+
+  // Tropical destinations
+  if (dest.includes('costa rica') || dest.includes('hawaii') || dest.includes('caribbean') ||
+      dest.includes('puerto rico') || dest.includes('jamaica') || dest.includes('bahamas') ||
+      dest.includes('fiji') || dest.includes('tahiti') || dest.includes('bali') ||
+      ctry.includes('costa rica') || ctry.includes('thailand') || ctry.includes('indonesia')) {
+    return 'tropical';
+  }
+
+  // Beach destinations
+  if (dest.includes('beach') || dest.includes('cancun') || dest.includes('miami') ||
+      dest.includes('maldives') || dest.includes('cabo') || dest.includes('florida') ||
+      dest.includes('california') || dest.includes('san diego') || dest.includes('santa monica')) {
+    return 'beach';
+  }
+
+  // Safari/Africa
+  if (ctry.includes('kenya') || ctry.includes('tanzania') || ctry.includes('south africa') ||
+      ctry.includes('botswana') || ctry.includes('namibia') || dest.includes('safari') ||
+      dest.includes('serengeti') || dest.includes('kruger') || dest.includes('africa')) {
+    return 'safari';
+  }
+
+  // Default travel theme
+  return 'travel';
+}
+
+// Draw themed decorations for cover page
+function drawThemedCoverDecorations(doc, theme) {
+  switch (theme) {
+    case 'japan':
+      drawCherryBlossom(doc, 40, 70, 20);
+      drawCherryBlossom(doc, PAGE_WIDTH - 50, 90, 16);
+      drawCherryBlossom(doc, 60, 100, 12);
+      drawToriiGate(doc, PAGE_WIDTH - 60, 60, 26);
+      drawMtFuji(doc, 50, PAGE_HEIGHT - 140, 35);
+      drawKoiFish(doc, PAGE_WIDTH - 60, PAGE_HEIGHT - 160, 22);
+      drawLantern(doc, 35, PAGE_HEIGHT - 180, 18);
+      drawCherryBlossom(doc, PAGE_WIDTH - 40, PAGE_HEIGHT - 130, 14);
+      break;
+
+    case 'paris':
+      drawEiffelTower(doc, PAGE_WIDTH - 55, 70, 35);
+      drawFleurDeLis(doc, 40, 75, 18);
+      drawFleurDeLis(doc, 65, 100, 14);
+      drawCroissant(doc, 50, PAGE_HEIGHT - 150, 20);
+      drawBeret(doc, PAGE_WIDTH - 50, PAGE_HEIGHT - 160, 20);
+      drawFleurDeLis(doc, 35, PAGE_HEIGHT - 185, 16);
+      drawCroissant(doc, PAGE_WIDTH - 65, PAGE_HEIGHT - 135, 16);
+      break;
+
+    case 'london':
+      drawBigBen(doc, PAGE_WIDTH - 55, 75, 35);
+      drawCrown(doc, 50, 70, 22);
+      drawDoubleDecker(doc, 55, PAGE_HEIGHT - 150, 30);
+      drawTeaCup(doc, PAGE_WIDTH - 50, PAGE_HEIGHT - 160, 20);
+      drawCrown(doc, 35, PAGE_HEIGHT - 185, 16);
+      drawTeaCup(doc, PAGE_WIDTH - 70, PAGE_HEIGHT - 130, 16);
+      break;
+
+    case 'tropical':
+      drawMonsteraLeaf(doc, 30, 80, 35, -20);
+      drawMonsteraLeaf(doc, PAGE_WIDTH - 25, 100, 30, 25);
+      drawToucan(doc, PAGE_WIDTH - 70, 60, 28);
+      drawButterfly(doc, 70, 130, 18);
+      drawButterfly(doc, PAGE_WIDTH - 90, 160, 14);
+      drawHummingbird(doc, 50, PAGE_HEIGHT - 160, 22);
+      drawTropicalFlower(doc, PAGE_WIDTH - 50, PAGE_HEIGHT - 180, 18);
+      drawSmallLeaf(doc, 25, PAGE_HEIGHT - 200, 14, -30);
+      drawSmallLeaf(doc, PAGE_WIDTH - 30, PAGE_HEIGHT - 140, 12, 20);
+      break;
+
+    case 'beach':
+      drawPalmTree(doc, 45, 90, 35);
+      drawPalmTree(doc, PAGE_WIDTH - 40, 100, 30);
+      drawSun(doc, PAGE_WIDTH - 60, 55, 25);
+      drawWave(doc, 50, PAGE_HEIGHT - 150, 28);
+      drawSeashell(doc, PAGE_WIDTH - 55, PAGE_HEIGHT - 160, 18);
+      drawStarfish(doc, 40, PAGE_HEIGHT - 180, 20);
+      drawSeashell(doc, PAGE_WIDTH - 70, PAGE_HEIGHT - 130, 14);
+      break;
+
+    case 'safari':
+      drawAcaciaTree(doc, 45, 85, 35);
+      drawAcaciaTree(doc, PAGE_WIDTH - 40, 95, 28);
+      drawSun(doc, PAGE_WIDTH - 55, 50, 22);
+      drawElephant(doc, 55, PAGE_HEIGHT - 150, 28);
+      drawGiraffe(doc, PAGE_WIDTH - 55, PAGE_HEIGHT - 165, 32);
+      drawLionFace(doc, 40, PAGE_HEIGHT - 185, 22);
+      break;
+
+    default: // travel theme
+      drawAirplane(doc, PAGE_WIDTH - 80, 70, 30, 'rgba(255,255,255,0.3)');
+      drawAirplane(doc, 60, PAGE_HEIGHT - 150, 25, 'rgba(255,255,255,0.25)');
+      drawSuitcase(doc, 50, 80, 20, 'rgba(255,255,255,0.3)');
+      drawCompass(doc, PAGE_WIDTH - 55, 100, 25, 'rgba(255,255,255,0.3)');
+      drawSuitcase(doc, PAGE_WIDTH - 60, PAGE_HEIGHT - 160, 18, 'rgba(255,255,255,0.25)');
+      break;
+  }
+}
+
+// Draw themed decorations for daily page header
+function drawThemedHeaderAccents(doc, theme) {
+  switch (theme) {
+    case 'japan':
+      drawCherryBlossom(doc, PAGE_WIDTH - 45, 22, 14);
+      drawCherryBlossom(doc, PAGE_WIDTH - 25, 38, 10);
+      break;
+    case 'paris':
+      drawFleurDeLis(doc, PAGE_WIDTH - 35, 25, 14, '#ffffff');
+      break;
+    case 'london':
+      drawCrown(doc, PAGE_WIDTH - 35, 25, 16);
+      break;
+    case 'tropical':
+      drawSmallLeaf(doc, PAGE_WIDTH - 45, 20, 14, 30, '#2ecc71');
+      drawButterfly(doc, PAGE_WIDTH - 25, 35, 12);
+      break;
+    case 'beach':
+      drawSun(doc, PAGE_WIDTH - 35, 25, 16);
+      break;
+    case 'safari':
+      drawLionFace(doc, PAGE_WIDTH - 35, 26, 16);
+      break;
+    default:
+      drawCompass(doc, PAGE_WIDTH - 35, 25, 16, '#ffffff');
+      break;
+  }
+}
+
+// Draw themed decorations for sketch area corners
+function drawThemedSketchCorners(doc, theme, margin, y, contentWidth, sketchHeight) {
+  switch (theme) {
+    case 'japan':
+      drawCherryBlossom(doc, margin + 15, y + 15, 12);
+      drawCherryBlossom(doc, margin + contentWidth - 15, y + 15, 12);
+      drawKoiFish(doc, margin + contentWidth - 30, y + sketchHeight - 20, 14);
+      drawCherryBlossom(doc, margin + 25, y + sketchHeight - 18, 10);
+      break;
+    case 'paris':
+      drawFleurDeLis(doc, margin + 15, y + 15, 12);
+      drawFleurDeLis(doc, margin + contentWidth - 15, y + 15, 12);
+      drawCroissant(doc, margin + contentWidth - 28, y + sketchHeight - 18, 14);
+      drawFleurDeLis(doc, margin + 20, y + sketchHeight - 18, 10);
+      break;
+    case 'london':
+      drawCrown(doc, margin + 15, y + 15, 12);
+      drawCrown(doc, margin + contentWidth - 15, y + 15, 12);
+      drawTeaCup(doc, margin + contentWidth - 25, y + sketchHeight - 18, 14);
+      drawCrown(doc, margin + 20, y + sketchHeight - 18, 10);
+      break;
+    case 'tropical':
+      drawSmallLeaf(doc, margin + 12, y + 12, 10, -30);
+      drawSmallLeaf(doc, margin + contentWidth - 12, y + 12, 10, 30);
+      drawButterfly(doc, margin + contentWidth - 25, y + sketchHeight - 20, 12);
+      drawTropicalFlower(doc, margin + 20, y + sketchHeight - 18, 12);
+      break;
+    case 'beach':
+      drawSeashell(doc, margin + 15, y + 15, 12);
+      drawSeashell(doc, margin + contentWidth - 15, y + 15, 12);
+      drawStarfish(doc, margin + contentWidth - 25, y + sketchHeight - 20, 14);
+      drawWave(doc, margin + 30, y + sketchHeight - 15, 18);
+      break;
+    case 'safari':
+      drawSmallLeaf(doc, margin + 12, y + 12, 10, -30, '#228b22');
+      drawSmallLeaf(doc, margin + contentWidth - 12, y + 12, 10, 30, '#228b22');
+      drawLionFace(doc, margin + contentWidth - 25, y + sketchHeight - 22, 14);
+      drawElephant(doc, margin + 25, y + sketchHeight - 20, 16);
+      break;
+    default:
+      drawStar(doc, margin + 12, y + 12, 6, 5, 3);
+      drawStar(doc, margin + contentWidth - 12, y + 12, 6, 5, 3);
+      drawAirplane(doc, margin + contentWidth - 25, y + sketchHeight - 20, 16, COLORS.accent);
+      drawSuitcase(doc, margin + 22, y + sketchHeight - 18, 12, COLORS.secondary);
+      break;
+  }
+}
+
+// Draw themed decorations for reflections page
+function drawThemedReflectionsDecorations(doc, theme) {
+  switch (theme) {
+    case 'japan':
+      drawCherryBlossom(doc, 25, 30, 18);
+      drawCherryBlossom(doc, PAGE_WIDTH - 30, 35, 16);
+      drawKoiFish(doc, PAGE_WIDTH - 55, PAGE_HEIGHT - 50, 18, '#ff6b35');
+      drawCherryBlossom(doc, 45, PAGE_HEIGHT - 45, 14);
+      break;
+    case 'paris':
+      drawFleurDeLis(doc, 30, 30, 18);
+      drawFleurDeLis(doc, PAGE_WIDTH - 30, 30, 16);
+      drawCroissant(doc, PAGE_WIDTH - 55, PAGE_HEIGHT - 48, 18);
+      drawBeret(doc, 45, PAGE_HEIGHT - 48, 16);
+      break;
+    case 'london':
+      drawCrown(doc, 30, 30, 18);
+      drawCrown(doc, PAGE_WIDTH - 35, 30, 16);
+      drawTeaCup(doc, PAGE_WIDTH - 50, PAGE_HEIGHT - 50, 18);
+      drawDoubleDecker(doc, 55, PAGE_HEIGHT - 52, 22);
+      break;
+    case 'tropical':
+      drawMonsteraLeaf(doc, 20, 25, 22, -15);
+      drawMonsteraLeaf(doc, PAGE_WIDTH - 15, 30, 20, 20);
+      drawToucan(doc, PAGE_WIDTH - 55, PAGE_HEIGHT - 50, 20, true);
+      drawHummingbird(doc, 45, PAGE_HEIGHT - 45, 18);
+      break;
+    case 'beach':
+      drawPalmTree(doc, 30, 40, 25);
+      drawPalmTree(doc, PAGE_WIDTH - 25, 45, 22);
+      drawStarfish(doc, PAGE_WIDTH - 50, PAGE_HEIGHT - 48, 18);
+      drawSeashell(doc, 45, PAGE_HEIGHT - 45, 16);
+      break;
+    case 'safari':
+      drawAcaciaTree(doc, 30, 40, 25);
+      drawAcaciaTree(doc, PAGE_WIDTH - 25, 42, 22);
+      drawElephant(doc, PAGE_WIDTH - 55, PAGE_HEIGHT - 52, 20);
+      drawGiraffe(doc, 50, PAGE_HEIGHT - 55, 22);
+      break;
+    default:
+      drawAirplane(doc, 40, 35, 22, COLORS.primaryLight);
+      drawSuitcase(doc, PAGE_WIDTH - 40, 35, 18, COLORS.secondaryLight);
+      drawCompass(doc, PAGE_WIDTH - 50, PAGE_HEIGHT - 50, 20, COLORS.accent);
+      drawSuitcase(doc, 45, PAGE_HEIGHT - 48, 16, COLORS.secondary);
+      break;
+  }
+}
+
+// Draw themed decorations for final page
+function drawThemedFinalPageDecorations(doc, theme) {
+  switch (theme) {
+    case 'japan':
+      drawMtFuji(doc, 45, 85, 40);
+      drawToriiGate(doc, PAGE_WIDTH - 55, 70, 30);
+      drawCherryBlossom(doc, 70, 110, 16);
+      drawCherryBlossom(doc, PAGE_WIDTH - 80, 100, 14);
+      drawKoiFish(doc, 55, PAGE_HEIGHT - 90, 22);
+      drawLantern(doc, PAGE_WIDTH - 50, PAGE_HEIGHT - 85, 20);
+      drawCherryBlossom(doc, 35, PAGE_HEIGHT - 60, 18);
+      drawCherryBlossom(doc, PAGE_WIDTH - 40, PAGE_HEIGHT - 55, 16);
+      break;
+    case 'paris':
+      drawEiffelTower(doc, PAGE_WIDTH / 2, 80, 45);
+      drawFleurDeLis(doc, 50, 90, 20);
+      drawFleurDeLis(doc, PAGE_WIDTH - 55, 95, 18);
+      drawCroissant(doc, 55, PAGE_HEIGHT - 85, 20);
+      drawBeret(doc, PAGE_WIDTH - 55, PAGE_HEIGHT - 80, 20);
+      drawFleurDeLis(doc, 35, PAGE_HEIGHT - 55, 16);
+      drawCroissant(doc, PAGE_WIDTH - 45, PAGE_HEIGHT - 55, 16);
+      break;
+    case 'london':
+      drawBigBen(doc, PAGE_WIDTH / 2, 85, 45);
+      drawCrown(doc, 55, 85, 24);
+      drawCrown(doc, PAGE_WIDTH - 60, 90, 22);
+      drawDoubleDecker(doc, 60, PAGE_HEIGHT - 90, 28);
+      drawTeaCup(doc, PAGE_WIDTH - 55, PAGE_HEIGHT - 85, 22);
+      drawCrown(doc, 40, PAGE_HEIGHT - 55, 18);
+      drawTeaCup(doc, PAGE_WIDTH - 45, PAGE_HEIGHT - 55, 16);
+      break;
+    case 'tropical':
+      drawMonsteraLeaf(doc, 25, 70, 30, -20);
+      drawMonsteraLeaf(doc, PAGE_WIDTH - 20, 85, 28, 25);
+      drawToucan(doc, PAGE_WIDTH - 65, 50, 26);
+      drawButterfly(doc, 60, 110, 16);
+      drawButterfly(doc, PAGE_WIDTH - 80, 130, 14);
+      drawHummingbird(doc, 45, PAGE_HEIGHT - 80, 20);
+      drawTropicalFlower(doc, PAGE_WIDTH - 45, PAGE_HEIGHT - 90, 16);
+      drawPalmFrond(doc, 20, PAGE_HEIGHT - 50, 22, -25);
+      drawPalmFrond(doc, PAGE_WIDTH - 15, PAGE_HEIGHT - 60, 20, 30);
+      break;
+    case 'beach':
+      drawPalmTree(doc, 45, 100, 40);
+      drawPalmTree(doc, PAGE_WIDTH - 40, 110, 35);
+      drawSun(doc, PAGE_WIDTH / 2, 60, 30);
+      drawWave(doc, 60, PAGE_HEIGHT - 85, 30);
+      drawWave(doc, PAGE_WIDTH - 70, PAGE_HEIGHT - 80, 25);
+      drawStarfish(doc, 45, PAGE_HEIGHT - 55, 20);
+      drawSeashell(doc, PAGE_WIDTH - 50, PAGE_HEIGHT - 55, 18);
+      break;
+    case 'safari':
+      drawAcaciaTree(doc, 50, 95, 40);
+      drawAcaciaTree(doc, PAGE_WIDTH - 45, 100, 35);
+      drawSun(doc, PAGE_WIDTH / 2, 55, 28);
+      drawElephant(doc, 60, PAGE_HEIGHT - 90, 26);
+      drawGiraffe(doc, PAGE_WIDTH - 60, PAGE_HEIGHT - 100, 30);
+      drawLionFace(doc, 45, PAGE_HEIGHT - 55, 20);
+      drawLionFace(doc, PAGE_WIDTH - 50, PAGE_HEIGHT - 55, 18);
+      break;
+    default:
+      drawAirplane(doc, PAGE_WIDTH - 80, 70, 35, 'rgba(255,255,255,0.3)');
+      drawAirplane(doc, 60, PAGE_HEIGHT - 90, 30, 'rgba(255,255,255,0.25)');
+      drawSuitcase(doc, 50, 85, 22, 'rgba(255,255,255,0.3)');
+      drawCompass(doc, PAGE_WIDTH - 55, 100, 28, 'rgba(255,255,255,0.3)');
+      drawSuitcase(doc, PAGE_WIDTH - 60, PAGE_HEIGHT - 70, 20, 'rgba(255,255,255,0.25)');
+      drawCompass(doc, 55, PAGE_HEIGHT - 65, 22, 'rgba(255,255,255,0.25)');
+      break;
+  }
+}
+
 // Draw a stamp/badge
 function drawBadge(doc, x, y, text, options = {}) {
   const { color = COLORS.coral, size = 40 } = options;
@@ -406,15 +1700,18 @@ export async function generatePDF(content, journalData, outputPath) {
       const stream = fs.createWriteStream(outputPath);
       doc.pipe(stream);
 
+      // Determine destination theme for decorations
+      const theme = getDestinationTheme(content.destination, content.country);
+
       // Generate each section
-      generateCoverPage(doc, content);
+      generateCoverPage(doc, content, theme);
       generateWelcomePage(doc, content);
       generateAboutMyTripPage(doc, content);
       generateDestinationFactsPages(doc, content);
       generateActivitiesSection(doc, content);
       generateRoadTripGamesSection(doc, content);
-      generateDailyPages(doc, content);
-      generateClosingPage(doc, content);
+      generateDailyPages(doc, content, theme);
+      generateClosingPage(doc, content, theme);
 
       doc.end();
 
@@ -430,7 +1727,7 @@ export async function generatePDF(content, journalData, outputPath) {
 // PAGE GENERATORS
 // ============================================
 
-function generateCoverPage(doc, content) {
+function generateCoverPage(doc, content, theme) {
   // Gradient-like background with layered colors
   doc.rect(0, 0, PAGE_WIDTH, PAGE_HEIGHT).fill(COLORS.primary);
 
@@ -451,17 +1748,8 @@ function generateCoverPage(doc, content) {
     .closePath()
     .fill();
 
-  // Decorative elements - scattered shapes
-  doc.fillColor('rgba(255,255,255,0.1)');
-  drawStar(doc, 50, 80, 15, 5, 7);
-  drawStar(doc, PAGE_WIDTH - 60, 120, 12, 5, 5);
-  drawStar(doc, 80, PAGE_HEIGHT - 180, 10, 5, 4);
-  drawStar(doc, PAGE_WIDTH - 40, PAGE_HEIGHT - 220, 18, 5, 8);
-
-  // Airplane decorations
-  doc.fillColor('rgba(255,255,255,0.15)');
-  drawAirplane(doc, PAGE_WIDTH - 80, 70, 30, 'rgba(255,255,255,0.2)');
-  drawAirplane(doc, 60, PAGE_HEIGHT - 150, 25, 'rgba(255,255,255,0.15)');
+  // Destination-themed decorations
+  drawThemedCoverDecorations(doc, theme);
 
   // Main content frame
   const frameX = 30;
@@ -1469,7 +2757,7 @@ function generateRoadTripGamesSection(doc, content) {
   // Note: Don't add page here - daily pages will add their own
 }
 
-function generateDailyPages(doc, content) {
+function generateDailyPages(doc, content, theme) {
   const LINE_HEIGHT = 18;
   const PAGE_BOTTOM = PAGE_HEIGHT - MARGIN - 10;
 
@@ -1490,6 +2778,9 @@ function generateDailyPages(doc, content) {
       .bezierCurveTo(PAGE_WIDTH * 0.7, 60, PAGE_WIDTH * 0.3, 50, 0, 55)
       .closePath()
       .fill();
+
+    // Themed header accents
+    drawThemedHeaderAccents(doc, theme);
 
     // Day number badge
     doc.fillColor(COLORS.secondary)
@@ -1586,10 +2877,8 @@ function generateDailyPages(doc, content) {
       radius: 10,
     });
 
-    // Corner decorations
-    drawStar(doc, MARGIN + 12, y + 12, 6, 5, 3);
-    drawStar(doc, MARGIN + CONTENT_WIDTH - 12, y + 12, 6, 5, 3);
-    doc.fillColor(COLORS.accentLight);
+    // Corner decorations - themed accents
+    drawThemedSketchCorners(doc, theme, MARGIN, y, CONTENT_WIDTH, sketchHeight);
 
     y += sketchHeight + 15;
 
@@ -1646,13 +2935,16 @@ function generateDailyPages(doc, content) {
   });
 }
 
-function generateClosingPage(doc, content) {
+function generateClosingPage(doc, content, theme) {
   const LINE_HEIGHT = 18;
   const PAGE_BOTTOM = PAGE_HEIGHT - MARGIN - 10;
 
   // === Reflections Page ===
   doc.addPage();
   drawPageBorder(doc, 'double');
+
+  // Themed corner decorations
+  drawThemedReflectionsDecorations(doc, theme);
 
   let y = MARGIN + 15;
 
@@ -1699,14 +2991,8 @@ function generateClosingPage(doc, content) {
     .rect(0, 0, PAGE_WIDTH, PAGE_HEIGHT)
     .fill();
 
-  // Decorative elements
-  doc.fillColor('rgba(255,255,255,0.1)');
-  for (let i = 0; i < 15; i++) {
-    const sx = Math.random() * PAGE_WIDTH;
-    const sy = Math.random() * PAGE_HEIGHT;
-    const size = 5 + Math.random() * 15;
-    drawStar(doc, sx, sy, size, 5, size/2);
-  }
+  // Themed decorations for final page
+  drawThemedFinalPageDecorations(doc, theme);
 
   // Main content card
   const cardX = 25;

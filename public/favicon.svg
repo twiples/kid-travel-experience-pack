@@ -1,3 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <text y=".9em" font-size="90">🎒</text>
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Main backpack body -->
+  <path d="M8 10C8 8.89543 8.89543 8 10 8H22C23.1046 8 24 8.89543 24 10V26C24 27.1046 23.1046 28 22 28H10C8.89543 28 8 27.1046 8 26V10Z" fill="#00afd8"/>
+  <!-- Top loop/handle -->
+  <path d="M12 8V5C12 4.44772 12.4477 4 13 4H19C19.5523 4 20 4.44772 20 5V8" stroke="#00afd8" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Front pocket -->
+  <rect x="10" y="16" width="12" height="7" rx="1.5" fill="#008fb3"/>
+  <!-- Pocket zipper line -->
+  <line x1="13" y1="19.5" x2="19" y2="19.5" stroke="#00afd8" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Left strap -->
+  <path d="M8 13C5.5 13 5 14.5 5 16V23C5 24 5.5 24.5 6 24.5" stroke="#008fb3" stroke-width="2" stroke-linecap="round"/>
+  <!-- Right strap -->
+  <path d="M24 13C26.5 13 27 14.5 27 16V23C27 24 26.5 24.5 26 24.5" stroke="#008fb3" stroke-width="2" stroke-linecap="round"/>
 </svg>

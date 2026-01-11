@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
+import BackpackIcon from '../components/BackpackIcon'
 import './Download.css'
 
 function Download() {
@@ -119,7 +120,7 @@ function Download() {
         </div>
 
         <div className="packing-list">
-          <h2>🎒 Don't Forget to Pack</h2>
+          <h2><BackpackIcon size={20} className="packing-icon" /> Don't Forget to Pack</h2>
           <ul>
             <li>✏️ Pencils and colored pencils</li>
             <li>🖊️ A good pen for writing</li>
