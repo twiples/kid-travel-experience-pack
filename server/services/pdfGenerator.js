@@ -1466,7 +1466,7 @@ function generateRoadTripGamesSection(doc, content) {
     .text('P1: _______', COL2_X + 20, y + 20)
     .text('P2: _______', COL2_X + 20, y + 45);
 
-  doc.addPage();
+  // Note: Don't add page here - daily pages will add their own
 }
 
 function generateDailyPages(doc, content) {
