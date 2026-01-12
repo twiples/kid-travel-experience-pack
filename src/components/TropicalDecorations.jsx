@@ -173,3 +173,170 @@ export function PalmTree({ size = 80, className = '' }) {
     </svg>
   )
 }
+
+// Destination-specific icons
+export function TokyoIcon({ size = 48, className = '' }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 64 64" fill="none" className={className}>
+      {/* Pagoda/Tower shape */}
+      <path d="M32 4L24 16H40L32 4Z" fill="#d32f2f"/>
+      <path d="M26 16L20 28H44L38 16H26Z" fill="#c62828"/>
+      <path d="M22 28L16 40H48L42 28H22Z" fill="#d32f2f"/>
+      <path d="M18 40L12 52H52L46 40H18Z" fill="#c62828"/>
+      {/* Tower details */}
+      <rect x="28" y="52" width="8" height="8" fill="#5d4037"/>
+      <circle cx="32" cy="8" r="2" fill="#ffd700"/>
+      {/* Cherry blossoms */}
+      <circle cx="12" cy="20" r="4" fill="#ffb7c5"/>
+      <circle cx="52" cy="24" r="3" fill="#ffb7c5"/>
+      <circle cx="8" cy="36" r="3" fill="#ffc0cb"/>
+    </svg>
+  )
+}
+
+export function ParisIcon({ size = 48, className = '' }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 64 64" fill="none" className={className}>
+      {/* Eiffel Tower */}
+      <path d="M32 4L28 20H36L32 4Z" fill="#5d4e37"/>
+      <path d="M28 20L22 40H42L36 20H28Z" fill="#4a3f31"/>
+      <path d="M22 40L14 60H50L42 40H22Z" fill="#5d4e37"/>
+      {/* Cross beams */}
+      <rect x="26" y="24" width="12" height="2" fill="#6d5d4a"/>
+      <rect x="20" y="44" width="24" height="2" fill="#6d5d4a"/>
+      {/* Decorative arches */}
+      <path d="M24 48C24 44 28 42 32 42C36 42 40 44 40 48" stroke="#6d5d4a" strokeWidth="2" fill="none"/>
+      {/* Stars */}
+      <circle cx="12" cy="16" r="2" fill="#ffd700"/>
+      <circle cx="52" cy="20" r="2" fill="#ffd700"/>
+      <circle cx="8" cy="40" r="1.5" fill="#ffd700"/>
+    </svg>
+  )
+}
+
+export function LondonIcon({ size = 48, className = '' }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 64 64" fill="none" className={className}>
+      {/* Big Ben tower */}
+      <rect x="24" y="12" width="16" height="44" fill="#c9a85c"/>
+      <rect x="22" y="8" width="20" height="6" fill="#b8973f"/>
+      {/* Clock face */}
+      <circle cx="32" cy="24" r="6" fill="#f5f5dc"/>
+      <circle cx="32" cy="24" r="5" stroke="#333" strokeWidth="1" fill="none"/>
+      <line x1="32" y1="24" x2="32" y2="20" stroke="#333" strokeWidth="1.5"/>
+      <line x1="32" y1="24" x2="35" y2="24" stroke="#333" strokeWidth="1"/>
+      {/* Spire */}
+      <path d="M32 8L28 2L32 0L36 2L32 8Z" fill="#c9a85c"/>
+      {/* Windows */}
+      <rect x="28" y="34" width="3" height="5" fill="#87ceeb"/>
+      <rect x="33" y="34" width="3" height="5" fill="#87ceeb"/>
+      <rect x="28" y="44" width="3" height="5" fill="#87ceeb"/>
+      <rect x="33" y="44" width="3" height="5" fill="#87ceeb"/>
+      {/* Red phone box accent */}
+      <rect x="48" y="44" width="8" height="16" rx="1" fill="#cc0000"/>
+    </svg>
+  )
+}
+
+export function OrlandoIcon({ size = 48, className = '' }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 64 64" fill="none" className={className}>
+      {/* Castle */}
+      <rect x="20" y="28" width="24" height="28" fill="#e8dcc8"/>
+      {/* Towers */}
+      <rect x="16" y="20" width="8" height="36" fill="#d4c4b0"/>
+      <rect x="40" y="20" width="8" height="36" fill="#d4c4b0"/>
+      {/* Tower tops */}
+      <path d="M20 20L16 8L12 20H20Z" fill="#4169e1"/>
+      <path d="M52 20L48 8L44 20H52Z" fill="#4169e1"/>
+      <path d="M36 28L32 16L28 28H36Z" fill="#4169e1"/>
+      {/* Flags */}
+      <path d="M16 8L16 4L22 6L16 8Z" fill="#ff69b4"/>
+      <path d="M48 8L48 4L54 6L48 8Z" fill="#ff69b4"/>
+      {/* Windows */}
+      <rect x="24" y="36" width="6" height="8" rx="3" fill="#87ceeb"/>
+      <rect x="34" y="36" width="6" height="8" rx="3" fill="#87ceeb"/>
+      {/* Door */}
+      <path d="M32 56L26 56L26 48C26 44 29 42 32 42C35 42 38 44 38 48L38 56L32 56Z" fill="#8b4513"/>
+      {/* Stars */}
+      <circle cx="8" cy="24" r="2" fill="#ffd700"/>
+      <circle cx="56" cy="16" r="2" fill="#ffd700"/>
+    </svg>
+  )
+}
+
+export function BeachIcon({ size = 48, className = '' }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 64 64" fill="none" className={className}>
+      {/* Sun */}
+      <circle cx="48" cy="16" r="10" fill="#ffd700"/>
+      <circle cx="48" cy="16" r="6" fill="#ffeb3b"/>
+      {/* Waves */}
+      <path d="M0 44C8 40 16 48 24 44C32 40 40 48 48 44C56 40 64 48 72 44V64H0V44Z" fill="#00bcd4"/>
+      <path d="M0 50C8 46 16 54 24 50C32 46 40 54 48 50C56 46 64 54 72 50V64H0V50Z" fill="#0097a7"/>
+      {/* Beach */}
+      <path d="M0 56L64 48V64H0V56Z" fill="#f4d03f"/>
+      {/* Palm tree */}
+      <path d="M18 32L16 56H20L18 32Z" fill="#8b6914"/>
+      <path d="M18 32C18 32 8 28 4 32C10 32 16 34 18 32Z" fill="#27ae60"/>
+      <path d="M18 32C18 32 28 28 32 32C26 32 20 34 18 32Z" fill="#2ecc71"/>
+      <path d="M18 30C18 30 14 20 18 14C22 20 18 30 18 30Z" fill="#27ae60"/>
+      {/* Starfish */}
+      <path d="M52 54L54 50L56 54L60 52L56 56L58 60L54 58L52 62L50 58L46 60L50 56L48 52L52 54Z" fill="#ff6b6b"/>
+    </svg>
+  )
+}
+
+// Animated cloud component
+export function CloudIcon({ size = 80, className = '' }) {
+  return (
+    <svg width={size} height={size * 0.5} viewBox="0 0 100 50" fill="none" className={className}>
+      <ellipse cx="30" cy="35" rx="20" ry="12" fill="white" fillOpacity="0.9"/>
+      <ellipse cx="50" cy="30" rx="25" ry="15" fill="white" fillOpacity="0.9"/>
+      <ellipse cx="70" cy="35" rx="20" ry="12" fill="white" fillOpacity="0.9"/>
+      <ellipse cx="45" cy="22" rx="15" ry="10" fill="white" fillOpacity="0.9"/>
+      <ellipse cx="60" cy="20" rx="12" ry="8" fill="white" fillOpacity="0.9"/>
+    </svg>
+  )
+}
+
+// Sparkle/star for accents
+export function SparkleIcon({ size = 24, className = '', color = '#ffd700' }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className}>
+      <path d="M12 0L14 10L24 12L14 14L12 24L10 14L0 12L10 10L12 0Z" fill={color}/>
+    </svg>
+  )
+}
+
+// Airplane for travel theme
+export function AirplaneIcon({ size = 48, className = '' }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 64 64" fill="none" className={className}>
+      <path d="M56 24L36 32L20 28L8 32L20 36L36 32L56 40L60 32L56 24Z" fill="#00afd8"/>
+      <path d="M28 32L24 44L32 40L28 32Z" fill="#008fb3"/>
+      <path d="M28 32L24 20L32 24L28 32Z" fill="#008fb3"/>
+      <circle cx="16" cy="32" r="4" fill="#2d3436"/>
+      <ellipse cx="36" cy="32" rx="8" ry="4" fill="#74d4ed"/>
+    </svg>
+  )
+}
+
+// Compass for navigation theme
+export function CompassIcon({ size = 48, className = '' }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 64 64" fill="none" className={className}>
+      <circle cx="32" cy="32" r="28" fill="#f5f5dc" stroke="#c9a85c" strokeWidth="3"/>
+      <circle cx="32" cy="32" r="24" stroke="#ddd" strokeWidth="1"/>
+      {/* Cardinal points */}
+      <path d="M32 8L36 28H28L32 8Z" fill="#d32f2f"/>
+      <path d="M32 56L28 36H36L32 56Z" fill="#333"/>
+      <path d="M8 32L28 28V36L8 32Z" fill="#333"/>
+      <path d="M56 32L36 36V28L56 32Z" fill="#333"/>
+      {/* Center */}
+      <circle cx="32" cy="32" r="4" fill="#c9a85c"/>
+      {/* Direction markers */}
+      <text x="32" y="18" textAnchor="middle" fill="#333" fontSize="6" fontWeight="bold">N</text>
+    </svg>
+  )
+}

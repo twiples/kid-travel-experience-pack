@@ -1,4 +1,444 @@
 {
+  "osaka": {
+    "id": "osaka",
+    "name": "Osaka",
+    "country": "Japan",
+    "emoji": "🏯",
+    "language": "Japanese",
+    "currency": "Yen (¥)",
+    "greeting": "Konnichiwa",
+    "thankyou": "Arigatou",
+    "goodbye": "Sayonara",
+    "population": "2.7 million",
+    "funFacts": [
+      "Osaka is known as Japan's kitchen - it's famous for amazing street food!",
+      "Osaka Castle was built over 400 years ago and has survived wars and fires",
+      "People in Osaka walk on the right side of escalators, opposite from Tokyo!",
+      "The Glico Running Man sign in Dotonbori is one of Japan's most famous landmarks",
+      "Osaka has the oldest public bathhouse in Japan, dating back over 1000 years"
+    ],
+    "landmarks": [
+      "Osaka Castle",
+      "Dotonbori",
+      "Universal Studios Japan",
+      "Shinsekai Tower",
+      "Kuromon Market",
+      "Shitennoji Temple"
+    ],
+    "foods": [
+      "Takoyaki (octopus balls)",
+      "Okonomiyaki (savory pancakes)",
+      "Kushikatsu (deep-fried skewers)",
+      "Ramen",
+      "Matcha sweets"
+    ],
+    "culturalHighlights": [
+      "Osakans are known for being friendly and outgoing",
+      "Comedy and entertainment culture is huge in Osaka",
+      "Street food is meant to be eaten while walking (kuidaore culture)",
+      "Merchants and trading have shaped the city's character"
+    ],
+    "prompts": {
+      "observation": [
+        "Walk through Dotonbori. What colorful signs and smells do you notice?",
+        "Watch people enjoying street food. What are they eating?",
+        "Compare Osaka Castle to buildings around it. What makes it special?",
+        "Listen to the sounds of the city. How is it different from home?"
+      ],
+      "reflection": [
+        "How do Osakans seem different from people at home?",
+        "What would it be like to eat street food here every day?",
+        "If you could bring one Osaka tradition home, what would it be?"
+      ],
+      "interests": {
+        "food": [
+          "Try takoyaki! Describe the crispy outside and soft inside.",
+          "Watch okonomiyaki being made. What ingredients go in?",
+          "Visit Kuromon Market. What seafood surprised you most?"
+        ],
+        "animals": [
+          "Did you visit the Osaka Aquarium? What creature amazed you?",
+          "Look for animal mascots on shop signs. Draw your favorite.",
+          "What animals did you notice in temple gardens?"
+        ],
+        "art": [
+          "Find the colorful neon signs of Dotonbori. Which is most creative?",
+          "How is Japanese writing (kanji) like art?",
+          "Look for traditional art in Osaka Castle. What patterns do you see?"
+        ],
+        "history": [
+          "What did you learn about the samurai who built Osaka Castle?",
+          "Find something ancient and something modern side by side.",
+          "How has Osaka changed over hundreds of years?"
+        ],
+        "culture": [
+          "Why is Osaka called Japan's kitchen?",
+          "How is the energy here different from other cities?",
+          "What makes Osakans famous for being funny and friendly?"
+        ]
+      }
+    },
+    "activities": {
+      "wordSearch": ["OSAKA", "CASTLE", "TAKOYAKI", "RAMEN", "TEMPLE", "NEON", "MARKET", "SAMURAI", "TOWER", "FOOD"],
+      "trivia": [
+        {"q": "What is Osaka's famous octopus snack called?", "a": "Takoyaki"},
+        {"q": "What famous castle is in Osaka?", "a": "Osaka Castle"},
+        {"q": "What is Osaka called because of all its great food?", "a": "Japan's Kitchen"}
+      ]
+    }
+  },
+  "lyon": {
+    "id": "lyon",
+    "name": "Lyon",
+    "country": "France",
+    "emoji": "🦁",
+    "language": "French",
+    "currency": "Euro (€)",
+    "greeting": "Bonjour",
+    "thankyou": "Merci",
+    "goodbye": "Au revoir",
+    "population": "500,000",
+    "funFacts": [
+      "Lyon is the gastronomic capital of France - it's famous for incredible food!",
+      "The city has secret passageways called 'traboules' hidden between buildings",
+      "Lyon has one of Europe's best zoos with over 300 species",
+      "The Lumière brothers invented cinema here in 1895!",
+      "During the Festival of Lights, the whole city glows with amazing light shows"
+    ],
+    "landmarks": [
+      "Basilica of Notre-Dame de Fourvière",
+      "Parc de la Tête d'Or",
+      "Old Lyon (Vieux Lyon)",
+      "Place Bellecour",
+      "Traboules passages",
+      "Lumière Museum"
+    ],
+    "foods": [
+      "Quenelles (fish dumplings)",
+      "Praline tart",
+      "Lyonnaise salad",
+      "Bouchon cuisine",
+      "Cocons de Lyon (silk-shaped candies)"
+    ],
+    "culturalHighlights": [
+      "Lyon was the silk capital of Europe for centuries",
+      "Traditional 'bouchon' restaurants serve hearty local food",
+      "Hidden traboules let silk workers move between buildings",
+      "Street murals (fresques) decorate walls throughout the city"
+    ],
+    "prompts": {
+      "observation": [
+        "Find a traboule passageway. What does it feel like walking through?",
+        "Look at the murals on buildings. What stories do they tell?",
+        "Walk through Old Lyon. How old do the buildings look?",
+        "Watch people at a café. What are they eating and drinking?"
+      ],
+      "reflection": [
+        "Why do you think Lyon became famous for food?",
+        "How would you have used the traboules if you were a silk worker?",
+        "What makes this city feel different from Paris?"
+      ],
+      "interests": {
+        "food": [
+          "Try something at a bouchon restaurant. Describe the flavors.",
+          "Visit Les Halles market. What produce looked amazing?",
+          "What French pastry was your favorite?"
+        ],
+        "art": [
+          "Find the famous wall murals. Which one impressed you most?",
+          "How did silk weaving become an art form here?",
+          "What art did you see at a museum or gallery?"
+        ],
+        "history": [
+          "Learn about Lyon's silk industry. How did it change the city?",
+          "What did you discover about Roman Lyon?",
+          "Find something ancient. How has it survived?"
+        ],
+        "animals": [
+          "Visit Parc de la Tête d'Or zoo. What was your favorite animal?",
+          "What animals did you spot in the parks?",
+          "Look for the lion symbols around Lyon!"
+        ],
+        "science": [
+          "Visit the Lumière Museum. How was cinema invented?",
+          "What did you learn at the science museum?",
+          "How did silk weaving use early technology?"
+        ]
+      }
+    },
+    "activities": {
+      "wordSearch": ["LYON", "SILK", "TRABOULE", "MURAL", "BOUCHON", "BASILICA", "LUMIERE", "CINEMA", "PARK", "FRENCH"],
+      "trivia": [
+        {"q": "What secret passageways are hidden in Lyon?", "a": "Traboules"},
+        {"q": "What fabric made Lyon famous?", "a": "Silk"},
+        {"q": "What was invented in Lyon by the Lumière brothers?", "a": "Cinema"}
+      ]
+    }
+  },
+  "moorea": {
+    "id": "moorea",
+    "name": "Moorea",
+    "country": "French Polynesia",
+    "emoji": "🏝️",
+    "language": "French & Tahitian",
+    "currency": "CFP Franc",
+    "greeting": "Ia orana",
+    "thankyou": "Māuruuru",
+    "goodbye": "Nānā",
+    "population": "17,000",
+    "funFacts": [
+      "Moorea means 'yellow lizard' in Tahitian!",
+      "The island is shaped like a heart when seen from above",
+      "You can feed stingrays and swim with sharks in crystal clear waters",
+      "Moorea was formed by a volcano over 2 million years ago",
+      "Dolphins and humpback whales visit the island regularly"
+    ],
+    "landmarks": [
+      "Belvedere Lookout",
+      "Temae Beach",
+      "Cook's Bay",
+      "Opunohu Bay",
+      "Magic Mountain",
+      "Stingray World"
+    ],
+    "foods": [
+      "Poisson cru (raw fish in coconut milk)",
+      "Fresh tropical fruits",
+      "Coconut bread",
+      "Mahi mahi fish",
+      "Tahitian vanilla treats"
+    ],
+    "culturalHighlights": [
+      "Polynesian culture values nature and the ocean",
+      "Flower crowns and leis are worn for celebrations",
+      "Traditional outrigger canoes are still used",
+      "Music and dance are central to island life"
+    ],
+    "prompts": {
+      "observation": [
+        "Look at the water. How many shades of blue can you count?",
+        "Watch the fish swimming near shore. What colors do you see?",
+        "Climb to a lookout point. Describe the view of the bays.",
+        "Notice the tropical flowers. Which ones smell the sweetest?"
+      ],
+      "reflection": [
+        "How is island life different from life at home?",
+        "What does the ocean mean to people who live here?",
+        "How would your life change if you lived on this island?"
+      ],
+      "interests": {
+        "nature": [
+          "Describe the coral reef you saw. What shapes and colors?",
+          "How is this island different from beaches at home?",
+          "What did you learn about how the island was formed?"
+        ],
+        "animals": [
+          "Did you swim with stingrays or sharks? How did it feel?",
+          "What tropical fish did you see snorkeling?",
+          "Look for dolphins! Describe what you saw."
+        ],
+        "culture": [
+          "Learn some Tahitian words. What do they mean?",
+          "Watch a traditional dance performance. What story did it tell?",
+          "How do islanders use the ocean for food and fun?"
+        ],
+        "food": [
+          "Try poisson cru! Describe the coconut and fish flavors.",
+          "What tropical fruit was your favorite?",
+          "How is food different on an island?"
+        ],
+        "science": [
+          "How was this island created by a volcano?",
+          "Learn about coral reefs. Why are they important?",
+          "How do ocean currents affect island weather?"
+        ]
+      }
+    },
+    "activities": {
+      "wordSearch": ["MOOREA", "ISLAND", "CORAL", "LAGOON", "DOLPHIN", "SHARK", "COCONUT", "TAHITI", "BEACH", "REEF"],
+      "trivia": [
+        {"q": "What does Moorea mean in Tahitian?", "a": "Yellow Lizard"},
+        {"q": "What shape is Moorea when seen from above?", "a": "A heart"},
+        {"q": "What ocean animals can you swim with in Moorea?", "a": "Stingrays and sharks"}
+      ]
+    }
+  },
+  "bangkok": {
+    "id": "bangkok",
+    "name": "Bangkok",
+    "country": "Thailand",
+    "emoji": "🛕",
+    "language": "Thai",
+    "currency": "Thai Baht (฿)",
+    "greeting": "Sawasdee",
+    "thankyou": "Khop khun",
+    "goodbye": "La gorn",
+    "population": "10 million",
+    "funFacts": [
+      "Bangkok's full ceremonial name is the longest city name in the world - 168 letters!",
+      "There are over 400 Buddhist temples (wats) in Bangkok",
+      "The floating markets sell food and goods from boats!",
+      "Tuk-tuks are colorful three-wheeled taxis zooming everywhere",
+      "Thai elephants are sacred and were once used by royalty"
+    ],
+    "landmarks": [
+      "Grand Palace",
+      "Wat Pho (Temple of the Reclining Buddha)",
+      "Wat Arun (Temple of Dawn)",
+      "Chatuchak Weekend Market",
+      "Floating markets",
+      "Khao San Road"
+    ],
+    "foods": [
+      "Pad Thai",
+      "Mango sticky rice",
+      "Tom Yum soup",
+      "Thai iced tea",
+      "Spring rolls"
+    ],
+    "culturalHighlights": [
+      "Buddhism is a big part of daily life",
+      "The wai greeting (hands together with a bow) shows respect",
+      "Street food is everywhere and amazingly delicious",
+      "Respect for the royal family is very important"
+    ],
+    "prompts": {
+      "observation": [
+        "Walk through a temple. What colors and decorations do you see?",
+        "Watch the boats on the river. What are people carrying?",
+        "Look at the street food stalls. What's cooking?",
+        "Notice how people greet each other. What gestures do they use?"
+      ],
+      "reflection": [
+        "How is Bangkok different from cities at home?",
+        "What would it be like to shop at a floating market?",
+        "What did you learn about Buddhism from visiting temples?"
+      ],
+      "interests": {
+        "food": [
+          "Try pad thai from a street stall. Rate the flavors!",
+          "What was the spiciest thing you ate?",
+          "Describe mango sticky rice. Was it your favorite dessert?"
+        ],
+        "culture": [
+          "Learn the wai greeting. When do people use it?",
+          "What did you notice about Buddhist monks?",
+          "How is Thai culture different from home?"
+        ],
+        "animals": [
+          "Did you see any elephants? Describe them!",
+          "What animals did you spot in temple gardens?",
+          "Look for fish in the temple ponds."
+        ],
+        "art": [
+          "Describe the gold decorations at the Grand Palace.",
+          "How are Thai temples decorated differently from buildings at home?",
+          "What patterns do you see repeated in Thai art?"
+        ],
+        "history": [
+          "What did you learn about Thai kings and queens?",
+          "How old are some of the temples you visited?",
+          "How has Bangkok changed over time?"
+        ]
+      }
+    },
+    "activities": {
+      "wordSearch": ["BANGKOK", "TEMPLE", "BUDDHA", "THAI", "PALACE", "MARKET", "ELEPHANT", "TUKTUK", "RIVER", "SPICY"],
+      "trivia": [
+        {"q": "What is the most famous noodle dish in Thailand?", "a": "Pad Thai"},
+        {"q": "What are the colorful three-wheeled taxis called?", "a": "Tuk-tuks"},
+        {"q": "What is the Thai gesture of greeting called?", "a": "Wai"}
+      ]
+    }
+  },
+  "verona": {
+    "id": "verona",
+    "name": "Verona",
+    "country": "Italy",
+    "emoji": "🏛️",
+    "language": "Italian",
+    "currency": "Euro (€)",
+    "greeting": "Ciao",
+    "thankyou": "Grazie",
+    "goodbye": "Arrivederci",
+    "population": "260,000",
+    "funFacts": [
+      "Verona is where Shakespeare's Romeo and Juliet takes place!",
+      "The Arena di Verona is a 2000-year-old Roman amphitheater still used for concerts",
+      "Juliet's balcony gets over a million visitors per year",
+      "The city has been a UNESCO World Heritage Site since 2000",
+      "Verona has the largest Roman arena that is still in use"
+    ],
+    "landmarks": [
+      "Arena di Verona",
+      "Juliet's House & Balcony",
+      "Piazza delle Erbe",
+      "Castelvecchio",
+      "Ponte Pietra bridge",
+      "Torre dei Lamberti"
+    ],
+    "foods": [
+      "Gelato",
+      "Pizza",
+      "Risotto all'Amarone",
+      "Pandoro (Christmas cake)",
+      "Pasta e fagioli"
+    ],
+    "culturalHighlights": [
+      "Opera performances in the ancient arena are magical",
+      "Café culture - sitting and people-watching is a tradition",
+      "Roman and medieval history are everywhere",
+      "Shakespeare made this city famous for love stories"
+    ],
+    "prompts": {
+      "observation": [
+        "Stand in the Arena. Imagine it filled with Romans. What would you hear?",
+        "Look at Juliet's balcony. Why do you think people come here?",
+        "Walk through Piazza delle Erbe. What's being sold?",
+        "Find a Roman ruin. How has it survived 2000 years?"
+      ],
+      "reflection": [
+        "Why do you think Romeo and Juliet's story is still famous?",
+        "How would it feel to watch opera in an ancient arena?",
+        "What would your life be like in medieval Verona?"
+      ],
+      "interests": {
+        "history": [
+          "What did you learn about Roman Verona?",
+          "Compare something Roman to something medieval. What's different?",
+          "How has the Arena been used over 2000 years?"
+        ],
+        "art": [
+          "Find a fresco or painting. What story does it tell?",
+          "How is Italian architecture different from home?",
+          "Watch an artist painting in the piazza. What are they capturing?"
+        ],
+        "food": [
+          "Rate your gelato flavors! Which was best?",
+          "Try local pasta or risotto. Describe the taste.",
+          "What Italian food would you want to cook at home?"
+        ],
+        "culture": [
+          "Learn some Italian words. Practice them with locals!",
+          "How is café culture different from eating at home?",
+          "What makes Italian cities feel different from other places?"
+        ],
+        "literature": [
+          "Read about Romeo and Juliet. What did you learn?",
+          "Why did Shakespeare set his play here?",
+          "Write your own short love story set in Verona!"
+        ]
+      }
+    },
+    "activities": {
+      "wordSearch": ["VERONA", "ROMEO", "JULIET", "ARENA", "ROMAN", "ITALY", "GELATO", "OPERA", "PIZZA", "CASTLE"],
+      "trivia": [
+        {"q": "Which famous Shakespeare play is set in Verona?", "a": "Romeo and Juliet"},
+        {"q": "What ancient structure in Verona still hosts concerts?", "a": "Arena di Verona"},
+        {"q": "What Italian frozen treat is Verona famous for?", "a": "Gelato"}
+      ]
+    }
+  },
   "tokyo": {
     "id": "tokyo",
     "name": "Tokyo & Kyoto",

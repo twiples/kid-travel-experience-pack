@@ -1,5 +1,24 @@
 import PDFDocument from 'pdfkit';
 import fs from 'fs';
+import QRCode from 'qrcode';
+
+// Generate QR code as data URL for embedding in PDF
+async function generateQRCodeDataURL(data) {
+  try {
+    return await QRCode.toDataURL(data, {
+      errorCorrectionLevel: 'M',
+      margin: 1,
+      width: 100,
+      color: {
+        dark: '#1D3557',
+        light: '#FFFFFF'
+      }
+    });
+  } catch (error) {
+    console.error('QR code generation error:', error);
+    return null;
+  }
+}
 
 // Enhanced color palette - more vibrant and kid-friendly
 const COLORS = {
@@ -1692,6 +1711,11 @@ function shadeColor(color, percent) {
 // ============================================
 
 export async function generatePDF(content, journalData, outputPath) {
+  // Generate QR code for this journal
+  const baseUrl = process.env.BASE_URL || 'https://kidstravel.app';
+  const qrData = `${baseUrl}/memories/${journalData.id}`;
+  const qrCodeDataURL = await generateQRCodeDataURL(qrData);
+
   return new Promise((resolve, reject) => {
     try {
       const doc = new PDFDocument({
@@ -1700,6 +1724,7 @@ export async function generatePDF(content, journalData, outputPath) {
         info: {
           Title: `${content.childName}'s Travel Journal - ${content.destination}`,
           Author: 'KidsTravel Journal Generator',
+          Subject: `Journal ID: ${journalData.id}`,
         },
       });
 
@@ -1710,14 +1735,14 @@ export async function generatePDF(content, journalData, outputPath) {
       const theme = getDestinationTheme(content.destination, content.country);
 
       // Generate each section
-      generateCoverPage(doc, content, theme);
+      generateCoverPage(doc, content, theme, qrCodeDataURL, journalData.id);
       generateWelcomePage(doc, content);
       generateAboutMyTripPage(doc, content);
       generateDestinationFactsPages(doc, content);
       generateActivitiesSection(doc, content);
       generateRoadTripGamesSection(doc, content);
       generateDailyPages(doc, content, theme);
-      generateClosingPage(doc, content, theme);
+      generateClosingPage(doc, content, theme, qrCodeDataURL, journalData.id);
 
       doc.end();
 
@@ -1733,7 +1758,7 @@ export async function generatePDF(content, journalData, outputPath) {
 // PAGE GENERATORS
 // ============================================
 
-function generateCoverPage(doc, content, theme) {
+function generateCoverPage(doc, content, theme, qrCodeDataURL, journalId) {
   // Gradient-like background with layered colors
   doc.rect(0, 0, PAGE_WIDTH, PAGE_HEIGHT).fill(COLORS.primary);
 
@@ -1835,6 +1860,27 @@ function generateCoverPage(doc, content, theme) {
     .font(FONTS.italic)
     .fontSize(10)
     .text('Adventures await!', MARGIN, PAGE_HEIGHT - 40, { align: 'center', width: CONTENT_WIDTH });
+
+  // QR Code in bottom right corner
+  if (qrCodeDataURL) {
+    const qrSize = 45;
+    const qrX = PAGE_WIDTH - qrSize - 15;
+    const qrY = PAGE_HEIGHT - qrSize - 15;
+
+    // White background for QR
+    doc.fillColor(COLORS.white)
+      .roundedRect(qrX - 3, qrY - 3, qrSize + 6, qrSize + 6, 4)
+      .fill();
+
+    // Add QR code image
+    doc.image(qrCodeDataURL, qrX, qrY, { width: qrSize, height: qrSize });
+
+    // Small label
+    doc.fillColor(COLORS.white)
+      .font(FONTS.body)
+      .fontSize(5)
+      .text('Scan after trip!', qrX - 5, qrY + qrSize + 5, { width: qrSize + 10, align: 'center' });
+  }
 
   doc.addPage();
 }
@@ -2986,7 +3032,7 @@ function generateDailyPages(doc, content, theme) {
   });
 }
 
-function generateClosingPage(doc, content, theme) {
+function generateClosingPage(doc, content, theme, qrCodeDataURL, journalId) {
   const LINE_HEIGHT = 18;
   const PAGE_BOTTOM = PAGE_HEIGHT - MARGIN - 10;
 
@@ -3163,6 +3209,35 @@ function generateClosingPage(doc, content, theme) {
   for (let i = 0; i < 3; i++) {
     drawWritingLine(doc, cardX + 30, y, cardW - 60, { style: 'dashed' });
     y += LINE_HEIGHT;
+  }
+
+  // QR Code Section - Upload your completed journal
+  if (qrCodeDataURL) {
+    y += 10;
+    const qrBoxX = cardX + cardW/2 - 80;
+    const qrBoxY = y;
+    const qrBoxW = 160;
+    const qrBoxH = 60;
+
+    // QR section background
+    doc.fillColor(COLORS.primaryLight)
+      .roundedRect(qrBoxX, qrBoxY, qrBoxW, qrBoxH, 8)
+      .fill();
+
+    // QR code
+    const qrSize = 45;
+    doc.image(qrCodeDataURL, qrBoxX + 10, qrBoxY + 7, { width: qrSize, height: qrSize });
+
+    // Instructions
+    doc.fillColor(COLORS.text).font(FONTS.title).fontSize(7)
+      .text('SCAN AFTER YOUR TRIP!', qrBoxX + qrSize + 18, qrBoxY + 10, { width: 90 });
+
+    doc.fillColor(COLORS.textLight).font(FONTS.body).fontSize(6)
+      .text('Upload photos of your journal to create a video memory!', qrBoxX + qrSize + 18, qrBoxY + 22, { width: 90 });
+
+    // Journal ID (small, for manual entry)
+    doc.fillColor(COLORS.textLight).fontSize(5)
+      .text(`ID: ${journalId ? journalId.slice(0, 8) : 'N/A'}`, qrBoxX + qrSize + 18, qrBoxY + 45, { width: 90 });
   }
 
   // Footer

@@ -1,0 +1,34 @@
+{
+  "id": "demo-verona-sophia-2025",
+  "destination": "Verona",
+  "childName": "Sophia",
+  "childAge": 9,
+  "tripDays": 8,
+  "tripDates": {
+    "start": "2025-07-21",
+    "end": "2025-07-28"
+  },
+  "status": "memories_generated",
+  "artifacts": {
+    "originalJournal": "/samples/verona-sample.pdf",
+    "completedJournal": "/demo/verona/completed-journal.pdf",
+    "memoryVideo": "/demo/verona/memory-video-preview.pdf",
+    "holidayCard": "/demo/verona/holiday-card.pdf",
+    "schoolSlides": "/demo/verona/school-slides.pdf",
+    "socialClip": "/demo/verona/social-clip-poster.pdf"
+  },
+  "stats": {
+    "pagesCompleted": 12,
+    "wordsLearned": 8,
+    "gelatoCount": 14,
+    "rating": 5
+  },
+  "highlights": [
+    "Opera at the Arena under candlelight",
+    "Making pasta with Nonna",
+    "Climbing 368 steps up Torre dei Lamberti",
+    "Visiting Juliets balcony",
+    "Boat ride on Lake Garda"
+  ],
+  "generatedAt": "2026-01-12T03:18:01.637Z"
+}

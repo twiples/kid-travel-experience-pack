@@ -1,7 +1,7 @@
 [
   {
-    "id": "tokyo-sample",
-    "destination": "Tokyo",
+    "id": "osaka-sample",
+    "destination": "Osaka",
     "childName": "Emma",
     "childAge": 8,
     "interests": [
@@ -9,59 +9,59 @@
       "culture"
     ],
     "tripDays": 7,
-    "fileName": "tokyo-sample.pdf",
-    "downloadUrl": "/samples/tokyo-sample.pdf"
+    "fileName": "osaka-sample.pdf",
+    "downloadUrl": "/samples/osaka-sample.pdf"
   },
   {
-    "id": "paris-sample",
-    "destination": "Paris",
+    "id": "lyon-sample",
+    "destination": "Lyon",
     "childName": "Lucas",
     "childAge": 10,
     "interests": [
       "art",
-      "architecture"
+      "food"
     ],
     "tripDays": 5,
-    "fileName": "paris-sample.pdf",
-    "downloadUrl": "/samples/paris-sample.pdf"
+    "fileName": "lyon-sample.pdf",
+    "downloadUrl": "/samples/lyon-sample.pdf"
   },
   {
-    "id": "hawaii-sample",
-    "destination": "Hawaii",
-    "childName": "Sophia",
-    "childAge": 9,
+    "id": "moorea-sample",
+    "destination": "Moorea",
+    "childName": "Oliver",
+    "childAge": 11,
     "interests": [
       "nature",
       "animals"
     ],
     "tripDays": 6,
-    "fileName": "hawaii-sample.pdf",
-    "downloadUrl": "/samples/hawaii-sample.pdf"
+    "fileName": "moorea-sample.pdf",
+    "downloadUrl": "/samples/moorea-sample.pdf"
   },
   {
-    "id": "london-sample",
-    "destination": "London",
-    "childName": "Oliver",
-    "childAge": 11,
+    "id": "bangkok-sample",
+    "destination": "Bangkok",
+    "childName": "Mia",
+    "childAge": 9,
+    "interests": [
+      "food",
+      "culture"
+    ],
+    "tripDays": 5,
+    "fileName": "bangkok-sample.pdf",
+    "downloadUrl": "/samples/bangkok-sample.pdf"
+  },
+  {
+    "id": "verona-sample",
+    "destination": "Verona",
+    "childName": "Sophia",
+    "childAge": 9,
     "interests": [
       "history",
-      "transportation"
+      "art"
     ],
     "tripDays": 8,
-    "fileName": "london-sample.pdf",
-    "downloadUrl": "/samples/london-sample.pdf"
-  },
-  {
-    "id": "orlando-sample",
-    "destination": "Orlando",
-    "childName": "Mia",
-    "childAge": 8,
-    "interests": [
-      "sports",
-      "animals"
-    ],
-    "tripDays": 4,
-    "fileName": "orlando-sample.pdf",
-    "downloadUrl": "/samples/orlando-sample.pdf"
+    "fileName": "verona-sample.pdf",
+    "downloadUrl": "/samples/verona-sample.pdf"
   }
 ]

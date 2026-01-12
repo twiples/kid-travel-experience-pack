@@ -1,25 +1,49 @@
 # Kid Travel Experience Pack
 
-A webapp that generates personalized, printable travel journals for kids ages 8-12. Transform family trips into lasting memories with destination-specific prompts, activities, and reflection spaces.
+A webapp that transforms family trips into lasting memories. Generate personalized, printable travel journals for kids ages 8-12, then turn completed journals into shareable digital keepsakes.
+
+## The Complete Journey
+
+```
+CREATE & PRINT  ──▶  TRAVEL & FILL  ──▶  UPLOAD & SHARE
+     🗺️                   ✈️                  📸
+ Personalize          Complete the         Scan QR code
+ your journal         journal on           and upload
+ and print            your trip            photos
+     │                                          │
+     ▼                                          ▼
+    📄                                         🎬
+ Download                                   Memory
+   PDF                                     Products
+```
 
 ## Features
 
-- **5-Step Form Wizard**: Easy trip setup with destination, child info, interests, and optional family photo
-- **5 Pre-Built Destinations**: Tokyo/Kyoto, Paris, London, Orlando/Disney, Hawaii
-- **Personalized Content**: Journal prompts tailored to child's interests and age
-- **Print-Ready PDF**: Optimized for home printing with activities, daily pages, and reflection spaces
-- **In-Flight Activities**: Word searches, travel bingo, trivia, and creative challenges
+### Pre-Trip: Printed Journal
+- **5-Step Form Wizard**: Easy trip setup with destination, child info, and interests
+- **10 Curated Destinations**: Osaka, Lyon, Moorea, Bangkok, Verona, Tokyo, Paris, London, Orlando, Hawaii
+- **Personalized Content**: Prompts tailored to child's age and interests
+- **Print-Ready PDF**: Activities, daily pages, and reflection spaces
+
+### Post-Trip: Digital Memories
+- **QR Code Integration**: Each PDF includes a unique QR code for easy identification
+- **Photo Upload**: Upload photos of completed journal pages
+- **Memory Products**:
+  - Animated summary video
+  - Holiday cards for sharing
+  - School presentation slides
+  - Social media clips
 
 ## Tech Stack
 
 - **Frontend**: React 18 + Vite
 - **Backend**: Express.js
 - **PDF Generation**: PDFKit
+- **QR Codes**: qrcode
 
 ## Getting Started
 
 ### Prerequisites
-
 - Node.js 18+
 - npm or yarn
 
@@ -29,20 +53,20 @@ A webapp that generates personalized, printable travel journals for kids ages 8-
 # Install dependencies
 npm install
 
-# Start development server (frontend)
+# Start frontend dev server
 npm run dev
 
-# Start backend server (in another terminal)
+# Start backend server (separate terminal)
 npm run server
 ```
 
-The frontend runs on `http://localhost:5173` and the backend on `http://localhost:3001`.
+Frontend: `http://localhost:5173`
+Backend: `http://localhost:3001`
 
-### Production Build
+### Generate Sample PDFs
 
 ```bash
-npm run build
-npm run preview
+node server/scripts/generateSamples.js
 ```
 
 ## Project Structure
@@ -50,50 +74,33 @@ npm run preview
 ```
 kid-travel-experience-pack/
 ├── src/
-│   ├── components/        # Reusable UI components
-│   ├── pages/            # Page components
+│   ├── components/     # Reusable UI components
+│   ├── pages/          # Page components
 │   │   ├── LandingPage.jsx
 │   │   ├── CreateJournal.jsx
 │   │   ├── Processing.jsx
-│   │   └── Download.jsx
-│   ├── data/
-│   │   └── destinations.json  # Destination knowledge base
-│   └── styles/
-│       └── index.css     # Global styles
+│   │   ├── Download.jsx
+│   │   └── Memories.jsx
+│   └── data/
+│       ├── destinations.json
+│       └── samples.json
 ├── server/
-│   ├── index.js          # Express server
-│   └── services/
-│       ├── journalGenerator.js  # Content generation
-│       └── pdfGenerator.js      # PDF creation
-└── public/
+│   ├── index.js
+│   ├── services/
+│   │   ├── journalGenerator.js
+│   │   └── pdfGenerator.js
+│   └── scripts/
+│       └── generateSamples.js
+├── public/samples/     # Pre-generated sample PDFs
+└── docs/
+    ├── PRD.md          # Full product requirements
+    └── POST_TRIP_FEATURE.md
 ```
 
-## Journal Structure
+## Documentation
 
-Each generated journal includes:
-
-1. **Pre-Trip Section** (4-8 pages)
-   - Personalized welcome letter
-   - Destination facts and cultural tips
-   - Useful phrases
-   - Pre-trip reflection prompts
-
-2. **In-Flight Activities** (6-10 pages)
-   - Word search puzzle
-   - Travel bingo
-   - Trivia questions
-   - Creative challenges
-
-3. **Daily Journal Pages** (2 pages per day)
-   - Location-specific prompts
-   - Interest-aligned questions
-   - Sketching space
-   - Mood and weather trackers
-   - New word section
-
-4. **Trip Reflections** (2-4 pages)
-   - Summary prompts
-   - Favorite memories
+- [Product Requirements Document](docs/PRD.md) - Full feature specifications
+- [Post-Trip Feature](docs/POST_TRIP_FEATURE.md) - Memory capture details
 
 ## License
 

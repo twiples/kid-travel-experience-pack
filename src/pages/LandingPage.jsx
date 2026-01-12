@@ -1,82 +1,134 @@
 import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import BackpackIcon from '../components/BackpackIcon'
-import { ToucanIcon, MonsteraLeaf, ButterflyIcon } from '../components/TropicalDecorations'
-import SAMPLES from '../data/samples.json'
+import {
+  ToucanIcon,
+  MonsteraLeaf,
+  ButterflyIcon,
+  HummingbirdIcon,
+  FlowerIcon,
+  PalmTree,
+  TokyoIcon,
+  ParisIcon,
+  LondonIcon,
+  OrlandoIcon,
+  BeachIcon,
+  CloudIcon,
+  SparkleIcon,
+  AirplaneIcon,
+  CompassIcon
+} from '../components/TropicalDecorations'
 import './LandingPage.css'
+
+// Destination icons mapping
+const DESTINATION_ICONS = {
+  'Osaka': TokyoIcon,      // Japan icon
+  'Lyon': ParisIcon,       // France icon
+  'Moorea': BeachIcon,     // French Polynesia icon
+  'Bangkok': TokyoIcon,    // Thailand icon (Asian style)
+  'Verona': ParisIcon,     // Italy icon (European style)
+}
 
 const JOURNEY_STEPS = [
   {
     icon: '🗺️',
-    title: 'Choose Destination',
-    description: 'Pick from popular spots or enter any destination',
+    title: 'Create & Print',
+    description: 'Personalize your journal and print at home',
   },
   {
-    icon: '✨',
-    title: 'Personalize',
-    description: "Add your child's name, age, and interests",
+    icon: '✈️',
+    title: 'Travel & Fill',
+    description: 'Kids complete the journal during your trip',
   },
   {
-    icon: '📄',
-    title: 'Download & Print',
-    description: 'Get your PDF instantly, ready to print at home',
+    icon: '📸',
+    title: 'Upload Pages',
+    description: 'Scan the QR code and upload completed pages',
+  },
+  {
+    icon: '🎬',
+    title: 'Share Memories',
+    description: 'Get videos, cards, and slides to treasure forever',
   },
 ]
 
 const FEATURES = [
   {
     icon: '📖',
-    title: 'Personalized Journals',
-    description: 'Custom prompts tailored to your child\'s interests and destinations',
+    title: 'Printed Journal',
+    description: 'Beautiful PDF with prompts, activities, and daily pages tailored to your kid and destination',
     gradient: 'gradient-1'
   },
   {
-    icon: '✨',
-    title: 'Age-Appropriate',
-    description: 'Designed for kids ages 8-12 with engaging activities and reflection prompts',
+    icon: '🎬',
+    title: 'Memory Video',
+    description: 'Animated video of completed pages with music — perfect for sharing',
     gradient: 'gradient-2'
   },
   {
-    icon: '🗺️',
-    title: 'Destination-Specific',
-    description: 'Location-aware content with cultural facts, language tips, and local insights',
+    icon: '💌',
+    title: 'Holiday Cards',
+    description: 'Turn journal highlights into shareable cards for family and friends',
     gradient: 'gradient-3'
   },
   {
-    icon: '🖨️',
-    title: 'Print-Ready PDFs',
-    description: 'Optimized for home printing with beautiful layouts and activity pages',
+    icon: '📊',
+    title: 'School Slides',
+    description: 'Presentation deck for show-and-tell that kids will love presenting',
     gradient: 'gradient-4'
   },
 ]
 
-const SECTIONS_CONTENT = [
+const PRINTED_JOURNAL_SECTIONS = [
   {
     number: '01',
     title: 'Pre-Trip Prep',
-    description: 'Maps, fun facts, cultural highlights, and "Did you know?" trivia about your destinations',
+    description: 'Maps, fun facts, cultural highlights, and trivia about your destination',
     visual: '🗺️'
   },
   {
     number: '02',
-    title: 'Travel Time Activities',
-    description: 'Fun games, puzzles, and creative activities to keep kids engaged during flights, car rides, and waits',
+    title: 'Travel Activities',
+    description: 'Games, puzzles, and creative activities for flights and car rides',
     visual: '✈️'
   },
   {
     number: '03',
-    title: 'Daily Journal Pages',
-    description: 'Location-specific prompts, reflection questions, sketching space, and mood trackers',
+    title: 'Daily Journal',
+    description: 'Prompts, sketching space, mood trackers, and reflection questions',
     visual: '📝'
   },
 ]
 
+const DIGITAL_OUTPUTS = [
+  {
+    icon: '🎬',
+    title: 'Memory Video',
+    description: '30-60 second animated video with music',
+  },
+  {
+    icon: '💌',
+    title: 'Holiday Cards',
+    description: '4 beautiful card templates to share',
+  },
+  {
+    icon: '📊',
+    title: 'School Presentation',
+    description: '8-12 slides for show-and-tell',
+  },
+  {
+    icon: '📱',
+    title: 'Social Clips',
+    description: 'Short clips for Instagram & TikTok',
+  },
+]
+
 const DESTINATIONS = [
-  { name: 'Tokyo', country: 'Japan', image: '🗼' },
-  { name: 'Paris', country: 'France', image: '🗼' },
-  { name: 'London', country: 'UK', image: '🎡' },
-  { name: 'Orlando', country: 'USA', image: '🏰' },
-  { name: 'Hawaii', country: 'USA', image: '🌺' },
+  { name: 'Osaka', country: 'Japan', image: '🏯' },
+  { name: 'Lyon', country: 'France', image: '🦁' },
+  { name: 'Moorea', country: 'French Polynesia', image: '🏝️' },
+  { name: 'Bangkok', country: 'Thailand', image: '🛕' },
+  { name: 'Verona', country: 'Italy', image: '🏛️' },
 ]
 
 function LandingPage() {
@@ -131,11 +183,21 @@ function LandingPage() {
           <div className="hero-shape hero-shape-1"></div>
           <div className="hero-shape hero-shape-2"></div>
           <div className="hero-shape hero-shape-3"></div>
+          {/* Floating decorative elements */}
+          <CloudIcon size={120} className="hero-decor hero-cloud-1" />
+          <CloudIcon size={100} className="hero-decor hero-cloud-2" />
+          <AirplaneIcon size={40} className="hero-decor hero-airplane" />
+          <SparkleIcon size={20} className="hero-decor hero-sparkle-1" />
+          <SparkleIcon size={16} className="hero-decor hero-sparkle-2" />
+          <SparkleIcon size={24} className="hero-decor hero-sparkle-3" />
+          <ButterflyIcon size={28} className="hero-decor hero-butterfly-float" />
+          <FlowerIcon size={24} className="hero-decor hero-flower-1" />
+          <HummingbirdIcon size={32} className="hero-decor hero-hummingbird" />
         </div>
 
         <div className="container hero-content">
           <div className="hero-text">
-            <span className="hero-label animate-fade-in-up">Travel Journals for Kids</span>
+            <span className="hero-label animate-fade-in-up">Print • Complete • Share</span>
             <h1 className="hero-title animate-fade-in-up stagger-2">
               Turn Family Trips into
               <span className="hero-highlight"> Lasting Memories</span>
@@ -147,7 +209,9 @@ function LandingPage() {
             </p>
             <p className="hero-description animate-fade-in-up stagger-4">
               A travel journal made for kids to capture their adventure through drawings,
-              games, and their own storytelling — a keepsake your whole family will treasure forever.
+              games, and their own storytelling. After your trip, upload the completed pages
+              and we'll transform them into shareable videos, holiday cards, and keepsakes
+              your whole family will treasure forever.
             </p>
             <div className="hero-actions animate-fade-in-up stagger-5">
               <Link to="/create" className="btn btn-accent btn-large">
@@ -192,12 +256,18 @@ function LandingPage() {
 
       {/* Features Grid */}
       <section className="features-section">
+        <div className="features-decorations">
+          <SparkleIcon size={18} className="features-decor features-sparkle-1" />
+          <SparkleIcon size={14} className="features-decor features-sparkle-2" />
+          <CompassIcon size={36} className="features-decor features-compass" />
+          <PalmTree size={50} className="features-decor features-palm" />
+        </div>
         <div className="container">
           <div className="section-header reveal">
-            <span className="section-label">Features</span>
-            <h2 className="section-title">Everything Your Child Needs</h2>
+            <span className="section-label">What You Get</span>
+            <h2 className="section-title">One Trip, Four Keepsakes</h2>
             <p className="section-subtitle">
-              Thoughtfully designed journals that make travel memorable
+              A printed journal for the trip, plus digital memories to share forever
             </p>
           </div>
 
@@ -224,9 +294,9 @@ function LandingPage() {
         <div className="container">
           <div className="section-header reveal">
             <span className="section-label">How It Works</span>
-            <h2 className="section-title">Your Journey to a Perfect Journal</h2>
+            <h2 className="section-title">Your Complete Memory Journey</h2>
             <p className="section-subtitle">
-              Create a personalized travel journal in just 3 easy steps
+              From printed journal to shareable digital memories in 4 simple steps
             </p>
           </div>
 
@@ -234,13 +304,13 @@ function LandingPage() {
             <svg className="journey-path" viewBox="0 0 800 80" preserveAspectRatio="none">
               <path
                 className="journey-path-bg"
-                d="M 50 40 Q 200 40 400 40 Q 600 40 750 40"
+                d="M 30 40 L 770 40"
                 fill="none"
                 strokeWidth="4"
               />
               <path
                 className="journey-path-line"
-                d="M 50 40 Q 200 40 400 40 Q 600 40 750 40"
+                d="M 30 40 L 770 40"
                 fill="none"
                 strokeWidth="4"
               />
@@ -272,61 +342,68 @@ function LandingPage() {
         </div>
       </section>
 
-      {/* Sample Journals */}
-      <section className="samples-section">
+      {/* The Complete Package - Two Panels */}
+      <section className="package-section">
+        <div className="package-background"></div>
         <div className="container">
           <div className="section-header reveal">
-            <span className="section-label">Examples</span>
-            <h2 className="section-title">See What You'll Create</h2>
-            <p className="section-subtitle">
-              Download sample journals to preview the quality and content
-            </p>
+            <span className="section-label">The Complete Package</span>
+            <h2 className="section-title">From Paper to Digital Memories</h2>
           </div>
 
-          <div className="samples-grid reveal">
-            {SAMPLES.map((sample, index) => (
-              <a
-                key={sample.id}
-                href={sample.downloadUrl}
-                className="sample-card"
-                style={{ animationDelay: `${index * 100}ms` }}
-                download
-              >
-                <div className="sample-destination">{sample.destination}</div>
-                <div className="sample-info">
-                  <span className="sample-child">{sample.childName}, age {sample.childAge}</span>
-                  <span className="sample-details">{sample.tripDays} days • {sample.interests.join(', ')}</span>
-                </div>
-                <div className="sample-download">
-                  <span className="sample-download-icon">⬇</span>
-                  Download PDF
-                </div>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* What's Inside - Editorial Layout */}
-      <section className="inside-section">
-        <div className="inside-background"></div>
-        <div className="container">
-          <div className="section-header reveal">
-            <span className="section-label">What's Inside</span>
-            <h2 className="section-title">Three Sections of Fun</h2>
-          </div>
-
-          <div className="inside-grid">
-            {SECTIONS_CONTENT.map((section, index) => (
-              <div key={index} className="inside-card reveal" style={{ animationDelay: `${index * 150}ms` }}>
-                <div className="inside-number">{section.number}</div>
-                <div className="inside-content">
-                  <div className="inside-visual">{section.visual}</div>
-                  <h3 className="inside-title">{section.title}</h3>
-                  <p className="inside-description">{section.description}</p>
-                </div>
+          <div className="package-panels">
+            {/* Printed Journal Panel */}
+            <div className="package-panel printed-panel reveal">
+              <div className="panel-header">
+                <span className="panel-icon">📖</span>
+                <h3>Printed Journal</h3>
+                <p className="panel-subtitle">For the trip</p>
               </div>
-            ))}
+              <div className="panel-items">
+                {PRINTED_JOURNAL_SECTIONS.map((section, index) => (
+                  <div key={index} className="panel-item">
+                    <span className="item-visual">{section.visual}</span>
+                    <div className="item-content">
+                      <h4>{section.title}</h4>
+                      <p>{section.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="panel-footer">
+                <span>Print at home • Ready in 2 minutes</span>
+              </div>
+            </div>
+
+            {/* Arrow between panels */}
+            <div className="package-arrow reveal">
+              <div className="arrow-line"></div>
+              <span className="arrow-text">Upload completed pages</span>
+              <div className="arrow-icon">→</div>
+            </div>
+
+            {/* Digital Outputs Panel */}
+            <div className="package-panel digital-panel reveal">
+              <div className="panel-header">
+                <span className="panel-icon">✨</span>
+                <h3>Digital Memories</h3>
+                <p className="panel-subtitle">After the trip</p>
+              </div>
+              <div className="panel-items digital-items">
+                {DIGITAL_OUTPUTS.map((output, index) => (
+                  <div key={index} className="panel-item digital-item">
+                    <span className="item-visual">{output.icon}</span>
+                    <div className="item-content">
+                      <h4>{output.title}</h4>
+                      <p>{output.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="panel-footer">
+                <span>Share with family • Keep forever</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -335,33 +412,51 @@ function LandingPage() {
       <section className="destinations-section">
         <div className="container">
           <div className="section-header reveal">
-            <span className="section-label">Destinations</span>
-            <h2 className="section-title">Curated for Popular Spots</h2>
+            <span className="section-label">Sample Journals</span>
+            <h2 className="section-title">Preview Popular Destinations</h2>
             <p className="section-subtitle">
-              Location-specific content for family-favorite destinations worldwide
+              Download sample journals to see what you'll create
             </p>
           </div>
 
           <div className="destinations-showcase reveal">
-            {DESTINATIONS.map((dest, index) => (
-              <Link
-                key={index}
-                to={`/create?destination=${encodeURIComponent(dest.name)}&country=${encodeURIComponent(dest.country)}`}
-                className="destination-pill"
-                style={{ animationDelay: `${index * 80}ms` }}
-              >
-                <span className="destination-image">{dest.image}</span>
-                <div className="destination-info">
-                  <span className="destination-name">{dest.name}</span>
-                  <span className="destination-country">{dest.country}</span>
-                </div>
-              </Link>
-            ))}
+            {DESTINATIONS.map((dest, index) => {
+              const IconComponent = DESTINATION_ICONS[dest.name]
+              const sampleFile = `/samples/${dest.name.toLowerCase()}-sample.pdf`
+              return (
+                <a
+                  key={index}
+                  href={sampleFile}
+                  className="destination-pill"
+                  style={{ animationDelay: `${index * 80}ms` }}
+                  download
+                >
+                  <div className="destination-icon">
+                    {IconComponent && <IconComponent size={48} />}
+                  </div>
+                  <div className="destination-info">
+                    <span className="destination-name">{dest.name}</span>
+                    <span className="destination-country">{dest.country}</span>
+                  </div>
+                  <span className="destination-download">⬇ PDF</span>
+                </a>
+              )
+            })}
           </div>
 
-          <p className="destinations-note reveal">
-            Don't see your destination? No problem — we generate custom content for any location!
-          </p>
+          <div className="destinations-cta reveal">
+            <Link to="/demo" className="btn btn-primary demo-btn">
+              See Complete Demo: Sophia's Verona Adventure
+              <span className="btn-arrow">→</span>
+            </Link>
+            <p className="destinations-note">
+              Want a journal for a different destination?
+            </p>
+            <Link to="/create" className="btn btn-secondary">
+              Create Custom Journal
+              <span className="btn-arrow">→</span>
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -370,6 +465,10 @@ function LandingPage() {
         <div className="cta-background">
           <div className="cta-shape cta-shape-1"></div>
           <div className="cta-shape cta-shape-2"></div>
+          <AirplaneIcon size={32} className="cta-decor cta-airplane" />
+          <SparkleIcon size={20} className="cta-decor cta-sparkle-1" />
+          <SparkleIcon size={16} className="cta-decor cta-sparkle-2" />
+          <ButterflyIcon size={24} className="cta-decor cta-butterfly" />
         </div>
         <div className="container">
           <div className="cta-content reveal">
@@ -378,10 +477,15 @@ function LandingPage() {
             <p className="cta-description">
               Your personalized travel journal is just a few clicks away
             </p>
-            <Link to="/create" className="btn btn-primary btn-large cta-button">
-              Start Creating
-              <span className="btn-arrow">→</span>
-            </Link>
+            <div className="cta-buttons">
+              <Link to="/create" className="btn btn-primary btn-large cta-button">
+                Create Journal
+                <span className="btn-arrow">→</span>
+              </Link>
+              <Link to="/memories" className="btn btn-secondary cta-button-secondary">
+                Upload Completed Journal
+              </Link>
+            </div>
           </div>
         </div>
       </section>

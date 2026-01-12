@@ -61,11 +61,48 @@ const upload = multer({
 // In-memory storage for journals (would use a database in production)
 const journals = new Map();
 
+// In-memory storage for memory uploads
+const memoryUploads = new Map();
+
 // Ensure output directory exists
 const outputDir = path.join(__dirname, 'output');
 if (!fs.existsSync(outputDir)) {
   fs.mkdirSync(outputDir, { recursive: true });
 }
+
+// Ensure memories upload directory exists
+const memoriesUploadDir = path.join(__dirname, 'uploads', 'memories');
+if (!fs.existsSync(memoriesUploadDir)) {
+  fs.mkdirSync(memoriesUploadDir, { recursive: true });
+}
+
+// Memory photos upload config
+const memoryStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    const journalDir = path.join(memoriesUploadDir, req.params.journalId);
+    if (!fs.existsSync(journalDir)) {
+      fs.mkdirSync(journalDir, { recursive: true });
+    }
+    cb(null, journalDir);
+  },
+  filename: (req, file, cb) => {
+    const ext = path.extname(file.originalname);
+    cb(null, `page_${Date.now()}${ext}`);
+  }
+});
+
+const memoryUpload = multer({
+  storage: memoryStorage,
+  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB per photo
+  fileFilter: (req, file, cb) => {
+    const allowed = ['image/jpeg', 'image/png', 'image/heic', 'image/heif'];
+    if (allowed.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(new Error('Only image files are allowed'));
+    }
+  }
+});
 
 // Routes
 
@@ -207,6 +244,147 @@ async function generateJournalAsync(journalId, journalData) {
     journals.set(journalId, journal);
   }
 }
+
+// ============================================
+// MEMORIES API ROUTES
+// ============================================
+
+// Upload journal photos for memory generation
+app.post('/api/memories/:journalId/upload', memoryUpload.array('photos', 50), async (req, res) => {
+  try {
+    const { journalId } = req.params;
+    const files = req.files;
+
+    if (!files || files.length === 0) {
+      return res.status(400).json({ error: 'No photos uploaded' });
+    }
+
+    // Store uploaded files info
+    const uploadData = {
+      journalId,
+      photos: files.map((file, index) => ({
+        id: uuidv4(),
+        path: file.path,
+        filename: file.filename,
+        pageType: req.body[`pageTypes[${index}]`] || 'daily',
+        uploadedAt: new Date()
+      })),
+      status: 'uploaded',
+      uploadedAt: new Date()
+    };
+
+    memoryUploads.set(journalId, uploadData);
+
+    res.json({
+      success: true,
+      photoCount: files.length,
+      journalId
+    });
+  } catch (error) {
+    console.error('Error uploading memories:', error);
+    res.status(500).json({ error: 'Upload failed' });
+  }
+});
+
+// Get memory upload status
+app.get('/api/memories/:journalId/status', (req, res) => {
+  const { journalId } = req.params;
+  const upload = memoryUploads.get(journalId);
+
+  if (!upload) {
+    return res.status(404).json({ error: 'No uploads found for this journal' });
+  }
+
+  res.json({
+    status: upload.status,
+    photoCount: upload.photos?.length || 0,
+    products: upload.products || null
+  });
+});
+
+// Generate memory products (prototype - simulated)
+app.post('/api/memories/:journalId/generate', async (req, res) => {
+  try {
+    const { journalId } = req.params;
+    const upload = memoryUploads.get(journalId);
+
+    if (!upload) {
+      return res.status(404).json({ error: 'No uploads found' });
+    }
+
+    // Update status to processing
+    upload.status = 'processing';
+    memoryUploads.set(journalId, upload);
+
+    // Simulate processing time
+    setTimeout(() => {
+      upload.status = 'completed';
+      upload.products = {
+        video: {
+          url: `/api/memories/${journalId}/download/video`,
+          format: 'mp4',
+          ready: true
+        },
+        cards: {
+          templates: [
+            { id: 1, url: `/api/memories/${journalId}/download/card/1` },
+            { id: 2, url: `/api/memories/${journalId}/download/card/2` },
+            { id: 3, url: `/api/memories/${journalId}/download/card/3` },
+            { id: 4, url: `/api/memories/${journalId}/download/card/4` }
+          ],
+          ready: true
+        },
+        slides: {
+          url: `/api/memories/${journalId}/download/slides`,
+          format: 'pdf',
+          ready: true
+        },
+        social: {
+          clips: [
+            { format: 'instagram', url: `/api/memories/${journalId}/download/social/instagram` },
+            { format: 'tiktok', url: `/api/memories/${journalId}/download/social/tiktok` }
+          ],
+          ready: true
+        }
+      };
+      memoryUploads.set(journalId, upload);
+    }, 3000);
+
+    res.json({
+      success: true,
+      status: 'processing',
+      message: 'Memory generation started'
+    });
+  } catch (error) {
+    console.error('Error generating memories:', error);
+    res.status(500).json({ error: 'Generation failed' });
+  }
+});
+
+// Get generated products
+app.get('/api/memories/:journalId/products', (req, res) => {
+  const { journalId } = req.params;
+  const upload = memoryUploads.get(journalId);
+
+  if (!upload || !upload.products) {
+    return res.status(404).json({ error: 'Products not ready' });
+  }
+
+  res.json({ products: upload.products });
+});
+
+// Download memory product (placeholder for prototype)
+app.get('/api/memories/:journalId/download/:type', (req, res) => {
+  const { journalId, type } = req.params;
+
+  // For prototype, return a placeholder response
+  res.json({
+    message: `Download endpoint for ${type}`,
+    note: 'In production, this would return the actual file',
+    journalId,
+    type
+  });
+});
 
 // Serve React app for all other routes (must be after API routes)
 if (fs.existsSync(distPath)) {
