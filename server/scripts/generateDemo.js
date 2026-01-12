@@ -184,14 +184,18 @@ async function generateCompletedJournal() {
   doc.fontSize(48).text('Verona Adventure', 50, 160, { align: 'center' });
   doc.fontSize(24).fillColor(COLORS.secondary).text('July 2025', 50, 230, { align: 'center' });
 
-  // Decorative elements
-  doc.fontSize(60).text('🏛️', 250, 300, { align: 'center' });
-  doc.fontSize(20).fillColor(COLORS.accent).text('Age 9 • 8 Days of Adventure', 50, 400, { align: 'center' });
+  // Decorative elements - using text instead of emoji
+  doc.roundedRect(230, 290, 150, 80, 10).stroke(COLORS.accent);
+  doc.fontSize(16).fillColor(COLORS.accent).text('[ Roman Arena ]', 235, 320, { align: 'center', width: 140 });
 
-  // Kid's addition on cover - "This journal belongs to me!"
+  doc.fontSize(20).fillColor(COLORS.accent).text('Age 9  *  8 Days of Adventure', 50, 400, { align: 'center' });
+
+  // Kid's addition on cover
   doc.fontSize(14).fillColor(COLORS.kid_handwriting)
      .text('This journal belongs to ME! - Sophia', 50, 500, { align: 'center', oblique: true });
-  doc.fontSize(40).text('⭐', 280, 540);
+
+  // Star decoration
+  doc.fontSize(24).fillColor(COLORS.secondary).text('* * *', 50, 540, { align: 'center' });
 
   // Daily entries
   for (const entry of JOURNAL_ENTRIES) {
@@ -232,8 +236,9 @@ async function generateCompletedJournal() {
     doc.roundedRect(50, yPos, 250, 100, 10).stroke(COLORS.accent);
     doc.fontSize(9).fillColor(COLORS.accent).text('My Sketch:', 55, yPos + 5);
     doc.fontSize(11).fillColor(COLORS.pencil).text(`[${entry.sketch}]`, 60, yPos + 40, { oblique: true });
-    // Add simple sketch indicator
-    doc.fontSize(30).text('✏️', 180, yPos + 50);
+
+    // Simple pencil indicator with text
+    doc.fontSize(10).fillColor(COLORS.accent).text('(drawing)', 170, yPos + 70);
 
     // New word learned
     doc.roundedRect(320, yPos, 230, 100, 10).fill('#FFF5E6');
@@ -272,24 +277,24 @@ async function generateCompletedJournal() {
   );
 
   doc.fontSize(14).fillColor(COLORS.secondary).text('I would rate this trip:', 50, 420);
-  doc.fontSize(24).text('⭐⭐⭐⭐⭐', 50, 445);
-  doc.fontSize(12).fillColor(COLORS.kid_handwriting).text('FIVE STARS! Best trip ever!!!', 200, 455, { oblique: true });
+  doc.fontSize(24).fillColor(COLORS.secondary).text('* * * * *  (5 stars!)', 50, 445);
+  doc.fontSize(12).fillColor(COLORS.kid_handwriting).text('FIVE STARS! Best trip ever!!!', 250, 455, { oblique: true });
 
   doc.fontSize(14).fillColor(COLORS.secondary).text('My signature:', 50, 520);
-  doc.fontSize(18).fillColor(COLORS.kid_handwriting).text('Sophia ❤️', 50, 550, { oblique: true });
+  doc.fontSize(18).fillColor(COLORS.kid_handwriting).text('Sophia <3', 50, 550, { oblique: true });
   doc.fontSize(12).text('World Traveler, Age 9', 50, 580);
 
-  // Gelato count
+  // Gelato count box
   doc.roundedRect(350, 480, 180, 100, 10).fill(COLORS.light);
   doc.fontSize(12).fillColor(COLORS.primary).text('Gelato Count:', 370, 500);
-  doc.fontSize(48).text('🍦', 365, 520);
-  doc.fontSize(24).fillColor(COLORS.secondary).text('x 14!', 420, 540);
+  doc.fontSize(36).fillColor(COLORS.secondary).text('14', 400, 530);
+  doc.fontSize(14).fillColor(COLORS.primary).text('gelatos!', 445, 545);
 
   doc.end();
 
   return new Promise((resolve) => {
     stream.on('finish', () => {
-      console.log('  ✓ Completed journal generated');
+      console.log('  Completed journal generated');
       resolve(outputPath);
     });
   });
@@ -314,53 +319,51 @@ async function generateHolidayCard() {
   // Header
   doc.fontSize(28).fillColor(COLORS.secondary).text('Greetings from Verona!', 20, 30, { align: 'center' });
 
-  // Decorative icons
-  doc.fontSize(35).text('🏛️', 40, 70);
-  doc.fontSize(35).text('🍕', 420, 70);
+  // Decorative text icons
+  doc.fontSize(12).fillColor(COLORS.accent).text('[Arena]', 40, 75);
+  doc.fontSize(12).fillColor(COLORS.accent).text('[Pizza]', 430, 75);
 
   // Main content box
-  doc.roundedRect(40, 110, 424, 140, 10).fill('#FFFFFF');
+  doc.roundedRect(40, 100, 424, 150, 10).fill('#FFFFFF');
 
   // Photo placeholder boxes (simulating journal pages)
-  doc.roundedRect(50, 120, 95, 70, 5).fill(COLORS.cream).stroke(COLORS.accent);
-  doc.fontSize(8).fillColor(COLORS.accent).text('Arena at night', 55, 165, { width: 85, align: 'center' });
+  doc.roundedRect(50, 110, 95, 70, 5).fill(COLORS.cream).stroke(COLORS.accent);
+  doc.fontSize(8).fillColor(COLORS.accent).text('Arena at night', 55, 155, { width: 85, align: 'center' });
 
-  doc.roundedRect(155, 120, 95, 70, 5).fill(COLORS.cream).stroke(COLORS.accent);
-  doc.fontSize(8).text("Juliet's Balcony", 160, 165, { width: 85, align: 'center' });
+  doc.roundedRect(155, 110, 95, 70, 5).fill(COLORS.cream).stroke(COLORS.accent);
+  doc.fontSize(8).text("Juliet's Balcony", 160, 155, { width: 85, align: 'center' });
 
-  doc.roundedRect(260, 120, 95, 70, 5).fill(COLORS.cream).stroke(COLORS.accent);
-  doc.fontSize(8).text('Making Pasta!', 265, 165, { width: 85, align: 'center' });
+  doc.roundedRect(260, 110, 95, 70, 5).fill(COLORS.cream).stroke(COLORS.accent);
+  doc.fontSize(8).text('Making Pasta!', 265, 155, { width: 85, align: 'center' });
 
-  doc.roundedRect(365, 120, 95, 70, 5).fill(COLORS.cream).stroke(COLORS.accent);
-  doc.fontSize(8).text('Lake Garda', 370, 165, { width: 85, align: 'center' });
+  doc.roundedRect(365, 110, 95, 70, 5).fill(COLORS.cream).stroke(COLORS.accent);
+  doc.fontSize(8).text('Lake Garda', 370, 155, { width: 85, align: 'center' });
 
-  // Icons in boxes
-  doc.fontSize(24).fillColor(COLORS.primary);
-  doc.text('🏟️', 75, 130);
-  doc.text('💕', 180, 130);
-  doc.text('🍝', 285, 130);
-  doc.text('⛵', 390, 130);
+  // Labels in boxes
+  doc.fontSize(10).fillColor(COLORS.primary);
+  doc.text('Day 6', 80, 130);
+  doc.text('Day 2', 185, 130);
+  doc.text('Day 5', 290, 130);
+  doc.text('Day 7', 395, 130);
 
   // Message
-  doc.fontSize(12).fillColor(COLORS.kid_handwriting);
-  doc.text("I had the BEST time in Verona! I saw where Romeo and Juliet lived,", 50, 200, { align: 'center', width: 400, oblique: true });
-  doc.text("watched an opera under the stars, and ate 14 gelatos! - Sophia, age 9", 50, 218, { align: 'center', width: 400, oblique: true });
+  doc.fontSize(11).fillColor(COLORS.kid_handwriting);
+  doc.text("I had the BEST time in Verona! I saw where Romeo and Juliet lived,", 50, 190, { align: 'center', width: 400, oblique: true });
+  doc.text("watched an opera under the stars, and ate 14 gelatos!", 50, 205, { align: 'center', width: 400, oblique: true });
+  doc.fontSize(10).text("- Sophia, age 9", 50, 225, { align: 'center', width: 400, oblique: true });
 
   // Footer
   doc.fontSize(14).fillColor(COLORS.primary).text('Summer 2025', 20, 270, { align: 'center' });
   doc.fontSize(10).fillColor(COLORS.accent).text('Made with love from our travel journal', 20, 290, { align: 'center' });
 
-  // Hearts
-  doc.fontSize(20).fillColor(COLORS.secondary);
-  doc.text('❤️', 60, 310);
-  doc.text('🇮🇹', 230, 310);
-  doc.text('❤️', 400, 310);
+  // Decorative footer
+  doc.fontSize(14).fillColor(COLORS.secondary).text('<3  ITALIA  <3', 20, 315, { align: 'center' });
 
   doc.end();
 
   return new Promise((resolve) => {
     stream.on('finish', () => {
-      console.log('  ✓ Holiday card generated');
+      console.log('  Holiday card generated');
       resolve(outputPath);
     });
   });
@@ -379,54 +382,54 @@ async function generateSchoolSlides() {
     {
       title: 'My Trip to Verona, Italy',
       subtitle: 'By Sophia, Age 9',
-      content: 'Summer 2025 • 8 Days of Adventure',
-      icon: '🇮🇹'
+      content: 'Summer 2025 - 8 Days of Adventure',
+      icon: '[Italy Flag]'
     },
     {
       title: 'Where is Verona?',
-      content: '• Verona is a city in northern Italy\n• It is in the Veneto region\n• About 2 hours from Venice\n• Population: 260,000 people\n• Famous for Romeo and Juliet!',
-      icon: '🗺️'
+      content: '* Verona is a city in northern Italy\n* It is in the Veneto region\n* About 2 hours from Venice\n* Population: 260,000 people\n* Famous for Romeo and Juliet!',
+      icon: '[Map]'
     },
     {
       title: 'The Arena di Verona',
-      content: '• Built by the Romans 2,000 years ago!\n• One of the best preserved ancient amphitheaters\n• Used to have gladiator fights\n• Now they have operas and concerts\n• I watched an opera there at night with candles!',
-      icon: '🏛️'
+      content: '* Built by the Romans 2,000 years ago!\n* One of the best preserved ancient amphitheaters\n* Used to have gladiator fights\n* Now they have operas and concerts\n* I watched an opera there at night with candles!',
+      icon: '[Arena]'
     },
     {
       title: "Romeo and Juliet's Verona",
-      content: "• Shakespeare set his famous play here\n• We visited Juliet's house and balcony\n• People leave love notes on the walls\n• There's a statue of Juliet for good luck\n• I touched her hand!",
-      icon: '💕'
+      content: "* Shakespeare set his famous play here\n* We visited Juliet's house and balcony\n* People leave love notes on the walls\n* There's a statue of Juliet for good luck\n* I touched her hand!",
+      icon: '[Heart]'
     },
     {
       title: 'Italian Food I Tried',
-      content: '• Pizza - way better than at home!\n• Pasta - I learned to make it from scratch\n• Gelato - I had 14 gelatos in 8 days!\n• Tiramisu - chocolate and cream dessert\n• Gnocchi - little potato pillows',
-      icon: '🍕'
+      content: '* Pizza - way better than at home!\n* Pasta - I learned to make it from scratch\n* Gelato - I had 14 gelatos in 8 days!\n* Tiramisu - chocolate and cream dessert\n* Gnocchi - little potato pillows',
+      icon: '[Pizza]'
     },
     {
       title: 'Cool Things I Did',
-      content: '• Climbed 368 steps up Torre dei Lamberti\n• Watched opera at the ancient Arena\n• Took a cooking class with an Italian grandma\n• Visited a castle (Castelvecchio)\n• Took a boat on Lake Garda',
-      icon: '⭐'
+      content: '* Climbed 368 steps up Torre dei Lamberti\n* Watched opera at the ancient Arena\n* Took a cooking class with an Italian grandma\n* Visited a castle (Castelvecchio)\n* Took a boat on Lake Garda',
+      icon: '[Star]'
     },
     {
       title: 'Italian Words I Learned',
-      content: '• Ciao (chow) = Hello/Goodbye\n• Grazie (GRAT-see-eh) = Thank you\n• Bellissimo = Very beautiful\n• Delizioso = Delicious\n• Arrivederci = Goodbye (see you again)',
-      icon: '🗣️'
+      content: '* Ciao (chow) = Hello/Goodbye\n* Grazie (GRAT-see-eh) = Thank you\n* Bellissimo = Very beautiful\n* Delizioso = Delicious\n* Arrivederci = Goodbye (see you again)',
+      icon: '[Speech]'
     },
     {
       title: 'What I Learned',
-      content: '• Buildings can last 2,000 years!\n• Italians eat dinner really late (8-9pm)\n• Opera is actually pretty cool\n• Making pasta is fun but messy\n• Gelato is the best invention ever',
-      icon: '💡'
+      content: '* Buildings can last 2,000 years!\n* Italians eat dinner really late (8-9pm)\n* Opera is actually pretty cool\n* Making pasta is fun but messy\n* Gelato is the best invention ever',
+      icon: '[Lightbulb]'
     },
     {
       title: 'My Favorite Memory',
-      content: 'Watching the opera at the Arena at night. Everyone lit candles and it looked like magic. There were elephants on stage (fake ones) and the singing was SO loud!',
-      icon: '✨'
+      content: 'Watching the opera at the Arena at night.\nEveryone lit candles and it looked like magic.\nThere were elephants on stage (fake ones)\nand the singing was SO loud!',
+      icon: '[Sparkle]'
     },
     {
       title: 'Thank You!',
       subtitle: 'Questions?',
-      content: 'I would rate this trip: ⭐⭐⭐⭐⭐\n\nI want to go back to Italy someday!',
-      icon: '🙋'
+      content: 'Trip Rating: * * * * * (5 stars!)\n\nI want to go back to Italy someday!',
+      icon: '[Hand]'
     }
   ];
 
@@ -441,19 +444,19 @@ async function generateSchoolSlides() {
     // Header bar
     doc.rect(0, 0, 792, 80).fill(COLORS.primary);
 
-    // Icon
-    doc.fontSize(40).fillColor('#FFFFFF').text(slide.icon, 30, 18);
+    // Icon placeholder
+    doc.fontSize(12).fillColor('#FFFFFF').text(slide.icon, 30, 32);
 
     // Title
-    doc.fontSize(32).fillColor('#FFFFFF').text(slide.title, 90, 25, { width: 650 });
+    doc.fontSize(28).fillColor('#FFFFFF').text(slide.title, 100, 25, { width: 650 });
 
     if (slide.subtitle) {
-      doc.fontSize(18).fillColor(COLORS.light).text(slide.subtitle, 90, 52);
+      doc.fontSize(16).fillColor(COLORS.light).text(slide.subtitle, 100, 52);
     }
 
     // Content
-    doc.fontSize(24).fillColor(COLORS.primary);
-    doc.text(slide.content, 60, 130, { width: 670, lineGap: 12 });
+    doc.fontSize(22).fillColor(COLORS.primary);
+    doc.text(slide.content, 60, 130, { width: 670, lineGap: 10 });
 
     // Page number
     doc.fontSize(12).fillColor(COLORS.accent).text(`${i + 1} / ${slides.length}`, 700, 580);
@@ -466,7 +469,7 @@ async function generateSchoolSlides() {
 
   return new Promise((resolve) => {
     stream.on('finish', () => {
-      console.log('  ✓ School slides generated');
+      console.log('  School slides generated');
       resolve(outputPath);
     });
   });
@@ -481,47 +484,48 @@ async function generateSocialClip() {
   const stream = fs.createWriteStream(outputPath);
   doc.pipe(stream);
 
-  // Background gradient simulation
-  doc.rect(0, 0, 405, 720).fill('#1D3557');
-  doc.rect(0, 500, 405, 220).fill('#E63946');
+  // Background
+  doc.rect(0, 0, 405, 720).fill(COLORS.primary);
+  doc.rect(0, 500, 405, 220).fill(COLORS.secondary);
 
   // Decorative circles
-  doc.circle(50, 100, 80).fill('#457B9D').opacity(0.3);
-  doc.circle(350, 200, 60).fill('#A8DADC').opacity(0.3);
+  doc.circle(50, 100, 80).fill(COLORS.accent).opacity(0.3);
+  doc.circle(350, 200, 60).fill(COLORS.light).opacity(0.3);
   doc.opacity(1);
 
   // Top text
-  doc.fontSize(16).fillColor('#A8DADC').text("SOPHIA'S ADVENTURE", 20, 50, { align: 'center' });
+  doc.fontSize(14).fillColor(COLORS.light).text("SOPHIA'S ADVENTURE", 20, 50, { align: 'center' });
 
   // Main title
   doc.fontSize(48).fillColor('#FFFFFF').text('VERONA', 20, 180, { align: 'center' });
-  doc.fontSize(24).fillColor('#F1FAEE').text('ITALY 2025', 20, 240, { align: 'center' });
+  doc.fontSize(24).fillColor(COLORS.cream).text('ITALY 2025', 20, 240, { align: 'center' });
 
-  // Center icon
-  doc.fontSize(100).text('🏛️', 130, 300);
+  // Center visual
+  doc.roundedRect(130, 300, 145, 100, 10).fill(COLORS.light);
+  doc.fontSize(14).fillColor(COLORS.primary).text('[ Roman Arena ]', 140, 340, { align: 'center', width: 125 });
 
   // Highlight moments
-  doc.fontSize(14).fillColor('#FFFFFF');
-  const moments = ['🎭 Opera under the stars', '🍝 Made pasta from scratch', '💕 Visited Juliets balcony', '🍦 14 gelatos in 8 days!'];
-  let y = 450;
+  doc.fontSize(13).fillColor('#FFFFFF');
+  const moments = ['* Opera under the stars', '* Made pasta from scratch', '* Visited Juliets balcony', '* 14 gelatos in 8 days!'];
+  let y = 440;
   for (const moment of moments) {
     doc.text(moment, 20, y, { align: 'center' });
-    y += 25;
+    y += 22;
   }
 
   // Bottom section
-  doc.fontSize(20).fillColor('#FFFFFF').text('8 Days of Magic', 20, 570, { align: 'center' });
-  doc.fontSize(28).text('✨ Watch the journey ✨', 20, 610, { align: 'center' });
+  doc.fontSize(18).fillColor('#FFFFFF').text('8 Days of Magic', 20, 560, { align: 'center' });
+  doc.fontSize(20).text('Watch the journey', 20, 600, { align: 'center' });
 
   // Play button
-  doc.circle(202, 670, 25).fill('#FFFFFF');
-  doc.fontSize(20).fillColor(COLORS.primary).text('▶', 192, 658);
+  doc.circle(202, 660, 25).fill('#FFFFFF');
+  doc.fontSize(20).fillColor(COLORS.primary).text('>', 195, 650);
 
   doc.end();
 
   return new Promise((resolve) => {
     stream.on('finish', () => {
-      console.log('  ✓ Social clip poster generated');
+      console.log('  Social clip poster generated');
       resolve(outputPath);
     });
   });
@@ -537,7 +541,7 @@ async function generateVideoPreview() {
   doc.pipe(stream);
 
   // Background
-  doc.rect(0, 0, 854, 480).fill('#1D3557');
+  doc.rect(0, 0, 854, 480).fill(COLORS.primary);
 
   // Film strip decorations
   doc.rect(0, 0, 854, 40).fill('#000000');
@@ -548,31 +552,31 @@ async function generateVideoPreview() {
   }
 
   // Title
-  doc.fontSize(36).fillColor('#FFFFFF').text("Sophia's Verona Adventure", 0, 80, { align: 'center', width: 854 });
-  doc.fontSize(18).fillColor('#A8DADC').text('A Memory Video', 0, 125, { align: 'center', width: 854 });
+  doc.fontSize(32).fillColor('#FFFFFF').text("Sophia's Verona Adventure", 0, 80, { align: 'center', width: 854 });
+  doc.fontSize(16).fillColor(COLORS.light).text('A Memory Video', 0, 120, { align: 'center', width: 854 });
 
   // Photo thumbnails simulation
-  const thumbs = ['🏛️', '💕', '🍝', '🏰', '⛵'];
+  const thumbLabels = ['Arena', 'Juliet', 'Pasta', 'Castle', 'Lake'];
   let tx = 127;
-  for (const thumb of thumbs) {
-    doc.roundedRect(tx, 180, 100, 75, 5).fill('#F1FAEE');
-    doc.fontSize(35).fillColor(COLORS.primary).text(thumb, tx + 30, 195);
+  for (const label of thumbLabels) {
+    doc.roundedRect(tx, 180, 100, 75, 5).fill(COLORS.cream);
+    doc.fontSize(11).fillColor(COLORS.primary).text(label, tx + 10, 210, { width: 80, align: 'center' });
     tx += 130;
   }
 
   // Play button
-  doc.circle(427, 330, 50).fill('#E63946');
-  doc.fontSize(40).fillColor('#FFFFFF').text('▶', 410, 305);
+  doc.circle(427, 330, 50).fill(COLORS.secondary);
+  doc.fontSize(36).fillColor('#FFFFFF').text('>', 412, 308);
 
   // Duration
   doc.fontSize(14).fillColor('#FFFFFF').text('Duration: 1:24', 0, 400, { align: 'center', width: 854 });
-  doc.fontSize(12).fillColor('#A8DADC').text('Music: Italian Summer • Ken Burns effect • Animated transitions', 0, 420, { align: 'center', width: 854 });
+  doc.fontSize(11).fillColor(COLORS.light).text('Music: Italian Summer  |  Ken Burns effect  |  Animated transitions', 0, 420, { align: 'center', width: 854 });
 
   doc.end();
 
   return new Promise((resolve) => {
     stream.on('finish', () => {
-      console.log('  ✓ Video preview generated');
+      console.log('  Video preview generated');
       resolve(outputPath);
     });
   });
@@ -619,14 +623,14 @@ async function generateMetadata() {
 
   const outputPath = path.join(OUTPUT_DIR, 'demo-metadata.json');
   fs.writeFileSync(outputPath, JSON.stringify(metadata, null, 2));
-  console.log('  ✓ Metadata generated');
+  console.log('  Metadata generated');
 
   return metadata;
 }
 
 // Main function
 async function generateAllDemoArtifacts() {
-  console.log('\n🎨 Generating Verona Demo Artifacts\n');
+  console.log('\nGenerating Verona Demo Artifacts\n');
   console.log(`Child: ${DEMO_DATA.childName}, Age ${DEMO_DATA.childAge}`);
   console.log(`Destination: ${DEMO_DATA.destination}`);
   console.log(`Trip: ${DEMO_DATA.tripDays} days\n`);
@@ -639,8 +643,8 @@ async function generateAllDemoArtifacts() {
     await generateVideoPreview();
     await generateMetadata();
 
-    console.log('\n✅ All demo artifacts generated successfully!');
-    console.log(`📁 Output directory: ${OUTPUT_DIR}\n`);
+    console.log('\nAll demo artifacts generated successfully!');
+    console.log(`Output directory: ${OUTPUT_DIR}\n`);
 
     // List files
     const files = fs.readdirSync(OUTPUT_DIR);
@@ -648,7 +652,7 @@ async function generateAllDemoArtifacts() {
     for (const file of files) {
       const stats = fs.statSync(path.join(OUTPUT_DIR, file));
       const size = (stats.size / 1024).toFixed(1);
-      console.log(`  • ${file} (${size} KB)`);
+      console.log(`  - ${file} (${size} KB)`);
     }
 
   } catch (error) {
