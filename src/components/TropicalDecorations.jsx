@@ -287,6 +287,56 @@ export function BeachIcon({ size = 48, className = '' }) {
   )
 }
 
+export function BangkokIcon({ size = 48, className = '' }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 64 64" fill="none" className={className}>
+      {/* Thai Temple/Stupa */}
+      <path d="M32 4L28 12H36L32 4Z" fill="#ffd700"/>
+      <path d="M32 12L26 20H38L32 12Z" fill="#ff9800"/>
+      <path d="M28 20L22 32H42L36 20H28Z" fill="#ffd700"/>
+      <path d="M24 32L18 48H46L40 32H24Z" fill="#ff9800"/>
+      {/* Temple base */}
+      <rect x="16" y="48" width="32" height="8" fill="#ffd700"/>
+      <rect x="14" y="54" width="36" height="6" fill="#e65100"/>
+      {/* Spire details */}
+      <circle cx="32" cy="6" r="2" fill="#ffd700"/>
+      <path d="M30 8L32 4L34 8" stroke="#ff6f00" strokeWidth="1" fill="none"/>
+      {/* Decorative elements */}
+      <path d="M22 40L20 44H24L22 40Z" fill="#fff176"/>
+      <path d="M42 40L40 44H44L42 40Z" fill="#fff176"/>
+      {/* Small Buddha silhouette */}
+      <ellipse cx="32" cy="42" rx="4" ry="5" fill="#ffcc80"/>
+      <circle cx="32" cy="38" r="3" fill="#ffcc80"/>
+    </svg>
+  )
+}
+
+export function VeronaIcon({ size = 48, className = '' }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 64 64" fill="none" className={className}>
+      {/* Roman Arena/Colosseum */}
+      <ellipse cx="32" cy="40" rx="28" ry="16" fill="#d4a574"/>
+      <ellipse cx="32" cy="38" rx="24" ry="12" fill="#c9956c"/>
+      <ellipse cx="32" cy="36" rx="20" ry="8" fill="#deb887"/>
+      {/* Arena floor */}
+      <ellipse cx="32" cy="40" rx="16" ry="6" fill="#f5deb3"/>
+      {/* Arches - outer ring */}
+      <path d="M8 36C8 36 10 44 12 44C14 44 14 36 14 36" stroke="#8b7355" strokeWidth="1.5" fill="none"/>
+      <path d="M16 34C16 34 18 42 20 42C22 42 22 34 22 34" stroke="#8b7355" strokeWidth="1.5" fill="none"/>
+      <path d="M24 33C24 33 26 40 28 40C30 40 30 33 30 33" stroke="#8b7355" strokeWidth="1.5" fill="none"/>
+      <path d="M34 33C34 33 36 40 38 40C40 40 40 33 40 33" stroke="#8b7355" strokeWidth="1.5" fill="none"/>
+      <path d="M42 34C42 34 44 42 46 42C48 42 48 34 48 34" stroke="#8b7355" strokeWidth="1.5" fill="none"/>
+      <path d="M50 36C50 36 52 44 54 44C56 44 56 36 56 36" stroke="#8b7355" strokeWidth="1.5" fill="none"/>
+      {/* Heart for Romeo & Juliet */}
+      <path d="M32 12C28 8 22 8 22 14C22 20 32 28 32 28C32 28 42 20 42 14C42 8 36 8 32 12Z" fill="#e63946"/>
+      {/* Italian flag colors accent */}
+      <rect x="4" y="52" width="6" height="8" fill="#009246"/>
+      <rect x="10" y="52" width="6" height="8" fill="white"/>
+      <rect x="16" y="52" width="6" height="8" fill="#ce2b37"/>
+    </svg>
+  )
+}
+
 // Animated cloud component
 export function CloudIcon({ size = 80, className = '' }) {
   return (

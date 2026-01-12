@@ -13,6 +13,8 @@ import {
   LondonIcon,
   OrlandoIcon,
   BeachIcon,
+  BangkokIcon,
+  VeronaIcon,
   CloudIcon,
   SparkleIcon,
   AirplaneIcon,
@@ -22,11 +24,11 @@ import './LandingPage.css'
 
 // Destination icons mapping
 const DESTINATION_ICONS = {
-  'Osaka': TokyoIcon,      // Japan icon
-  'Lyon': ParisIcon,       // France icon
-  'Moorea': BeachIcon,     // French Polynesia icon
-  'Bangkok': TokyoIcon,    // Thailand icon (Asian style)
-  'Verona': ParisIcon,     // Italy icon (European style)
+  'Osaka': TokyoIcon,      // Japan pagoda
+  'Lyon': ParisIcon,       // France Eiffel Tower
+  'Moorea': BeachIcon,     // Tropical beach
+  'Bangkok': BangkokIcon,  // Thai temple
+  'Verona': VeronaIcon,    // Roman arena with heart
 }
 
 const JOURNEY_STEPS = [
