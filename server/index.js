@@ -24,6 +24,12 @@ if (fs.existsSync(distPath)) {
   app.use(express.static(distPath));
 }
 
+// Serve sample PDFs
+const samplesPath = path.join(__dirname, '..', 'public', 'samples');
+if (fs.existsSync(samplesPath)) {
+  app.use('/samples', express.static(samplesPath));
+}
+
 // File upload config
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {

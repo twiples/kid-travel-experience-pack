@@ -2,7 +2,26 @@ import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import BackpackIcon from '../components/BackpackIcon'
 import { ToucanIcon, MonsteraLeaf, ButterflyIcon } from '../components/TropicalDecorations'
+import SAMPLES from '../data/samples.json'
 import './LandingPage.css'
+
+const JOURNEY_STEPS = [
+  {
+    icon: '🗺️',
+    title: 'Choose Destination',
+    description: 'Pick from popular spots or enter any destination',
+  },
+  {
+    icon: '✨',
+    title: 'Personalize',
+    description: "Add your child's name, age, and interests",
+  },
+  {
+    icon: '📄',
+    title: 'Download & Print',
+    description: 'Get your PDF instantly, ready to print at home',
+  },
+]
 
 const FEATURES = [
   {
@@ -195,6 +214,94 @@ function LandingPage() {
                 <h3 className="feature-title">{feature.title}</h3>
                 <p className="feature-description">{feature.description}</p>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works - Journey Timeline */}
+      <section className="journey-section">
+        <div className="container">
+          <div className="section-header reveal">
+            <span className="section-label">How It Works</span>
+            <h2 className="section-title">Your Journey to a Perfect Journal</h2>
+            <p className="section-subtitle">
+              Create a personalized travel journal in just 3 easy steps
+            </p>
+          </div>
+
+          <div className="journey-timeline reveal">
+            <svg className="journey-path" viewBox="0 0 800 80" preserveAspectRatio="none">
+              <path
+                className="journey-path-bg"
+                d="M 50 40 Q 200 40 400 40 Q 600 40 750 40"
+                fill="none"
+                strokeWidth="4"
+              />
+              <path
+                className="journey-path-line"
+                d="M 50 40 Q 200 40 400 40 Q 600 40 750 40"
+                fill="none"
+                strokeWidth="4"
+              />
+            </svg>
+
+            <div className="journey-steps">
+              {JOURNEY_STEPS.map((step, index) => (
+                <div
+                  key={index}
+                  className="journey-step"
+                  style={{ animationDelay: `${index * 200 + 300}ms` }}
+                >
+                  <div className="journey-step-icon">
+                    <span>{step.icon}</span>
+                  </div>
+                  <h3 className="journey-step-title">{step.title}</h3>
+                  <p className="journey-step-description">{step.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="journey-cta reveal">
+            <Link to="/create" className="btn btn-primary">
+              Start Your Journey
+              <span className="btn-arrow">→</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Sample Journals */}
+      <section className="samples-section">
+        <div className="container">
+          <div className="section-header reveal">
+            <span className="section-label">Examples</span>
+            <h2 className="section-title">See What You'll Create</h2>
+            <p className="section-subtitle">
+              Download sample journals to preview the quality and content
+            </p>
+          </div>
+
+          <div className="samples-grid reveal">
+            {SAMPLES.map((sample, index) => (
+              <a
+                key={sample.id}
+                href={sample.downloadUrl}
+                className="sample-card"
+                style={{ animationDelay: `${index * 100}ms` }}
+                download
+              >
+                <div className="sample-destination">{sample.destination}</div>
+                <div className="sample-info">
+                  <span className="sample-child">{sample.childName}, age {sample.childAge}</span>
+                  <span className="sample-details">{sample.tripDays} days • {sample.interests.join(', ')}</span>
+                </div>
+                <div className="sample-download">
+                  <span className="sample-download-icon">⬇</span>
+                  Download PDF
+                </div>
+              </a>
             ))}
           </div>
         </div>

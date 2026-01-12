@@ -1,0 +1,67 @@
+[
+  {
+    "id": "tokyo-sample",
+    "destination": "Tokyo",
+    "childName": "Emma",
+    "childAge": 8,
+    "interests": [
+      "food",
+      "culture"
+    ],
+    "tripDays": 7,
+    "fileName": "tokyo-sample.pdf",
+    "downloadUrl": "/samples/tokyo-sample.pdf"
+  },
+  {
+    "id": "paris-sample",
+    "destination": "Paris",
+    "childName": "Lucas",
+    "childAge": 10,
+    "interests": [
+      "art",
+      "architecture"
+    ],
+    "tripDays": 5,
+    "fileName": "paris-sample.pdf",
+    "downloadUrl": "/samples/paris-sample.pdf"
+  },
+  {
+    "id": "hawaii-sample",
+    "destination": "Hawaii",
+    "childName": "Sophia",
+    "childAge": 9,
+    "interests": [
+      "nature",
+      "animals"
+    ],
+    "tripDays": 6,
+    "fileName": "hawaii-sample.pdf",
+    "downloadUrl": "/samples/hawaii-sample.pdf"
+  },
+  {
+    "id": "london-sample",
+    "destination": "London",
+    "childName": "Oliver",
+    "childAge": 11,
+    "interests": [
+      "history",
+      "transportation"
+    ],
+    "tripDays": 8,
+    "fileName": "london-sample.pdf",
+    "downloadUrl": "/samples/london-sample.pdf"
+  },
+  {
+    "id": "orlando-sample",
+    "destination": "Orlando",
+    "childName": "Mia",
+    "childAge": 8,
+    "interests": [
+      "sports",
+      "animals"
+    ],
+    "tripDays": 4,
+    "fileName": "orlando-sample.pdf",
+    "downloadUrl": "/samples/orlando-sample.pdf"
+  }
+]

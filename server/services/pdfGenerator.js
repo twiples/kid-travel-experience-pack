@@ -1364,75 +1364,93 @@ function getDestinationTheme(destination, country) {
 }
 
 // Draw themed decorations for cover page
+// Cover frame is at y=120 to y=400, so keep decorations in top zone (y<100) or bottom zone (y>420)
 function drawThemedCoverDecorations(doc, theme) {
+  const TOP_ZONE = 95;      // Max Y for top decorations
+  const BOTTOM_ZONE = 430;  // Min Y for bottom decorations (PAGE_HEIGHT - 182)
+
   switch (theme) {
     case 'japan':
-      drawCherryBlossom(doc, 40, 70, 20);
-      drawCherryBlossom(doc, PAGE_WIDTH - 50, 90, 16);
-      drawCherryBlossom(doc, 60, 100, 12);
-      drawToriiGate(doc, PAGE_WIDTH - 60, 60, 26);
-      drawMtFuji(doc, 50, PAGE_HEIGHT - 140, 35);
-      drawKoiFish(doc, PAGE_WIDTH - 60, PAGE_HEIGHT - 160, 22);
-      drawLantern(doc, 35, PAGE_HEIGHT - 180, 18);
-      drawCherryBlossom(doc, PAGE_WIDTH - 40, PAGE_HEIGHT - 130, 14);
+      // Top zone decorations
+      drawCherryBlossom(doc, 40, 50, 20);
+      drawCherryBlossom(doc, PAGE_WIDTH - 50, 70, 16);
+      drawCherryBlossom(doc, 60, 85, 12);
+      drawToriiGate(doc, PAGE_WIDTH - 60, 45, 26);
+      // Bottom zone decorations
+      drawMtFuji(doc, 50, BOTTOM_ZONE + 20, 35);
+      drawKoiFish(doc, PAGE_WIDTH - 60, BOTTOM_ZONE + 40, 22);
+      drawLantern(doc, 35, BOTTOM_ZONE + 60, 18);
+      drawCherryBlossom(doc, PAGE_WIDTH - 40, BOTTOM_ZONE + 80, 14);
       break;
 
     case 'paris':
-      drawEiffelTower(doc, PAGE_WIDTH - 55, 70, 35);
-      drawFleurDeLis(doc, 40, 75, 18);
-      drawFleurDeLis(doc, 65, 100, 14);
-      drawCroissant(doc, 50, PAGE_HEIGHT - 150, 20);
-      drawBeret(doc, PAGE_WIDTH - 50, PAGE_HEIGHT - 160, 20);
-      drawFleurDeLis(doc, 35, PAGE_HEIGHT - 185, 16);
-      drawCroissant(doc, PAGE_WIDTH - 65, PAGE_HEIGHT - 135, 16);
+      // Top zone decorations
+      drawEiffelTower(doc, PAGE_WIDTH - 55, 50, 35);
+      drawFleurDeLis(doc, 40, 55, 18);
+      drawFleurDeLis(doc, 65, 80, 14);
+      // Bottom zone decorations
+      drawCroissant(doc, 50, BOTTOM_ZONE + 30, 20);
+      drawBeret(doc, PAGE_WIDTH - 50, BOTTOM_ZONE + 45, 20);
+      drawFleurDeLis(doc, 35, BOTTOM_ZONE + 70, 16);
+      drawCroissant(doc, PAGE_WIDTH - 65, BOTTOM_ZONE + 85, 16);
       break;
 
     case 'london':
-      drawBigBen(doc, PAGE_WIDTH - 55, 75, 35);
-      drawCrown(doc, 50, 70, 22);
-      drawDoubleDecker(doc, 55, PAGE_HEIGHT - 150, 30);
-      drawTeaCup(doc, PAGE_WIDTH - 50, PAGE_HEIGHT - 160, 20);
-      drawCrown(doc, 35, PAGE_HEIGHT - 185, 16);
-      drawTeaCup(doc, PAGE_WIDTH - 70, PAGE_HEIGHT - 130, 16);
+      // Top zone decorations
+      drawBigBen(doc, PAGE_WIDTH - 55, 55, 35);
+      drawCrown(doc, 50, 50, 22);
+      // Bottom zone decorations
+      drawDoubleDecker(doc, 55, BOTTOM_ZONE + 30, 30);
+      drawTeaCup(doc, PAGE_WIDTH - 50, BOTTOM_ZONE + 45, 20);
+      drawCrown(doc, 35, BOTTOM_ZONE + 70, 16);
+      drawTeaCup(doc, PAGE_WIDTH - 70, BOTTOM_ZONE + 85, 16);
       break;
 
     case 'tropical':
-      drawMonsteraLeaf(doc, 30, 80, 35, -20);
-      drawMonsteraLeaf(doc, PAGE_WIDTH - 25, 100, 30, 25);
-      drawToucan(doc, PAGE_WIDTH - 70, 60, 28);
-      drawButterfly(doc, 70, 130, 18);
-      drawButterfly(doc, PAGE_WIDTH - 90, 160, 14);
-      drawHummingbird(doc, 50, PAGE_HEIGHT - 160, 22);
-      drawTropicalFlower(doc, PAGE_WIDTH - 50, PAGE_HEIGHT - 180, 18);
-      drawSmallLeaf(doc, 25, PAGE_HEIGHT - 200, 14, -30);
-      drawSmallLeaf(doc, PAGE_WIDTH - 30, PAGE_HEIGHT - 140, 12, 20);
+      // Top zone decorations
+      drawMonsteraLeaf(doc, 30, 60, 35, -20);
+      drawMonsteraLeaf(doc, PAGE_WIDTH - 25, 80, 30, 25);
+      drawToucan(doc, PAGE_WIDTH - 70, 45, 28);
+      drawButterfly(doc, 70, 90, 18);
+      // Bottom zone decorations
+      drawHummingbird(doc, 50, BOTTOM_ZONE + 35, 22);
+      drawTropicalFlower(doc, PAGE_WIDTH - 50, BOTTOM_ZONE + 50, 18);
+      drawSmallLeaf(doc, 25, BOTTOM_ZONE + 75, 14, -30);
+      drawSmallLeaf(doc, PAGE_WIDTH - 30, BOTTOM_ZONE + 90, 12, 20);
+      drawButterfly(doc, PAGE_WIDTH - 90, BOTTOM_ZONE + 60, 14);
       break;
 
     case 'beach':
-      drawPalmTree(doc, 45, 90, 35);
-      drawPalmTree(doc, PAGE_WIDTH - 40, 100, 30);
-      drawSun(doc, PAGE_WIDTH - 60, 55, 25);
-      drawWave(doc, 50, PAGE_HEIGHT - 150, 28);
-      drawSeashell(doc, PAGE_WIDTH - 55, PAGE_HEIGHT - 160, 18);
-      drawStarfish(doc, 40, PAGE_HEIGHT - 180, 20);
-      drawSeashell(doc, PAGE_WIDTH - 70, PAGE_HEIGHT - 130, 14);
+      // Top zone decorations
+      drawPalmTree(doc, 45, 70, 35);
+      drawPalmTree(doc, PAGE_WIDTH - 40, 80, 30);
+      drawSun(doc, PAGE_WIDTH - 60, 40, 25);
+      // Bottom zone decorations
+      drawWave(doc, 50, BOTTOM_ZONE + 35, 28);
+      drawSeashell(doc, PAGE_WIDTH - 55, BOTTOM_ZONE + 50, 18);
+      drawStarfish(doc, 40, BOTTOM_ZONE + 70, 20);
+      drawSeashell(doc, PAGE_WIDTH - 70, BOTTOM_ZONE + 85, 14);
       break;
 
     case 'safari':
-      drawAcaciaTree(doc, 45, 85, 35);
-      drawAcaciaTree(doc, PAGE_WIDTH - 40, 95, 28);
-      drawSun(doc, PAGE_WIDTH - 55, 50, 22);
-      drawElephant(doc, 55, PAGE_HEIGHT - 150, 28);
-      drawGiraffe(doc, PAGE_WIDTH - 55, PAGE_HEIGHT - 165, 32);
-      drawLionFace(doc, 40, PAGE_HEIGHT - 185, 22);
+      // Top zone decorations
+      drawAcaciaTree(doc, 45, 65, 35);
+      drawAcaciaTree(doc, PAGE_WIDTH - 40, 75, 28);
+      drawSun(doc, PAGE_WIDTH - 55, 35, 22);
+      // Bottom zone decorations
+      drawElephant(doc, 55, BOTTOM_ZONE + 35, 28);
+      drawGiraffe(doc, PAGE_WIDTH - 55, BOTTOM_ZONE + 50, 32);
+      drawLionFace(doc, 40, BOTTOM_ZONE + 75, 22);
       break;
 
     default: // travel theme
-      drawAirplane(doc, PAGE_WIDTH - 80, 70, 30, 'rgba(255,255,255,0.3)');
-      drawAirplane(doc, 60, PAGE_HEIGHT - 150, 25, 'rgba(255,255,255,0.25)');
-      drawSuitcase(doc, 50, 80, 20, 'rgba(255,255,255,0.3)');
-      drawCompass(doc, PAGE_WIDTH - 55, 100, 25, 'rgba(255,255,255,0.3)');
-      drawSuitcase(doc, PAGE_WIDTH - 60, PAGE_HEIGHT - 160, 18, 'rgba(255,255,255,0.25)');
+      // Top zone decorations
+      drawAirplane(doc, PAGE_WIDTH - 80, 50, 30, 'rgba(255,255,255,0.3)');
+      drawSuitcase(doc, 50, 60, 20, 'rgba(255,255,255,0.3)');
+      drawCompass(doc, PAGE_WIDTH - 55, 80, 25, 'rgba(255,255,255,0.3)');
+      // Bottom zone decorations
+      drawAirplane(doc, 60, BOTTOM_ZONE + 40, 25, 'rgba(255,255,255,0.25)');
+      drawSuitcase(doc, PAGE_WIDTH - 60, BOTTOM_ZONE + 60, 18, 'rgba(255,255,255,0.25)');
       break;
   }
 }
@@ -1515,120 +1533,107 @@ function drawThemedSketchCorners(doc, theme, margin, y, contentWidth, sketchHeig
 }
 
 // Draw themed decorations for reflections page
+// Use MARGIN-relative positioning to avoid content overlap
 function drawThemedReflectionsDecorations(doc, theme) {
+  const cornerOffset = 20;  // Distance from page edge for corner decorations
+
   switch (theme) {
     case 'japan':
-      drawCherryBlossom(doc, 25, 30, 18);
-      drawCherryBlossom(doc, PAGE_WIDTH - 30, 35, 16);
-      drawKoiFish(doc, PAGE_WIDTH - 55, PAGE_HEIGHT - 50, 18, '#ff6b35');
-      drawCherryBlossom(doc, 45, PAGE_HEIGHT - 45, 14);
+      drawCherryBlossom(doc, cornerOffset, cornerOffset + 10, 16);
+      drawCherryBlossom(doc, PAGE_WIDTH - cornerOffset, cornerOffset + 15, 14);
+      drawKoiFish(doc, PAGE_WIDTH - cornerOffset - 25, PAGE_HEIGHT - cornerOffset - 20, 16);
+      drawCherryBlossom(doc, cornerOffset + 20, PAGE_HEIGHT - cornerOffset - 15, 12);
       break;
     case 'paris':
-      drawFleurDeLis(doc, 30, 30, 18);
-      drawFleurDeLis(doc, PAGE_WIDTH - 30, 30, 16);
-      drawCroissant(doc, PAGE_WIDTH - 55, PAGE_HEIGHT - 48, 18);
-      drawBeret(doc, 45, PAGE_HEIGHT - 48, 16);
+      drawFleurDeLis(doc, cornerOffset + 5, cornerOffset + 10, 16);
+      drawFleurDeLis(doc, PAGE_WIDTH - cornerOffset - 5, cornerOffset + 10, 14);
+      drawCroissant(doc, PAGE_WIDTH - cornerOffset - 25, PAGE_HEIGHT - cornerOffset - 18, 16);
+      drawBeret(doc, cornerOffset + 20, PAGE_HEIGHT - cornerOffset - 18, 14);
       break;
     case 'london':
-      drawCrown(doc, 30, 30, 18);
-      drawCrown(doc, PAGE_WIDTH - 35, 30, 16);
-      drawTeaCup(doc, PAGE_WIDTH - 50, PAGE_HEIGHT - 50, 18);
-      drawDoubleDecker(doc, 55, PAGE_HEIGHT - 52, 22);
+      drawCrown(doc, cornerOffset + 5, cornerOffset + 10, 16);
+      drawCrown(doc, PAGE_WIDTH - cornerOffset - 10, cornerOffset + 10, 14);
+      drawTeaCup(doc, PAGE_WIDTH - cornerOffset - 20, PAGE_HEIGHT - cornerOffset - 20, 16);
+      drawDoubleDecker(doc, cornerOffset + 25, PAGE_HEIGHT - cornerOffset - 22, 20);
       break;
     case 'tropical':
-      drawMonsteraLeaf(doc, 20, 25, 22, -15);
-      drawMonsteraLeaf(doc, PAGE_WIDTH - 15, 30, 20, 20);
-      drawToucan(doc, PAGE_WIDTH - 55, PAGE_HEIGHT - 50, 20, true);
-      drawHummingbird(doc, 45, PAGE_HEIGHT - 45, 18);
+      drawMonsteraLeaf(doc, cornerOffset - 5, cornerOffset + 5, 20, -15);
+      drawMonsteraLeaf(doc, PAGE_WIDTH - cornerOffset + 5, cornerOffset + 10, 18, 20);
+      drawToucan(doc, PAGE_WIDTH - cornerOffset - 30, PAGE_HEIGHT - cornerOffset - 20, 18, true);
+      drawHummingbird(doc, cornerOffset + 20, PAGE_HEIGHT - cornerOffset - 15, 16);
       break;
     case 'beach':
-      drawPalmTree(doc, 30, 40, 25);
-      drawPalmTree(doc, PAGE_WIDTH - 25, 45, 22);
-      drawStarfish(doc, PAGE_WIDTH - 50, PAGE_HEIGHT - 48, 18);
-      drawSeashell(doc, 45, PAGE_HEIGHT - 45, 16);
+      drawPalmTree(doc, cornerOffset + 5, cornerOffset + 20, 22);
+      drawPalmTree(doc, PAGE_WIDTH - cornerOffset, cornerOffset + 25, 20);
+      drawStarfish(doc, PAGE_WIDTH - cornerOffset - 20, PAGE_HEIGHT - cornerOffset - 18, 16);
+      drawSeashell(doc, cornerOffset + 20, PAGE_HEIGHT - cornerOffset - 15, 14);
       break;
     case 'safari':
-      drawAcaciaTree(doc, 30, 40, 25);
-      drawAcaciaTree(doc, PAGE_WIDTH - 25, 42, 22);
-      drawElephant(doc, PAGE_WIDTH - 55, PAGE_HEIGHT - 52, 20);
-      drawGiraffe(doc, 50, PAGE_HEIGHT - 55, 22);
+      drawAcaciaTree(doc, cornerOffset + 5, cornerOffset + 20, 22);
+      drawAcaciaTree(doc, PAGE_WIDTH - cornerOffset, cornerOffset + 22, 20);
+      drawElephant(doc, PAGE_WIDTH - cornerOffset - 30, PAGE_HEIGHT - cornerOffset - 22, 18);
+      drawGiraffe(doc, cornerOffset + 25, PAGE_HEIGHT - cornerOffset - 25, 20);
       break;
     default:
-      drawAirplane(doc, 40, 35, 22, COLORS.primaryLight);
-      drawSuitcase(doc, PAGE_WIDTH - 40, 35, 18, COLORS.secondaryLight);
-      drawCompass(doc, PAGE_WIDTH - 50, PAGE_HEIGHT - 50, 20, COLORS.accent);
-      drawSuitcase(doc, 45, PAGE_HEIGHT - 48, 16, COLORS.secondary);
+      drawAirplane(doc, cornerOffset + 15, cornerOffset + 15, 20, COLORS.primaryLight);
+      drawSuitcase(doc, PAGE_WIDTH - cornerOffset - 15, cornerOffset + 15, 16, COLORS.secondaryLight);
+      drawCompass(doc, PAGE_WIDTH - cornerOffset - 20, PAGE_HEIGHT - cornerOffset - 20, 18, COLORS.accent);
+      drawSuitcase(doc, cornerOffset + 20, PAGE_HEIGHT - cornerOffset - 18, 14, COLORS.secondary);
       break;
   }
 }
 
 // Draw themed decorations for final page
+// Final page card: x=25 to x=371, y=60 to y=572
+// Keep decorations at edges to avoid overlapping card content
 function drawThemedFinalPageDecorations(doc, theme) {
+  const topY = 25;           // Top decoration zone
+  const bottomY = PAGE_HEIGHT - 35;  // Bottom decoration zone
+
   switch (theme) {
     case 'japan':
-      drawMtFuji(doc, 45, 85, 40);
-      drawToriiGate(doc, PAGE_WIDTH - 55, 70, 30);
-      drawCherryBlossom(doc, 70, 110, 16);
-      drawCherryBlossom(doc, PAGE_WIDTH - 80, 100, 14);
-      drawKoiFish(doc, 55, PAGE_HEIGHT - 90, 22);
-      drawLantern(doc, PAGE_WIDTH - 50, PAGE_HEIGHT - 85, 20);
-      drawCherryBlossom(doc, 35, PAGE_HEIGHT - 60, 18);
-      drawCherryBlossom(doc, PAGE_WIDTH - 40, PAGE_HEIGHT - 55, 16);
+      drawCherryBlossom(doc, 15, topY, 16);
+      drawCherryBlossom(doc, PAGE_WIDTH - 20, topY + 5, 14);
+      drawToriiGate(doc, PAGE_WIDTH - 20, topY + 25, 20);
+      drawCherryBlossom(doc, 20, bottomY - 10, 14);
+      drawCherryBlossom(doc, PAGE_WIDTH - 25, bottomY - 5, 12);
       break;
     case 'paris':
-      drawEiffelTower(doc, PAGE_WIDTH / 2, 80, 45);
-      drawFleurDeLis(doc, 50, 90, 20);
-      drawFleurDeLis(doc, PAGE_WIDTH - 55, 95, 18);
-      drawCroissant(doc, 55, PAGE_HEIGHT - 85, 20);
-      drawBeret(doc, PAGE_WIDTH - 55, PAGE_HEIGHT - 80, 20);
-      drawFleurDeLis(doc, 35, PAGE_HEIGHT - 55, 16);
-      drawCroissant(doc, PAGE_WIDTH - 45, PAGE_HEIGHT - 55, 16);
+      drawFleurDeLis(doc, 15, topY, 16);
+      drawFleurDeLis(doc, PAGE_WIDTH - 20, topY + 5, 14);
+      drawFleurDeLis(doc, 20, bottomY - 10, 14);
+      drawCroissant(doc, PAGE_WIDTH - 25, bottomY - 8, 14);
       break;
     case 'london':
-      drawBigBen(doc, PAGE_WIDTH / 2, 85, 45);
-      drawCrown(doc, 55, 85, 24);
-      drawCrown(doc, PAGE_WIDTH - 60, 90, 22);
-      drawDoubleDecker(doc, 60, PAGE_HEIGHT - 90, 28);
-      drawTeaCup(doc, PAGE_WIDTH - 55, PAGE_HEIGHT - 85, 22);
-      drawCrown(doc, 40, PAGE_HEIGHT - 55, 18);
-      drawTeaCup(doc, PAGE_WIDTH - 45, PAGE_HEIGHT - 55, 16);
+      drawCrown(doc, 15, topY, 16);
+      drawCrown(doc, PAGE_WIDTH - 20, topY + 5, 14);
+      drawCrown(doc, 20, bottomY - 10, 14);
+      drawTeaCup(doc, PAGE_WIDTH - 25, bottomY - 8, 14);
       break;
     case 'tropical':
-      drawMonsteraLeaf(doc, 25, 70, 30, -20);
-      drawMonsteraLeaf(doc, PAGE_WIDTH - 20, 85, 28, 25);
-      drawToucan(doc, PAGE_WIDTH - 65, 50, 26);
-      drawButterfly(doc, 60, 110, 16);
-      drawButterfly(doc, PAGE_WIDTH - 80, 130, 14);
-      drawHummingbird(doc, 45, PAGE_HEIGHT - 80, 20);
-      drawTropicalFlower(doc, PAGE_WIDTH - 45, PAGE_HEIGHT - 90, 16);
-      drawPalmFrond(doc, 20, PAGE_HEIGHT - 50, 22, -25);
-      drawPalmFrond(doc, PAGE_WIDTH - 15, PAGE_HEIGHT - 60, 20, 30);
+      drawSmallLeaf(doc, 10, topY, 14, -20);
+      drawSmallLeaf(doc, PAGE_WIDTH - 15, topY + 5, 12, 25);
+      drawButterfly(doc, 18, topY + 20, 12);
+      drawSmallLeaf(doc, 15, bottomY - 12, 12, -30);
+      drawButterfly(doc, PAGE_WIDTH - 22, bottomY - 10, 10);
       break;
     case 'beach':
-      drawPalmTree(doc, 45, 100, 40);
-      drawPalmTree(doc, PAGE_WIDTH - 40, 110, 35);
-      drawSun(doc, PAGE_WIDTH / 2, 60, 30);
-      drawWave(doc, 60, PAGE_HEIGHT - 85, 30);
-      drawWave(doc, PAGE_WIDTH - 70, PAGE_HEIGHT - 80, 25);
-      drawStarfish(doc, 45, PAGE_HEIGHT - 55, 20);
-      drawSeashell(doc, PAGE_WIDTH - 50, PAGE_HEIGHT - 55, 18);
+      drawSun(doc, PAGE_WIDTH - 25, topY + 5, 18);
+      drawSeashell(doc, 15, topY + 5, 14);
+      drawStarfish(doc, 18, bottomY - 10, 14);
+      drawSeashell(doc, PAGE_WIDTH - 22, bottomY - 8, 12);
       break;
     case 'safari':
-      drawAcaciaTree(doc, 50, 95, 40);
-      drawAcaciaTree(doc, PAGE_WIDTH - 45, 100, 35);
-      drawSun(doc, PAGE_WIDTH / 2, 55, 28);
-      drawElephant(doc, 60, PAGE_HEIGHT - 90, 26);
-      drawGiraffe(doc, PAGE_WIDTH - 60, PAGE_HEIGHT - 100, 30);
-      drawLionFace(doc, 45, PAGE_HEIGHT - 55, 20);
-      drawLionFace(doc, PAGE_WIDTH - 50, PAGE_HEIGHT - 55, 18);
+      drawSun(doc, PAGE_WIDTH - 25, topY + 5, 16);
+      drawSmallLeaf(doc, 12, topY + 5, 12, -20, '#228b22');
+      drawLionFace(doc, 18, bottomY - 12, 14);
+      drawSmallLeaf(doc, PAGE_WIDTH - 18, bottomY - 10, 10, 20, '#228b22');
       break;
     default:
-      drawAirplane(doc, PAGE_WIDTH - 80, 70, 35, 'rgba(255,255,255,0.3)');
-      drawAirplane(doc, 60, PAGE_HEIGHT - 90, 30, 'rgba(255,255,255,0.25)');
-      drawSuitcase(doc, 50, 85, 22, 'rgba(255,255,255,0.3)');
-      drawCompass(doc, PAGE_WIDTH - 55, 100, 28, 'rgba(255,255,255,0.3)');
-      drawSuitcase(doc, PAGE_WIDTH - 60, PAGE_HEIGHT - 70, 20, 'rgba(255,255,255,0.25)');
-      drawCompass(doc, 55, PAGE_HEIGHT - 65, 22, 'rgba(255,255,255,0.25)');
+      drawStar(doc, 15, topY + 5, 8, 5, 3);
+      drawStar(doc, PAGE_WIDTH - 20, topY + 8, 6, 5, 3);
+      drawStar(doc, 18, bottomY - 8, 6, 5, 3);
+      drawStar(doc, PAGE_WIDTH - 22, bottomY - 6, 8, 5, 3);
       break;
   }
 }
