@@ -24,14 +24,6 @@ const INTERESTS = [
   { id: 'culture', label: 'Culture', emoji: '🌍' },
 ]
 
-const DESTINATIONS = [
-  { id: 'tokyo', name: 'Tokyo/Kyoto', country: 'Japan', emoji: '🗾' },
-  { id: 'paris', name: 'Paris', country: 'France', emoji: '🇫🇷' },
-  { id: 'london', name: 'London', country: 'UK', emoji: '🇬🇧' },
-  { id: 'orlando', name: 'Orlando/Disney', country: 'USA', emoji: '🏰' },
-  { id: 'hawaii', name: 'Hawaii', country: 'USA', emoji: '🌺' },
-]
-
 const STEPS = [
   { id: 1, title: 'Trip Details' },
   { id: 2, title: 'Child Info' },
@@ -47,7 +39,6 @@ function CreateJournal() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [formData, setFormData] = useState({
     // Trip details
-    destination: '',
     customDestination: '',
     startDate: '',
     endDate: '',
@@ -69,23 +60,11 @@ function CreateJournal() {
     const country = searchParams.get('country')
 
     if (destination) {
-      // Check if it matches a preset destination
-      const presetMatch = DESTINATIONS.find(d =>
-        d.name.toLowerCase().includes(destination.toLowerCase()) ||
-        destination.toLowerCase().includes(d.name.toLowerCase().split('/')[0])
-      )
-
-      if (presetMatch) {
-        setFormData(prev => ({ ...prev, destination: presetMatch.id }))
-      } else {
-        // Use as custom destination
-        const fullDestination = country ? `${destination}, ${country}` : destination
-        setFormData(prev => ({
-          ...prev,
-          destination: 'custom',
-          customDestination: fullDestination
-        }))
-      }
+      const fullDestination = country ? `${destination}, ${country}` : destination
+      setFormData(prev => ({
+        ...prev,
+        customDestination: fullDestination
+      }))
     }
   }, [searchParams])
 
@@ -122,7 +101,7 @@ function CreateJournal() {
   const canProceed = () => {
     switch (currentStep) {
       case 1:
-        return (formData.destination || formData.customDestination) &&
+        return formData.customDestination.trim() &&
                formData.startDate &&
                formData.endDate &&
                formData.tripType.length > 0
@@ -151,7 +130,7 @@ function CreateJournal() {
     setIsSubmitting(true)
     try {
       const submitData = new FormData()
-      submitData.append('destination', formData.destination || formData.customDestination)
+      submitData.append('destination', formData.customDestination)
       submitData.append('startDate', formData.startDate)
       submitData.append('endDate', formData.endDate)
       submitData.append('tripType', JSON.stringify(formData.tripType))
@@ -183,9 +162,7 @@ function CreateJournal() {
   }
 
   const getDestinationName = () => {
-    if (formData.customDestination) return formData.customDestination
-    const dest = DESTINATIONS.find(d => d.id === formData.destination)
-    return dest ? `${dest.name}, ${dest.country}` : ''
+    return formData.customDestination
   }
 
   const getTripDays = () => {
@@ -234,42 +211,14 @@ function CreateJournal() {
                 <h2>Where are you going?</h2>
 
                 <div className="form-group">
-                  <label className="form-label">Select Destination</label>
-                  <div className="destinations-select">
-                    {DESTINATIONS.map(dest => (
-                      <label
-                        key={dest.id}
-                        className={`destination-option ${formData.destination === dest.id ? 'selected' : ''}`}
-                      >
-                        <input
-                          type="radio"
-                          name="destination"
-                          value={dest.id}
-                          checked={formData.destination === dest.id}
-                          onChange={(e) => {
-                            updateFormData('destination', e.target.value)
-                            updateFormData('customDestination', '')
-                          }}
-                        />
-                        <span className="dest-emoji">{dest.emoji}</span>
-                        <span className="dest-name">{dest.name}</span>
-                        <span className="dest-country">{dest.country}</span>
-                      </label>
-                    ))}
-                  </div>
-                  <div className="custom-dest">
-                    <span>or enter a custom destination:</span>
-                    <input
-                      type="text"
-                      className="form-input"
-                      placeholder="e.g., Rome, Italy"
-                      value={formData.customDestination}
-                      onChange={(e) => {
-                        updateFormData('customDestination', e.target.value)
-                        updateFormData('destination', '')
-                      }}
-                    />
-                  </div>
+                  <label className="form-label">Destination</label>
+                  <input
+                    type="text"
+                    className="form-input"
+                    placeholder="e.g., Rome, Italy"
+                    value={formData.customDestination}
+                    onChange={(e) => updateFormData('customDestination', e.target.value)}
+                  />
                 </div>
 
                 <div className="form-row">
