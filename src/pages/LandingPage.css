@@ -1375,7 +1375,23 @@
 
 .journey-section {
   padding: var(--space-4xl) 0;
-  background: linear-gradient(180deg, var(--color-surface) 0%, var(--color-background) 100%);
+  background: linear-gradient(180deg, #f9fafb 0%, #f5f7f8 100%);
+}
+
+.journey-section .section-title {
+  color: #1D3557;
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.journey-section .section-subtitle {
+  color: #64748b;
+  font-size: 1.125rem;
+}
+
+.journey-section .section-label {
+  background: rgba(0, 175, 216, 0.1);
+  color: #00afd8;
 }
 
 .journey-timeline {
@@ -1488,13 +1504,13 @@
 .journey-step-title {
   font-size: 1.125rem;
   font-weight: 600;
-  color: var(--color-text);
+  color: #1D3557;
   margin-bottom: var(--space-xs);
 }
 
 .journey-step-description {
   font-size: 0.8125rem;
-  color: var(--color-text-secondary);
+  color: #64748b;
   max-width: 160px;
   line-height: 1.4;
 }
