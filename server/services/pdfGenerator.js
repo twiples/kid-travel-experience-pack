@@ -629,7 +629,8 @@ function drawToriiGate(doc, x, y, size = 24) {
   doc.translate(x, y);
   doc.scale(size / 24);
 
-  doc.fillColor('#d32f2f');
+  // Use warm coral-orange instead of red for better contrast on blue
+  doc.fillColor('#ff7f50');
 
   // Top beam (kasagi)
   doc.rect(-12, -10, 24, 3).fill();
@@ -1924,8 +1925,8 @@ function generateAboutMyTripPage(doc, content) {
   drawSuitcase(doc, MARGIN + 20, y + 15, 20, COLORS.secondary);
 
   doc.font(FONTS.body).fontSize(9).fillColor(COLORS.text);
-  doc.text('My name: ________________________________', MARGIN + 40, y + 12);
-  doc.text(`I am going to: ${content.destination}`, MARGIN + 40, y + 30);
+  doc.text(`Explorer: ${content.childName}`, MARGIN + 40, y + 12);
+  doc.text(`Destination: ${content.destination}`, MARGIN + 40, y + 30);
   doc.text('I am traveling with: _______________________', MARGIN + 12, y + 50);
   doc.text('How we are getting there: _________________', MARGIN + 12, y + 68);
   y += 100;
@@ -2045,30 +2046,35 @@ function generateDestinationFactsPages(doc, content) {
 
   y += 50;
 
-  // Useful phrases box
-  drawStyledBox(doc, MARGIN, y, CONTENT_WIDTH, 65, {
-    fillColor: COLORS.cream,
-    strokeColor: COLORS.primary,
-    radius: 10,
-  });
+  // Skip useful phrases for English-speaking destinations
+  const isEnglish = (facts.language || '').toLowerCase().includes('english');
 
-  doc.fillColor(COLORS.primary).font(FONTS.title).fontSize(9)
-    .text('Useful Phrases:', MARGIN + 10, y + 8);
+  if (!isEnglish) {
+    // Useful phrases box
+    drawStyledBox(doc, MARGIN, y, CONTENT_WIDTH, 65, {
+      fillColor: COLORS.cream,
+      strokeColor: COLORS.primary,
+      radius: 10,
+    });
 
-  let phraseY = y + 22;
-  const usefulPhrases = content.preTrip?.usefulPhrases || [
-    { phrase: 'Hello', meaning: 'Greeting', pronunciation: 'heh-LOH' },
-    { phrase: 'Thank you', meaning: 'Gratitude', pronunciation: 'THANK yoo' },
-  ];
-  usefulPhrases.forEach(phrase => {
-    doc.fillColor(COLORS.secondary).font(FONTS.title).fontSize(8)
-      .text(`"${phrase.phrase}"`, MARGIN + 15, phraseY);
-    doc.fillColor(COLORS.textLight).font(FONTS.body).fontSize(8)
-      .text(` = ${phrase.meaning}`, MARGIN + 15 + doc.widthOfString(`"${phrase.phrase}"`) + 5, phraseY);
-    phraseY += 14;
-  });
+    doc.fillColor(COLORS.primary).font(FONTS.title).fontSize(9)
+      .text('Useful Phrases:', MARGIN + 10, y + 8);
 
-  y += 80;
+    let phraseY = y + 22;
+    const usefulPhrases = content.preTrip?.usefulPhrases || [
+      { phrase: 'Hello', meaning: 'Greeting', pronunciation: 'heh-LOH' },
+      { phrase: 'Thank you', meaning: 'Gratitude', pronunciation: 'THANK yoo' },
+    ];
+    usefulPhrases.forEach(phrase => {
+      doc.fillColor(COLORS.secondary).font(FONTS.title).fontSize(8)
+        .text(`"${phrase.phrase}"`, MARGIN + 15, phraseY);
+      doc.fillColor(COLORS.textLight).font(FONTS.body).fontSize(8)
+        .text(` = ${phrase.meaning}`, MARGIN + 15 + doc.widthOfString(`"${phrase.phrase}"`) + 5, phraseY);
+      phraseY += 14;
+    });
+
+    y += 80;
+  }
 
   // Fun Facts with star bullets
   y = drawSectionHeader(doc, 'Did You Know?', y, { color: COLORS.secondary });
@@ -2423,11 +2429,12 @@ function generateActivitiesSection(doc, content) {
     }
   });
 
-  // Maze on right
+  // Maze on right - positioned relative to y (same as tic-tac-toe)
+  const mazeLabelY = y - 15;  // Same vertical position as section header
   doc.fillColor(COLORS.secondary).font(FONTS.title).fontSize(10)
-    .text('MINI MAZE', COL2_X + 10, MARGIN + 28);
+    .text('MINI MAZE', COL2_X + 10, mazeLabelY);
 
-  const mazeY = MARGIN + 45;
+  const mazeY = y;  // Use same y as tic-tac-toe
   const mazeW = 90;
   const mazeH = 72;
 

@@ -59,7 +59,7 @@ export async function generateJournal(journalData) {
 
 function generatePreTripSection(destData, childName, interests) {
   return {
-    welcomeLetter: `Dear ${childName},\n\nGet ready for an amazing adventure to ${destData.name}! This journal is all yours - a special place to write down everything you see, learn, and experience.\n\nUse it to capture your thoughts, draw pictures, and remember all the wonderful moments from your trip. There are no wrong answers - just be curious and have fun!\n\nHappy travels!`,
+    welcomeLetter: `Dear ${childName},\n\nYou are about to become an explorer! This journal is your secret place to capture everything you discover in ${destData.name}.\n\nYears from now, you'll read these pages and remember exactly how you felt, what made you laugh, and all the amazing things you learned. Your words and drawings are more precious than any souvenir you could buy.\n\nThere are no wrong answers here - just YOUR thoughts, YOUR feelings, and YOUR adventure. Be curious. Ask questions. Try new things. And most importantly, have fun!\n\nYour adventure awaits!`,
 
     destinationFacts: {
       language: destData.language,
@@ -87,10 +87,10 @@ function generatePreTripSection(destData, childName, interests) {
     ],
 
     preflightPrompts: [
-      `What are you most excited to see in ${destData.name}?`,
-      'What do you already know about this place?',
-      'What questions do you want to find answers to?',
-      'What foods are you curious to try?',
+      `What do you imagine ${destData.name} will look, sound, and smell like?`,
+      'What is one thing you hope to learn or discover on this trip?',
+      'What is something you\'ve never done before that you want to try?',
+      'Write a wish or hope you have for this adventure:',
     ],
   };
 }
@@ -186,33 +186,54 @@ function getSketchPrompt(day, destData) {
 
 function getDefaultObservationPrompts() {
   return [
-    // Sensory observation prompts
-    'What is the first thing you notice when you look around?',
-    'Describe the sounds you hear right now.',
-    'What smells are in the air?',
-    'How are people around you dressed differently than at home?',
-    // Psychology-based open-ended questions
-    'If you could explore anywhere in this place for a whole day, where would you go and why?',
-    'What is something here that you have never seen before? How does it make you feel?',
-    'What one thing would you want to show your best friend about this place?',
-    'Look at the people around you - what do you think they are feeling right now?',
+    // Mindfulness & sensory awareness
+    'Close your eyes for 10 seconds. What sounds do you hear? What does this place sound like?',
+    'What colors do you see around you that you don\'t see at home?',
+    'Find something beautiful that most people might walk past without noticing. Draw or describe it.',
+
+    // Curiosity & wonder
+    'What is something here that makes you think "Wow!" or "How does that work?"',
+    'If you were an explorer discovering this place for the first time, what would you write in your explorer\'s log?',
+    'What question would you ask someone who has lived here their whole life?',
+
+    // Perspective-taking & empathy
+    'Imagine you live here. What would your morning routine be like?',
+    'Watch the people around you for a minute. What do you think makes them happy?',
+    'What is something people here do differently that you think is actually a really good idea?',
+
+    // Growth mindset & courage
+    'What is something new you tried today, even if it felt a little scary at first?',
+    'What did you learn today that surprised you?',
+    'If you came back here in 10 years, what do you think would be different?',
   ];
 }
 
 function getDefaultReflectionPrompts() {
   return [
-    // Experience reflection
-    'What was the most surprising thing you experienced today?',
-    'What would you tell your friends about this place?',
-    'How is this place different from home?',
-    'What will you remember most about today?',
-    // Psychology-based growth & gratitude questions
-    'What is something kind you did for someone today, or that someone did for you?',
-    'What is something that was hard today, and how did you handle it?',
-    'What new skill or thing did you learn today that you are proud of?',
-    'What is one thing about today that you are grateful for? Why?',
-    'If you could travel back in time to this morning, what would you do differently?',
-    'What is something you want to try tomorrow that you have never done before?',
+    // Gratitude & appreciation
+    'Write down 3 things from today that made you smile or feel happy.',
+    'Who helped make today special? What would you want to say to thank them?',
+    'What is something you saw today that you want to remember forever?',
+
+    // Emotional intelligence & self-awareness
+    'How did you feel at different moments today? Draw faces to show your emotions.',
+    'What was the bravest thing you did today?',
+    'Was there a moment today when you felt proud of yourself? What happened?',
+
+    // Connection & empathy
+    'Did you meet anyone interesting today? What did you learn from them?',
+    'What is one way you helped someone in your family today?',
+    'If you could send a postcard to your future self about today, what would it say?',
+
+    // Growth & learning
+    'What is something you couldn\'t do before this trip that you can do now?',
+    'What mistake did you make today, and what did it teach you?',
+    'If a younger kid was going to visit this place, what advice would you give them?',
+
+    // Creativity & imagination
+    'If today was a chapter in a book about your life, what would you title it?',
+    'Design a souvenir that doesn\'t exist yet - something that would help you remember this day.',
+    'What would you change about today if you could do it all over again?',
   ];
 }
 
@@ -259,6 +280,7 @@ function generateTravelBingo(destData) {
 }
 
 function createGenericDestination(name) {
+  // Create thoughtful, inspiring default content for any destination
   return {
     name,
     country: '',
@@ -267,24 +289,33 @@ function createGenericDestination(name) {
     greeting: 'Hello',
     thankyou: 'Thank you',
     goodbye: 'Goodbye',
-    population: 'Check it out!',
+    population: 'Discover it yourself!',
     funFacts: [
-      'Every place has its own unique story',
-      'Traveling teaches us about different cultures',
-      'The best adventures are ones where you try new things',
+      `${name} has its own unique story waiting for you to discover`,
+      'Every new place teaches us something about ourselves and the world',
+      'The best explorers are curious and ask lots of questions',
+      'Local people love sharing what makes their home special',
     ],
     landmarks: [],
     culturalHighlights: [
-      'Observe how locals greet each other',
-      'Notice what people eat for breakfast',
-      'Look at how the buildings are designed',
+      'Watch how people greet each other - is it different from home?',
+      'Try to learn one new word in the local language each day',
+      'Notice the foods people eat - what looks delicious to try?',
+      'Look at the buildings and art - what stories do they tell?',
     ],
     prompts: {
       observation: getDefaultObservationPrompts(),
       reflection: getDefaultReflectionPrompts(),
       interests: {},
     },
-    activities: {},
+    activities: {
+      wordSearch: ['EXPLORE', 'DISCOVER', 'ADVENTURE', 'WONDER', 'JOURNEY', 'MEMORY', 'FRIENDS', 'LEARN'],
+      trivia: [
+        { q: `What is one thing that makes ${name} special?`, a: 'Your discovery!' },
+        { q: 'What language do you hear people speaking?', a: 'Listen and find out!' },
+        { q: 'What is something new you want to try here?', a: 'Your choice!' },
+      ],
+    },
   };
 }
 
